@@ -4,129 +4,173 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>バディスポーツクラブ有明 活動ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg-top:#f4f7fb;
-  --bg-bottom:#e8eef7;
-  --surface:#ffffff;
-  --surface-strong:#f8fbff;
-  --line:#d6deea;
-  --text:#223047;
-  --muted:#5d6c82;
-  --shadow:0 10px 28px rgba(18,39,74,.08);
-  --shadow-hover:0 18px 36px rgba(18,39,74,.16);
-  --radius:16px;
-  --gap:18px;
+  --apple-blue:#0071E3;
+  --text-primary:#1D1D1F;
+  --text-secondary:#6E6E73;
+  --card-bg:#FFFFFF;
+  --section-bg:#F5F5F7;
+  --border:#D2D2D7;
+  --table-border:#E5E5EA;
+  --accent-green:#34C759;
+  --accent-orange:#FF9500;
+  --accent-red:#FF3B30;
+  --shadow-card:0 2px 8px rgba(0,0,0,0.08), 0 0 1px rgba(0,0,0,0.06);
+  --shadow-card-hover:0 8px 24px rgba(0,0,0,0.12), 0 0 1px rgba(0,0,0,0.06);
+  --radius:18px;
+  --gap:20px;
+  --content-pad:clamp(14px,3vw,24px);
 }
 *{box-sizing:border-box;margin:0;padding:0}
+html{scrollbar-gutter:stable}
 body{
-  font-family:'Hiragino Sans','Yu Gothic',sans-serif;
-  background:
-    radial-gradient(circle at top left, rgba(255,255,255,.78), transparent 34%),
-    linear-gradient(180deg,var(--bg-top),var(--bg-bottom));
-  color:var(--text);
+  min-height:100vh;
+  font-family:-apple-system,'Hiragino Sans','Yu Gothic UI',BlinkMacSystemFont,'SF Pro Display',sans-serif;
+  background:var(--section-bg);
+  color:var(--text-primary);
   font-size:14px;
-  line-height:1.7;
-}
-header{
+  line-height:1.6;
   position:relative;
-  overflow:hidden;
-  padding:22px 20px 20px;
-  background:linear-gradient(135deg,#16345f 0%,#24508c 48%,#4f89c8 100%);
-  color:#fff;
-  box-shadow:0 12px 28px rgba(16,34,66,.18);
 }
-header::after{
-  content:"";
-  position:absolute;
-  inset:auto -8% -55% auto;
-  width:260px;
-  height:260px;
-  border-radius:50%;
-  background:radial-gradient(circle, rgba(255,255,255,.26), transparent 70%);
-  pointer-events:none;
+body::before,
+body::after{
+  content:none;
+}
+header,
+.info-box,
+.tab-bar,
+.filter-bar,
+.card{
+  position:relative;
+  z-index:1;
+}
+h1,h2,h3{letter-spacing:-0.01em}
+header{
+  padding:22px var(--content-pad) 18px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border);
 }
 header h1{
-  position:relative;
-  font-size:21px;
+  font-size:20px;
   font-weight:700;
-  letter-spacing:.02em;
+  line-height:1.25;
+  color:var(--text-primary);
 }
 header p{
-  position:relative;
-  font-size:12px;
-  color:rgba(235,243,255,.88);
-  margin-top:5px;
+  font-size:13px;
+  color:var(--text-secondary);
+  margin-top:6px;
 }
-.info-boxes{display:flex;gap:12px;padding:14px 14px 10px;flex-wrap:wrap}
+.info-boxes{
+  display:flex;
+  gap:14px;
+  padding:16px var(--content-pad) 12px;
+  flex-wrap:wrap;
+}
 .info-box{
   flex:1;
   min-width:280px;
-  background:rgba(255,255,255,.88);
-  backdrop-filter:blur(8px);
-  border:1px solid rgba(214,222,234,.9);
-  border-left:4px solid #f59e0b;
+  background:var(--card-bg);
+  border:1px solid rgba(210,210,215,0.6);
+  border-left:4px solid var(--apple-blue);
   border-radius:14px;
   padding:14px 16px;
-  font-size:12px;
-  box-shadow:0 6px 18px rgba(32,53,91,.06);
+  font-size:13px;
+  line-height:1.7;
+  color:var(--text-primary);
+  box-shadow:0 1px 4px rgba(0,0,0,0.06);
 }
-.info-box.blue{border-left-color:#2196f3}
-.info-box h2{font-size:12px;font-weight:700;color:#48586f;margin-bottom:7px}
-.info-box ol,.info-box ul{padding-left:16px;line-height:1.9}
+.info-box h2{
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:8px;
+}
+.info-box ol,
+.info-box ul{padding-left:18px;line-height:1.85}
+.info-box strong{color:var(--text-primary)}
+.info-box.blue{border-left-color:var(--accent-orange)}
 .tab-bar{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
-  padding:10px 14px;
-  background:rgba(255,255,255,.86);
-  backdrop-filter:blur(10px);
-  border-top:1px solid rgba(255,255,255,.4);
-  border-bottom:1px solid rgba(214,222,234,.95);
+  gap:10px;
+  padding:12px var(--content-pad);
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:saturate(180%) blur(20px);
+  -webkit-backdrop-filter:saturate(180%) blur(20px);
+  border-bottom:1px solid var(--border);
   position:sticky;
   top:0;
   z-index:10;
 }
 .tab{
-  padding:8px 15px;
-  border:1px solid #cad4e3;
-  border-radius:999px;
+  padding:9px 16px;
+  border:1px solid var(--border);
+  border-radius:20px;
   cursor:pointer;
-  font-size:12px;
-  font-weight:700;
+  font-size:13px;
+  font-weight:600;
   white-space:nowrap;
-  background:rgba(255,255,255,.94);
-  color:#42536a;
-  box-shadow:0 2px 8px rgba(23,44,80,.04);
-  transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease,color .2s ease;
+  background:var(--section-bg);
+  color:var(--text-primary);
+  transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.tab:hover{transform:translateY(-1px);box-shadow:0 8px 16px rgba(23,44,80,.08);background:#fff}
-.tab.active[data-tab="sport-club"]{background:#1a3c6e;color:#fff;border-color:#1a3c6e}
-.tab.active[data-tab="sport-school"]{background:#0277bd;color:#fff;border-color:#0277bd}
-.tab.active[data-tab="culture-club"]{background:#6a1b9a;color:#fff;border-color:#6a1b9a}
-.tab.active[data-tab="culture-school"]{background:#ad1457;color:#fff;border-color:#ad1457}
-.tab.active[data-tab="tenant"]{background:#e65100;color:#fff;border-color:#e65100}
+.tab:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+.tab.active{
+  background:var(--apple-blue);
+  color:#FFFFFF;
+  border-color:var(--apple-blue);
+  box-shadow:none;
+}
 .filter-bar{
   display:flex;
   flex-wrap:wrap;
-  gap:8px;
-  padding:10px 14px 2px;
+  gap:10px;
+  padding:14px var(--content-pad) 6px;
   align-items:center;
+  background:var(--card-bg);
+  border-bottom:1px solid var(--border);
 }
-.filter-label{font-size:11px;color:var(--muted);font-weight:700}
+.filter-label{
+  font-size:12px;
+  color:var(--text-secondary);
+  font-weight:700;
+}
 .age-btn{
-  padding:6px 11px;
-  border:1px solid #ccd5e2;
+  padding:8px 12px;
+  border:1px solid var(--border);
   border-radius:999px;
   cursor:pointer;
-  font-size:11px;
-  background:rgba(255,255,255,.92);
-  color:#45546a;
-  transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease,color .2s ease;
+  font-size:12px;
+  font-weight:600;
+  background:var(--section-bg);
+  color:var(--text-primary);
+  transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
 }
-.age-btn:hover{transform:translateY(-1px);box-shadow:0 6px 14px rgba(23,44,80,.08);background:#fff}
-.age-btn.active{background:#1a3c6e;color:#fff;border-color:#1a3c6e}
-.section{display:none;padding:14px 14px 28px}
+.age-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+}
+.age-btn.active{
+  background:var(--apple-blue);
+  color:#FFFFFF;
+  border-color:var(--apple-blue);
+}
+.section{
+  display:none;
+  padding:18px var(--content-pad) 34px;
+  position:relative;
+  z-index:1;
+}
 .section.active{display:block}
 .cards{
   display:grid;
@@ -140,77 +184,127 @@ header p{
   min-height:0;
 }
 .card{
-  background:linear-gradient(180deg,#ffffff 0%,#fbfdff 100%);
-  border:1px solid rgba(214,222,234,.95);
-  border-radius:var(--radius);
-  box-shadow:var(--shadow);
+  background:var(--card-bg);
+  border:none;
+  border-radius:18px;
+  box-shadow:var(--shadow-card);
   overflow:hidden;
-  transition:transform .22s ease,box-shadow .22s ease,border-color .22s ease;
+  transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
 }
 .pretext-ready .card{
   position:absolute;
   width:320px;
 }
 .card:hover{
+  box-shadow:var(--shadow-card-hover);
   transform:translateY(-2px);
-  box-shadow:var(--shadow-hover);
-  border-color:#c1cde0;
 }
 .card.hidden{display:none}
-.ch{padding:13px 16px 12px;color:#fff}
-.sport-club .ch{background:linear-gradient(135deg,#17325d 0%,#244d8a 100%)}
-.sport-school .ch{background:linear-gradient(135deg,#015e95 0%,#0998dd 100%)}
-.culture-club .ch{background:linear-gradient(135deg,#57147f 0%,#8430c2 100%)}
-.culture-school .ch{background:linear-gradient(135deg,#8c1149 0%,#d53e89 100%)}
-.tenant .ch{background:linear-gradient(135deg,#c04f00 0%,#f98d2f 100%)}
-.ch h3{font-size:15px;font-weight:700;line-height:1.45}
-.ch .sub{font-size:11px;opacity:.85;margin-top:4px;line-height:1.55}
-.cb{padding:12px 14px 14px;font-size:13px;line-height:1.72}
+.ch{
+  padding:14px 16px;
+  color:#FFFFFF;
+  border-radius:18px 18px 0 0;
+  border-bottom:none;
+}
+.sport-club .ch{background:#1A3C6E}
+.sport-school .ch{background:#0277BD}
+.culture-club .ch{background:#6A1B9A}
+.culture-school .ch{background:#AD1457}
+.tenant .ch{background:#E65100}
+.ch h3{font-size:16px;font-weight:700;line-height:1.35}
+.ch .sub{
+  font-size:12px;
+  color:rgba(255,255,255,0.88);
+  margin-top:4px;
+  line-height:1.6;
+}
+.cb{
+  padding:14px 16px 16px;
+  font-size:14px;
+  line-height:1.6;
+  color:var(--text-primary);
+}
 .bus{
   display:inline-block;
-  padding:3px 9px;
+  padding:5px 10px;
   border-radius:999px;
-  font-size:10px;
-  font-weight:700;
-  margin-bottom:10px;
+  font-size:12px;
+  font-weight:600;
+  margin-bottom:12px;
 }
-.bus-y{background:#e3f2fd;color:#0d47a1}
-.bus-n{background:#fce4ec;color:#880e4f}
-table.sc{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0 0}
+.bus-y{
+  background:#E3F2FD;
+  color:var(--apple-blue);
+  border:1px solid rgba(0,113,227,0.14);
+}
+.bus-n{
+  background:#FFF0F0;
+  color:var(--accent-red);
+  border:1px solid rgba(255,59,48,0.12);
+}
+table.sc{
+  width:100%;
+  border-collapse:collapse;
+  font-size:13px;
+  margin:8px 0 0;
+}
 .sc th{
-  background:#eef4fb;
-  padding:5px 6px;
+  background:var(--section-bg);
+  padding:6px 8px;
   text-align:left;
-  border:1px solid #dbe4ef;
+  border:1px solid var(--table-border);
   font-weight:700;
   white-space:nowrap;
+  color:var(--text-primary);
 }
 .sc td{
-  padding:5px 6px;
-  border:1px solid #e1e8f1;
+  padding:6px 8px;
+  border:1px solid var(--table-border);
   vertical-align:top;
-  line-height:1.65;
+  line-height:1.6;
+  color:var(--text-primary);
 }
-.sc tr:nth-child(even) td{background:#fbfdff}
+.sc tr:nth-child(even) td{background:#FBFBFD}
 .fee{
-  background:linear-gradient(180deg,#f8fbff 0%,#f1f6fc 100%);
-  border:1px solid #e0e8f2;
-  border-radius:12px;
-  padding:9px 11px;
-  margin-top:10px;
-  font-size:11px;
+  background:var(--section-bg);
+  border:none;
+  border-radius:10px;
+  padding:10px 12px;
+  margin-top:12px;
+  font-size:13px;
+  color:var(--text-primary);
 }
-.fee h4{font-size:11px;font-weight:700;color:#516075;margin-bottom:6px}
-.fr{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px dotted #d2dae5}
+.fee h4{
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-primary);
+  margin-bottom:7px;
+}
+.fr{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  padding:4px 0;
+  border-bottom:1px solid rgba(210,210,215,0.7);
+}
 .fr:last-of-type{border:none}
-.fn{color:#66758a}
-.fv{font-weight:700;color:#1a3c6e}
-.note{font-size:10px;color:#d33f43;margin-top:5px;line-height:1.6}
+.fn{color:var(--text-secondary)}
+.fv{font-weight:700;color:var(--text-primary)}
+.note{
+  font-size:12px;
+  color:var(--text-secondary);
+  margin-top:8px;
+  line-height:1.6;
+}
 @media (max-width: 767px){
-  header{padding:20px 16px 18px}
-  header h1{font-size:18px}
+  header{padding:18px 16px 16px}
+  header h1{font-size:19px}
   .info-boxes,.tab-bar,.filter-bar,.section{padding-left:12px;padding-right:12px}
   .cards{grid-template-columns:1fr}
+  .tab-bar,.filter-bar{gap:8px}
+  .tab,.age-btn{font-size:12px}
+  .cb{font-size:13px}
+  .sc{font-size:13px}
 }
 </style>
 </head>
@@ -867,6 +961,14 @@ const LINE_HEIGHT = 20;
 const GAP = 18;
 const MOBILE_MAX = 767;
 const TABLET_MAX = 1199;
+const AGE_KEYWORDS = {
+  semi: ['semi', 'セミジュニア', '3歳'],
+  junior: ['junior', 'ジュニア'],
+  middle: ['middle', 'ミドル'],
+  senior: ['senior', 'シニア'],
+  elementary: ['elementary', '小学生', '小1', '小2', '小3', '小4', '小5', '小6']
+};
+const RANGE_SEPARATORS = '[〜~～\\-ー−]';
 
 const tabs = [...document.querySelectorAll('.tab')];
 const ageButtons = [...document.querySelectorAll('.age-btn')];
@@ -901,16 +1003,138 @@ function setActiveAge(age) {
   });
 }
 
+function getAgeTokens(value) {
+  return normalizeText(value)
+    .toLowerCase()
+    .split(/[\s,]+/)
+    .map((token) => token.trim())
+    .filter((token) => Object.prototype.hasOwnProperty.call(AGE_KEYWORDS, token));
+}
+
+function addAges(target, ages) {
+  ages.forEach((age) => target.add(age));
+}
+
+function inferRowAgesFromText(text) {
+  const compact = normalizeText(text).replace(/\s+/g, '');
+  const ages = new Set();
+
+  if (!compact) return ages;
+
+  const semiToSeniorRange = new RegExp(`(?:セミジュニア|3歳)${RANGE_SEPARATORS}シニア`, 'i').test(compact);
+  const juniorToSeniorRange = new RegExp(`ジュニア${RANGE_SEPARATORS}シニア`, 'i').test(compact);
+  const semiToElementaryRange = new RegExp(`(?:セミジュニア|3歳)${RANGE_SEPARATORS}小学生`, 'i').test(compact);
+  const juniorToElementaryRange = new RegExp(`ジュニア${RANGE_SEPARATORS}小学生`, 'i').test(compact);
+
+  if (semiToSeniorRange || semiToElementaryRange) {
+    addAges(ages, ['semi', 'junior', 'middle', 'senior']);
+  }
+
+  if (juniorToSeniorRange || juniorToElementaryRange) {
+    addAges(ages, ['junior', 'middle', 'senior']);
+  }
+
+  if (/(?:セミジュニア|\bsemi\b|3歳)/i.test(compact)) {
+    ages.add('semi');
+  }
+
+  const compactWithoutSemi = compact.replace(/セミジュニア/gi, '');
+  if (/(?:^|[・/])ジュニア(?:$|[・/])/.test(compactWithoutSemi) || /^ジュニア/.test(compactWithoutSemi) || /\bjunior\b/i.test(compactWithoutSemi)) {
+    ages.add('junior');
+  }
+
+  if (/(?:ミドル|\bmiddle\b)/i.test(compact)) {
+    ages.add('middle');
+  }
+
+  if (/(?:シニア|\bsenior\b)/i.test(compact)) {
+    ages.add('senior');
+  }
+
+  if (!(semiToElementaryRange || juniorToElementaryRange) && /(?:小学生|小[1-6１-６]|\belementary\b)/i.test(compact)) {
+    ages.add('elementary');
+  }
+
+  return ages;
+}
+
+function getCardDataRows(card) {
+  return [...card.querySelectorAll('.sc tr')].filter((row) => row.querySelectorAll('td').length > 0);
+}
+
+function getRowAges(row) {
+  const explicitAge = row.dataset.age || '';
+  const explicitTokens = getAgeTokens(explicitAge);
+  if (explicitTokens.length > 0) {
+    return new Set(explicitTokens);
+  }
+
+  if (explicitAge) {
+    const inferredExplicitAges = inferRowAgesFromText(explicitAge);
+    if (inferredExplicitAges.size > 0) {
+      row.dataset.age = [...inferredExplicitAges].join(' ');
+      return inferredExplicitAges;
+    }
+  }
+
+  const inferredAges = inferRowAgesFromText(row.innerText || '');
+  row.dataset.age = [...inferredAges].join(' ');
+  return inferredAges;
+}
+
+function initializeRowAgeData(card) {
+  getCardDataRows(card).forEach((row) => {
+    getRowAges(row);
+  });
+}
+
+function setRowVisibility(row, visible) {
+  row.style.display = visible ? '' : 'none';
+}
+
+function getFeeRowCategory(row) {
+  const label = normalizeText(row.querySelector('.fn')?.innerText || row.innerText || '');
+  const hasInfant = label.includes('幼児');
+  const hasElementary = label.includes('小学生');
+
+  if (hasInfant && hasElementary) return 'all';
+  if (hasInfant) return 'infant';
+  if (hasElementary) return 'elementary';
+  return 'all';
+}
+
+function shouldShowFeeRow(age, row) {
+  if (age === 'all') return true;
+
+  const category = getFeeRowCategory(row);
+  if (category === 'all') return true;
+
+  if (age === 'elementary') {
+    return category === 'elementary';
+  }
+
+  return category === 'infant';
+}
+
+function setCardVisibility(card, visible) {
+  card.classList.toggle('hidden', !visible);
+  card.style.display = visible ? '' : 'none';
+
+  if (!visible) {
+    card.style.left = '';
+    card.style.top = '';
+    card.style.width = '';
+  }
+}
+
 function ensurePrepared(card) {
   if (cardMeta.has(card)) return cardMeta.get(card);
 
   const body = card.querySelector('.cb');
-  const tableRows = card.querySelectorAll('.sc tr').length;
   const feeRows = card.querySelectorAll('.fr').length;
   const noteCount = card.querySelectorAll('.note').length;
   const meta = {
     prepared: prepare(normalizeText(body?.innerText || ''), FONT),
-    tableRows,
     feeRows,
     noteCount
   };
@@ -923,9 +1147,10 @@ function estimateCardHeight(card, cardWidth) {
   const meta = ensurePrepared(card);
   const bodyWidth = Math.max(220, cardWidth - 28);
   const textHeight = layout(meta.prepared, bodyWidth, LINE_HEIGHT).height;
+  const visibleTableRows = [...card.querySelectorAll('.sc tr')].filter((row) => row.style.display !== 'none').length;
   const staticHeight =
     118 +
-    meta.tableRows * 24 +
+    visibleTableRows * 24 +
     meta.feeRows * 19 +
     meta.noteCount * 18;
 
@@ -954,7 +1179,9 @@ function relayoutSection(section) {
   const container = section.querySelector('.cards');
   if (!container) return;
 
-  const visibleCards = [...container.querySelectorAll('.card:not(.hidden)')];
+  const visibleCards = [...container.querySelectorAll('.card')].filter(
+    (card) => !card.classList.contains('hidden') && card.style.display !== 'none'
+  );
   if (visibleCards.length === 0) {
     container.style.height = '0px';
     return;
@@ -1009,8 +1236,22 @@ function applyAgeFilter() {
   if (!activeSection) return;
 
   activeSection.querySelectorAll('.card').forEach((card) => {
-    const show = age === 'all' || (card.dataset.ages || '').includes(age);
-    card.classList.toggle('hidden', !show);
+    const dataRows = getCardDataRows(card);
+    const feeRows = card.querySelectorAll('.fr');
+    let visibleRowCount = 0;
+
+    dataRows.forEach((row) => {
+      const rowAges = getRowAges(row);
+      const showRow = age === 'all' || rowAges.has(age);
+      setRowVisibility(row, showRow);
+      if (showRow) visibleRowCount += 1;
+    });
+
+    feeRows.forEach((row) => {
+      setRowVisibility(row, shouldShowFeeRow(age, row));
+    });
+
+    setCardVisibility(card, visibleRowCount > 0);
   });
 
   requestRelayout();
@@ -1020,14 +1261,15 @@ function activateTab(tab) {
   tabs.forEach((item) => item.classList.toggle('active', item === tab));
   sections.forEach((section) => {
     section.classList.toggle('active', section.id === tab.dataset.tab);
-    section.querySelectorAll('.card').forEach((card) => card.classList.remove('hidden'));
   });
 
-  setActiveAge('all');
-  requestRelayout();
+  applyAgeFilter();
 }
 
-cards.forEach((card) => ensurePrepared(card));
+cards.forEach((card) => {
+  initializeRowAgeData(card);
+  ensurePrepared(card);
+});
 document.body.classList.add('pretext-ready');
 
 tabs.forEach((tab) => {
@@ -1043,7 +1285,7 @@ ageButtons.forEach((button) => {
 
 window.addEventListener('resize', requestRelayout);
 
-requestRelayout();
+applyAgeFilter();
 </script>
 </body>
 </html>
