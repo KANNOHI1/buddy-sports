@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>バディスポーツクラブ有明 活動ガイド</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Hiragino Sans','Yu Gothic',sans-serif;background:#f0f2f5;color:#333;font-size:14px}
+header{background:#1a3c6e;color:#fff;padding:14px 20px}
+header h1{font-size:18px;font-weight:bold}
+header p{font-size:11px;color:#aac4e8;margin-top:3px}
+.info-boxes{display:flex;gap:10px;padding:10px 12px;flex-wrap:wrap}
+.info-box{flex:1;min-width:280px;background:#fff;border-radius:8px;padding:12px 14px;border-left:4px solid #f59e0b;font-size:12px}
+.info-box.blue{border-left-color:#2196f3}
+.info-box h2{font-size:12px;font-weight:bold;color:#555;margin-bottom:6px}
+.info-box ol,.info-box ul{padding-left:16px;line-height:1.9}
+.tab-bar{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px;background:#fff;border-bottom:2px solid #ddd;position:sticky;top:0;z-index:10}
+.tab{padding:6px 14px;border:2px solid #ccc;border-radius:20px;cursor:pointer;font-size:12px;font-weight:bold;white-space:nowrap;background:#fff;transition:all .2s}
+.tab:hover{background:#eee}
+.tab.active[data-tab="sport-club"]{background:#1a3c6e;color:#fff;border-color:#1a3c6e}
+.tab.active[data-tab="sport-school"]{background:#0277bd;color:#fff;border-color:#0277bd}
+.tab.active[data-tab="culture-club"]{background:#6a1b9a;color:#fff;border-color:#6a1b9a}
+.tab.active[data-tab="culture-school"]{background:#ad1457;color:#fff;border-color:#ad1457}
+.tab.active[data-tab="tenant"]{background:#e65100;color:#fff;border-color:#e65100}
+.filter-bar{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;background:#fafafa;border-bottom:1px solid #ddd;align-items:center}
+.filter-label{font-size:11px;color:#666;font-weight:bold}
+.age-btn{padding:4px 10px;border:1px solid #ccc;border-radius:12px;cursor:pointer;font-size:11px;background:#fff}
+.age-btn:hover{background:#e0e0e0}
+.age-btn.active{background:#1a3c6e;color:#fff;border-color:#1a3c6e}
+.section{display:none;padding:10px 12px}
+.section.active{display:block}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.card{background:#fff;border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.1);overflow:hidden}
+.card.hidden{display:none}
+.ch{padding:10px 14px;color:#fff}
+.sport-club .ch{background:#1a3c6e}
+.sport-school .ch{background:#0277bd}
+.culture-club .ch{background:#6a1b9a}
+.culture-school .ch{background:#ad1457}
+.tenant .ch{background:#e65100}
+.ch h3{font-size:14px;font-weight:bold}
+.ch .sub{font-size:11px;opacity:.8;margin-top:2px}
+.cb{padding:10px 14px}
+.bus{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:bold;margin-bottom:8px}
+.bus-y{background:#e3f2fd;color:#0d47a1}
+.bus-n{background:#fce4ec;color:#880e4f}
+table.sc{width:100%;border-collapse:collapse;font-size:11px;margin:6px 0}
+.sc th{background:#f5f5f5;padding:4px 6px;text-align:left;border:1px solid #e0e0e0;font-weight:bold;white-space:nowrap}
+.sc td{padding:4px 6px;border:1px solid #e0e0e0;vertical-align:top;line-height:1.6}
+.sc tr:nth-child(even) td{background:#fafafa}
+.fee{background:#f9f9f9;border-radius:6px;padding:8px 10px;margin-top:8px;font-size:11px}
+.fee h4{font-size:11px;font-weight:bold;color:#555;margin-bottom:5px}
+.fr{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #ddd}
+.fr:last-of-type{border:none}
+.fn{color:#666}
+.fv{font-weight:bold;color:#1a3c6e}
+.note{font-size:10px;color:#e53935;margin-top:4px;line-height:1.5}
+</style>
+</head>
+<body>
+<header>
+  <h1>バディスポーツクラブ有明 活動ガイド</h1>
+  <p>運動部・文化部・テナントスクール 総合一覧 ／ 全て税込価格</p>
+</header>
+
+<div class="info-boxes">
+  <div class="info-box">
+    <h2>💴 費用・月謝について（共通）</h2>
+    <ol>
+      <li>入会金：¥11,000（税込）― 入会時に一律</li>
+      <li>年会金：¥13,200（税込）― 途中入会は1ヶ月¥1,100×残月数。毎年3月末に翌年分請求。複数クラブ入会でも1種目分のみ。</li>
+      <li>在園児・卒園児：入会金免除。在園児年会金¥2,200。</li>
+      <li>運営費・大会準備費・用具費・ユニフォーム費はクラブ・スクールにより異なる。</li>
+      <li>合宿・大会出場等の費用はその都度連絡。</li>
+      <li>月謝：Aコース（バス利用あり）／ Bコース（バス利用なし）</li>
+    </ol>
+  </div>
+  <div class="info-box blue">
+    <h2>📌 クラブとスクールの違い</h2>
+    <ul>
+      <li><strong>クラブ</strong>：合宿・大会参加・チーム登録あり。<span style="color:#2e7d32;font-weight:bold">送迎バス利用可</span></li>
+      <li><strong>スクール</strong>：個人スキルアップのみ。合宿・大会なし。<span style="color:#c62828;font-weight:bold">送迎バス利用不可</span></li>
+      <li><strong>年齢区分</strong>：セミジュニア(年少々3歳) → ジュニア(年少4歳) → ミドル(年中5歳) → シニア(年長6歳) → 小学生</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tab-bar">
+  <div class="tab active" data-tab="sport-club">⚽ 運動部クラブ</div>
+  <div class="tab" data-tab="sport-school">🏃 運動部スクール</div>
+  <div class="tab" data-tab="culture-club">🎹 文化部クラブ</div>
+  <div class="tab" data-tab="culture-school">📚 文化部スクール</div>
+  <div class="tab" data-tab="tenant">🏢 テナントスクール</div>
+</div>
+
+<div class="filter-bar">
+  <span class="filter-label">年齢で絞り込み：</span>
+  <button class="age-btn active" data-age="all">すべて</button>
+  <button class="age-btn" data-age="semi">セミジュニア(年少々)</button>
+  <button class="age-btn" data-age="junior">ジュニア(年少)</button>
+  <button class="age-btn" data-age="middle">ミドル(年中)</button>
+  <button class="age-btn" data-age="senior">シニア(年長)</button>
+  <button class="age-btn" data-age="elementary">小学生</button>
+</div>
+
+<!-- 運動部クラブ -->
+<div class="section active" id="sport-club">
+<div class="cards">
+
+<div class="card sport-club" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>⚽ バディクラブ サッカー</h3><div class="sub">有明バディグランド / 江東バディグランド</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア</td><td>火 15:00-15:50 / 木 15:00-15:50</td></tr>
+<tr><td>ジュニア</td><td>月 15:00-15:50 / 金 16:00-16:50</td></tr>
+<tr><td>ミドル</td><td>月 16:00-16:50 / 金 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>水 15:00-15:50 / 月 16:00-16:50</td></tr>
+<tr><td>小1</td><td>水 17:00-18:30(江東) / 土 9:00-12:00(有明) / 日 7:00-10:00(江東)</td></tr>
+<tr><td>小2</td><td>水 17:00-18:30(江東) / 土 7:10-10:00(有明) / 日 7:00-10:00(江東)</td></tr>
+<tr><td>小3</td><td>水 17:00-18:30(江東) / 土 7:10-10:00(有明) / 日 7:00-10:00(江東)</td></tr>
+<tr><td>小4</td><td>水 17:00-19:00(有明) / 土 7:00-10:00(江東) / 日 7:10-10:00(有明)</td></tr>
+<tr><td>小5・6</td><td>水 17:00-19:00(有明) / 土 7:00-10:00(有明) / 日 7:10-10:00(有明)</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1回Aコース</span><span class="fv">¥9,900</span></div>
+<div class="fr"><span class="fn">幼児 週2回</span><span class="fv">¥13,200</span></div>
+<div class="fr"><span class="fn">小学生週2回A（1・2年のみ）/ B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生週3回A / B</span><span class="fv">¥19,250 / ¥16,500</span></div>
+<div class="fr"><span class="fn">グランド使用料（週1/2/3）</span><span class="fv">¥1,100 / ¥1,650 / ¥2,200</span></div>
+<div class="fr"><span class="fn">試合費（小学生男子のみ）</span><span class="fv">¥2,200/月</span></div>
+<p class="note">運営費¥6,600（月額¥550）/ 大会準備費・選手登録¥1,100（入会時）/ 強化合宿¥34,800（年2回）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🤸 バディクラブ 器械体操</h3><div class="sub">1F 体操場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア</td><td>あり（詳細別途確認）</td></tr>
+<tr><td>ジュニア</td><td>火 16:00-16:50 / 水 15:00-15:50 / 日 11:00-11:50</td></tr>
+<tr><td>ミドル</td><td>水・金 16:00-16:50 / 日 10:00-10:50</td></tr>
+<tr><td>シニア</td><td>火・金 15:00-15:50 / 水・金 16:00-16:50 / 日 10:00-10:50</td></tr>
+<tr><td>小学生【一般】</td><td>水・金 17:00-18:00 / 土・日 9:00-10:00（送迎なし）</td></tr>
+<tr><td>小学生【育成】</td><td>水・金 17:00-20:00 / 土・日 13:00-15:00</td></tr>
+<tr><td>小学生【選手】</td><td>火・木・金 17:00-20:00 / 土・日 13:00-17:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1 / 週2</span><span class="fv">¥9,900 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生一般 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生一般 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<p class="note">以降¥3,300ずつ増加 / 体験費¥2,200 / 運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🏀 バディクラブ バスケットボール</h3><div class="sub">3F バスケットコート</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア</td><td>月 15:00-15:50 / 日 16:00-16:50</td></tr>
+<tr><td>ジュニア</td><td>月 16:00-16:50 / 火 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>金 16:00-16:50 / 水 15:00-15:50 / 土 9:00-9:50</td></tr>
+<tr><td>シニア</td><td>火 16:00-16:50 / 金 15:00-15:50 / 土 9:00-9:50</td></tr>
+<tr><td>小学生【低学年】</td><td>水・金 17:00-18:30 / 土 7:10-10:00(有明) / 日 7:10-10:00(江東)</td></tr>
+<tr><td>小学生【高学年】</td><td>月・火 17:00-18:50 / 土・日 7:10-10:00(有明)</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥9,900 / ¥13,200 / ¥16,500</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥19,250 / ¥16,500</span></div>
+<p class="note">以降¥3,300ずつ増加 / 運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🏃 バディクラブ 陸上競技</h3><div class="sub">陸上走路</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア</td><td>水 16:00-16:50</td></tr>
+<tr><td>ジュニア</td><td>月・火 16:00-16:50 / 木・金 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>月・水・木 15:00-15:50 / 金 16:00-16:50 / 土 10:00-10:50</td></tr>
+<tr><td>シニア</td><td>月・水・木 15:00-15:50 / 金 16:00-16:50 / 土 10:00-10:50</td></tr>
+<tr><td>小学生（全学年）</td><td>月〜金 17:00-18:00 / 土 15:00-17:00（※週2回料金）</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥9,900 / ¥13,200 / ¥16,500</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥19,250 / ¥16,500</span></div>
+<p class="note">以降¥3,300ずつ増加 / 運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🥋 バディクラブ 柔道</h3><div class="sub">3F 柔道場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>月 15:00-15:50 / 木 16:00-16:50</td></tr>
+<tr><td>ミドル</td><td>月 16:00-16:50 / 木 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>月 16:00-16:50 / 木 15:00-15:50</td></tr>
+<tr><td>小学生（全学年）</td><td>月・木 17:00-18:30</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥9,900 / ¥13,200 / ¥16,500</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<p class="note">以降¥3,300ずつ増加 / 年間用具費¥3,300（月¥275）/ 大会準備費¥1,100（初回のみ）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🎾 バディクラブ テニス</h3><div class="sub">3F テニスコート</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（高学年 シャトルバス①お台場 ②豊洲）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>水・金 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>月・火・木 15:00-15:50 / 月・火・木・金 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>月・火・木 15:00-15:50 / 月・火・木・金 16:00-16:50</td></tr>
+<tr><td>小学生【オレンジ】</td><td>火・木・金 17:00-18:00 / 水 16:30-17:30</td></tr>
+<tr><td>小学生【グリーン】</td><td>火・木・金 18:00-19:00</td></tr>
+<tr><td>小学生【イエロー】</td><td>月 17:00-18:30 / 水 17:30-19:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2</span><span class="fv">¥10,450 / ¥20,900</span></div>
+<div class="fr"><span class="fn">小学生一般 週1/2</span><span class="fv">¥11,550 / ¥23,100</span></div>
+<div class="fr"><span class="fn">小学生イエロー 週1/2</span><span class="fv">¥14,850 / ¥29,700</span></div>
+<p class="note">運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>⚾ バディクラブ 野球</h3><div class="sub">グランド / 1F ハンドボール場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>月 16:00-16:50</td></tr>
+<tr><td>ミドル</td><td>月 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>月 15:00-15:50</td></tr>
+<tr><td>小学生（全学年）</td><td>月 17:00-18:30</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2</span><span class="fv">¥11,220 / ¥14,520</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥13,970 / ¥11,220</span></div>
+<p class="note">運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🧗 バディクラブ ボルダリング</h3><div class="sub">3F ボルダリング場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア + シャトルバス①お台場 ②豊洲）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>月・木・金 15:00-15:50 / 土 10:40-11:30 or 12:30-13:20</td></tr>
+<tr><td>ミドル</td><td>月・木・金 15:00-15:50 / 月・木 16:00-16:50 / 土 10:40-11:30 or 12:30-13:20</td></tr>
+<tr><td>シニア</td><td>月・木・金 15:00-15:50 / 月・木 16:00-16:50 / 土 10:40-11:30 or 12:30-13:20</td></tr>
+<tr><td>小1〜3</td><td>月 17:00-18:30(送迎あり) / 金 18:00-18:30(送迎あり) / 土 13:30-15:00</td></tr>
+<tr><td>小4〜中3</td><td>月 18:30-20:00 / 水 17:30-19:00 / 金 18:30-20:00 / 土 15:10-16:40</td></tr>
+<tr><td>高校生以上</td><td>月 18:30-20:00 / 水 17:30-19:00 / 土 17:00-18:30</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥12,660 / ¥19,860 / ¥27,060</span></div>
+<div class="fr"><span class="fn">小学生 週1A</span><span class="fv">¥17,810</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥25,010 / ¥22,260</span></div>
+<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥32,210 / ¥29,460</span></div>
+<p class="note">以降¥7,200ずつ増加 / 運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🏐 バディクラブ ドッジボール</h3><div class="sub">1F ハンドボール場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>水 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>水 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>水 16:00-16:50</td></tr>
+<tr><td>小学生（全学年）</td><td>水 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1</span><span class="fv">¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
+<p class="note">運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card sport-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>💪 バディ 青トレ&ランニングクラブ</h3><div class="sub">屋上グランド（大人は晴海ふ頭公園）</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア + シャトルバス①お台場 ②豊洲）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>火・水 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>火・水 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>火・水 16:00-16:50</td></tr>
+<tr><td>小学生（全学年）</td><td>火・水 17:00-18:00</td></tr>
+<tr><td>大人（15歳以上）</td><td>土 9:00-11:00（晴海ふ頭公園・中央区）</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生 週1</span><span class="fv">¥9,900</span></div>
+<div class="fr"><span class="fn">大人 週1</span><span class="fv">¥18,480</span></div>
+<p class="note">運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+</div></div>
+
+<!-- 運動部スクール -->
+<div class="section" id="sport-school">
+<div class="cards">
+
+<div class="card sport-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🏃 バディスクール FUNAJUKU</h3><div class="sub">屋上グランド</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>火・木 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>火・木 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>火・木 16:00-16:50</td></tr>
+<tr><td>小学生1・2年</td><td>火・木 17:00-18:10</td></tr>
+<tr><td>小学生3・4年</td><td>火・木 18:20-19:30</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1/2</span><span class="fv">¥10,450 / ¥15,400</span></div>
+<div class="fr"><span class="fn">小学生 週1/2</span><span class="fv">¥10,450 / ¥15,400</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🏈 バディスクール フラッグフットボール</h3><div class="sub">1F ハンドボール場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア</td><td>金 15:00-15:50</td></tr>
+<tr><td>ジュニア</td><td>金 15:00-15:50 / 金 16:00-16:50</td></tr>
+<tr><td>ミドル</td><td>金 16:00-16:50 / 金 17:00-17:50（※帰り送迎バスなし）</td></tr>
+<tr><td>シニア</td><td>金 16:00-16:50 / 金 17:00-17:50（※帰り送迎バスなし）</td></tr>
+<tr><td>小学生（全学年）</td><td>金 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥10,450</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="junior middle senior">
+<div class="ch"><h3>🏈🇺🇸 バディスクール 英語フラッグフットボール</h3><div class="sub">屋上グランド</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>木 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>木 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>木 16:00-16:50</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児</span><span class="fv">¥11,550</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🤼 バディスクール レスリング</h3><div class="sub">3F レスリング場</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア〜シニア</td><td>火・水・木・金 15:00-16:30 / 土 10:00-12:00</td></tr>
+<tr><td>小学生</td><td>火・水・木・金 17:00-19:00 / 土 10:00-12:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 週1 / 通い放題</span><span class="fv">¥13,000 / ¥20,000</span></div>
+<div class="fr"><span class="fn">小学生 週1 / 通い放題</span><span class="fv">¥13,000 / ¥20,000</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🤸 バディスクール 体操アクロバット（Brother体操）</h3><div class="sub">1F 体操場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>月 16:00-16:50 / 木 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>月 15:00-15:50 / 木 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>月 15:00-15:50 / 木 16:00-16:50</td></tr>
+<tr><td>小学生【一般コース】</td><td>月・木 17:00-18:00</td></tr>
+<tr><td>小学生【アクロバット】</td><td>月・木 18:00-19:00</td></tr>
+<tr><td>小学生〜大人【上級アクロ】</td><td>月・木 19:00-20:00 / 月・木 20:00-21:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">週1 / 週2</span><span class="fv">¥11,550 / ¥18,150</span></div>
+<p class="note">検定費 別途徴収</p>
+</div></div></div>
+
+<div class="card sport-school" data-ages="middle senior elementary">
+<div class="ch"><h3>⚔️ バディスクール 剣道</h3><div class="sub">3F 柔道場</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ミドル</td><td>水 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>水 16:00-16:50</td></tr>
+<tr><td>小学生</td><td>水 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">週1</span><span class="fv">¥9,900</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>💃 バディスクール ZERO・ONEダンス</h3><div class="sub">3F 教室</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>金 16:00-16:50</td></tr>
+<tr><td>ミドル</td><td>金 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>金 15:00-15:50</td></tr>
+<tr><td>小学生（全学年）</td><td>金 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生 週1</span><span class="fv">¥10,450</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🥊 バディスクール 空手道</h3><div class="sub">2F 教室</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>木 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>木 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>木 16:00-16:50</td></tr>
+<tr><td>小学生</td><td>木 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生 週1</span><span class="fv">¥9,900</span></div>
+<p class="note">昇段審査を受ける場合は別途費用</p>
+</div></div></div>
+
+<div class="card sport-school" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>⚽ バディスクール サッカースクール</h3><div class="sub">屋上グランド</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア〜シニア</td><td>詳細別途確認</td></tr>
+<tr><td>小学生</td><td>金 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥9,900</span></div>
+</div></div></div>
+
+<div class="card sport-school" data-ages="middle senior elementary">
+<div class="ch"><h3>🏀 バディスクール バスケットボール 3×3</h3><div class="sub">3F バスケットコート</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ミドル</td><td>木 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>木 16:00-16:50</td></tr>
+<tr><td>小学生</td><td>木 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥11,000</span></div>
+</div></div></div>
+
+</div></div>
+
+<!-- 文化部クラブ -->
+<div class="section" id="culture-club">
+<div class="cards">
+
+<div class="card culture-club" data-ages="senior elementary">
+<div class="ch"><h3>🎹 バディクラブ ピアノ</h3><div class="sub">4F 教室</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>シニア</td><td>火・水・木・金 各30分</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥9,900</span></div>
+<p class="note">運営費¥6,600（月額¥550）</p>
+</div></div></div>
+
+<div class="card culture-club" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🗣️ バディクラブ 英会話</h3><div class="sub">3F 教室</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>月〜金 15:00-15:50</td></tr>
+<tr><td>ミドル</td><td>月〜金 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>月〜金 16:00-16:50</td></tr>
+<tr><td>小学生</td><td>月〜金 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生 週1/2/3</span><span class="fv">¥11,220 / ¥16,500 / ¥24,420</span></div>
+<p class="note">運営費¥6,600（月額¥550）/ 教材費¥5,500</p>
+</div></div></div>
+
+<div class="card culture-club" data-ages="middle senior elementary">
+<div class="ch"><h3>💻 バディクラブ ミライキッズ プログラミング</h3><div class="sub">2F 教室</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 バスあり（1〜3年生 B・Cエリア）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ミドル</td><td>火・木 ①15:00-15:40 / ②16:00-16:40</td></tr>
+<tr><td>シニア</td><td>火・木 ①15:00-15:40 / ②16:00-16:40</td></tr>
+<tr><td>小学生</td><td>火・木 ①17:00-17:40</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生 週1</span><span class="fv">¥9,900</span></div>
+<p class="note">運営費¥13,200（月¥1,100）/ PC・Wi-Fi使用料・発表会費¥13,200 / 教材費¥6,380</p>
+</div></div></div>
+
+</div></div>
+
+<!-- 文化部スクール -->
+<div class="section" id="culture-school">
+<div class="cards">
+
+<div class="card culture-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>📖 バディスクール 明光キッズ 学習プログラム</h3><div class="sub">2F 教室</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア</td><td>月 15:00-15:40 / 金 15:00-15:40</td></tr>
+<tr><td>ミドル</td><td>月 16:00-16:50 / 金 16:00-16:50</td></tr>
+<tr><td>シニア</td><td>月 17:00-17:50 / 金 17:00-17:50</td></tr>
+<tr><td>小学生（全学年）</td><td>月・金 17:00-17:50</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥11,000</span></div>
+<p class="note">教材費¥1,210</p>
+</div></div></div>
+
+<div class="card culture-school" data-ages="middle senior">
+<div class="ch"><h3>🧠 バディスクール 明光キッズ 思考力教室</h3><div class="sub">2F 教室</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ミドル</td><td>水 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>水 16:00-16:50（経験者コース）</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥11,000</span></div>
+<p class="note">教材費¥1,210</p>
+</div></div></div>
+
+<div class="card culture-school" data-ages="middle senior elementary">
+<div class="ch"><h3>🔬 バディスクール 自然科学教室</h3><div class="sub">2F 教室</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ミドル</td><td>月・金 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>月・金 16:00-16:50</td></tr>
+<tr><td>小学生1・2年</td><td>金 17:00-18:00</td></tr>
+<tr><td>小学生3年以上</td><td>月 17:00-18:00</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児 / 小学生</span><span class="fv">¥9,900 / ¥11,000</span></div>
+<p class="note">教材費：幼児¥1,100 / 小学生¥2,200</p>
+</div></div></div>
+
+<div class="card culture-school" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🎻 バディスクール ヴァイオリン</h3><div class="sub">3F 教室</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>時間帯（火・水から選択）</th></tr>
+<tr><td>ジュニア〜小学生</td><td>①15:00-15:40 / ②15:50-16:30 / ③16:40-17:20 / ④17:30-18:10</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児・小学生</span><span class="fv">¥11,231</span></div>
+<p class="note">教材費¥5,000（入会時のみ）/ 楽器レンタル¥2,200/月 / スケッチブック2冊目以降¥600</p>
+</div></div></div>
+
+<div class="card culture-school" data-ages="middle senior">
+<div class="ch"><h3>✏️ バディスクール 明光キッズ 硬筆教室</h3><div class="sub">2F 教室</div></div>
+<div class="cb">
+<span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ミドル</td><td>木 15:00-15:45</td></tr>
+<tr><td>シニア</td><td>木 16:00-16:45</td></tr>
+</table>
+<div class="fee"><h4>月会費</h4>
+<div class="fr"><span class="fn">幼児</span><span class="fv">¥11,000</span></div>
+<p class="note">教材費¥1,210</p>
+</div></div></div>
+
+</div></div>
+
+<!-- テナントスクール -->
+<div class="section" id="tenant">
+<div class="cards">
+
+<div class="card tenant" data-ages="junior middle senior elementary">
+<div class="ch"><h3>📣 チアジムトーキョー（チアリーディング）</h3><div class="sub">3階スタジオA ／ info@cheermaxinstitute.com</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア・ミドル</td><td>火・木 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>火 16:00-16:50 / 木 16:00-16:50(English cheer) / 金 16:00-16:50</td></tr>
+<tr><td>小学生 がんばるチア（小1〜4）</td><td>火 17:00-18:00</td></tr>
+<tr><td>小学生 チア育成（小2〜6 招待制）</td><td>金 17:00-18:00</td></tr>
+<tr><td>youth cheer（小4〜6）</td><td>土 13:00-14:00</td></tr>
+<tr><td>starcats CHEER（小3〜中3）</td><td>金 18:30-20:30（チア大会チーム）</td></tr>
+</table>
+<div class="fee"><h4>料金（税込）</h4>
+<div class="fr"><span class="fn">年会費 BUDDY・がんばる・youth</span><span class="fv">¥13,200</span></div>
+<div class="fr"><span class="fn">年会費 育成・starcats GOLD</span><span class="fv">¥14,520</span></div>
+<div class="fr"><span class="fn">年会費 starcats CHEER</span><span class="fv">¥15,840</span></div>
+<div class="fr"><span class="fn">受講料 50/60分クラス1クラス</span><span class="fv">¥11,550/月</span></div>
+<div class="fr"><span class="fn">1クラス追加ごとに</span><span class="fv">+¥7,150</span></div>
+<p class="note">発表会約¥12,000 / イベント約¥4,000 別途</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="junior middle senior elementary">
+<div class="ch"><h3>💃 チアジムトーキョー（チアダンス）</h3><div class="sub">3階スタジオA</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア・ミドル</td><td>水・金 15:00-15:50</td></tr>
+<tr><td>シニア</td><td>水 16:00-16:50</td></tr>
+<tr><td>がんばるダンス youth（小1〜6）</td><td>水 17:00-18:00</td></tr>
+<tr><td>ダンス育成（小1〜4 招待制）</td><td>水 18:00-19:30</td></tr>
+<tr><td>初等科育成（小1〜3）</td><td>土 11:45-13:00</td></tr>
+<tr><td>中・高等科育成（小4〜中3）</td><td>土 13:20-14:50</td></tr>
+</table>
+<div class="fee"><h4>料金</h4>
+<p style="font-size:11px;color:#666">チアリーディングと同料金体系。詳細はチアジムトーキョーへ。</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🩰 バレエアーツ（バレエ）</h3><div class="sub">3階スタジオB ／ 03-5338-5818 / info@ballet-arts.jp</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>3歳〜シニア（エベイユ1）</td><td>月 15:00-15:50 / 金 15:00-15:50</td></tr>
+<tr><td>ミドル〜シニア（エベイユ2）</td><td>水 16:00-16:50 / 金 16:00-16:50</td></tr>
+<tr><td>小学生低学年</td><td>水 17:00-18:00 / 土 10:30-11:30 / 水・金 18:00-19:15</td></tr>
+<tr><td>初等科育成（小1〜3）</td><td>土 11:45-13:00</td></tr>
+<tr><td>中・高等科育成（小4〜中3）</td><td>土 13:20-14:50</td></tr>
+</table>
+<div class="fee"><h4>月会費（税込）</h4>
+<div class="fr"><span class="fn">エベイユ初等科 週1/2</span><span class="fv">¥9,920 / ¥11,150</span></div>
+<div class="fr"><span class="fn">中等科・高等科 週1/2</span><span class="fv">¥13,450 / ¥24,530</span></div>
+<div class="fr"><span class="fn">トゥシューズ 週1</span><span class="fv">¥3,100</span></div>
+<p class="note">入会金¥11,000（姉妹兄弟割¥5,500）/ 発表会・ユニフォーム費別途</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="junior middle senior elementary">
+<div class="ch"><h3>🏊 トウリトネス（スイミング）</h3><div class="sub">1階プール ／ 03-6426-0804 / info@tsa1998.com</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>ジュニア〜シニア</td><td>月〜金 15:00 or 16:00開始 / 土 11:00 or 12:00開始</td></tr>
+<tr><td>小学生（泳力別クラス）</td><td>月〜金 16:00/17:00/18:00開始 / 土 14:00/15:00/16:00/17:00開始</td></tr>
+</table>
+<div class="fee"><h4>月会費（税込）</h4>
+<div class="fr"><span class="fn">スイミング 週1</span><span class="fv">¥13,860</span></div>
+<div class="fr"><span class="fn">S級/選手 週1/2</span><span class="fv">¥11,220 / ¥16,500</span></div>
+<div class="fr"><span class="fn">定額通い放題</span><span class="fv">¥22,440</span></div>
+<div class="fr"><span class="fn">シンクロ</span><span class="fv">¥16,500</span></div>
+<div class="fr"><span class="fn">プライベートレッスン（30分）</span><span class="fv">¥5,940</span></div>
+<p class="note">指定水着：男子¥4,850/女子¥7,590 / 進級帽子¥880 / 11〜2月暖房費¥600/月</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🕺 エイペックス・ダンスマスター</h3><div class="sub">3階スタジオB ／ adm_buddy@av.avex.co.jp</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>3歳〜シニア</td><td>月 15:00-15:50 / 月 16:00-16:50 / 火 15:00-15:50 / 火 16:00-16:50</td></tr>
+<tr><td>小学生〜中学生</td><td>月 17:10-18:10 / 月 18:20-19:20 / 火 17:10-18:10 / 火 18:20-19:20 / 火 19:30-20:30</td></tr>
+<tr><td>大人（高校生〜）</td><td>月 18:20-19:20 / 火 18:20-19:20 / 火 19:30-20:30</td></tr>
+</table>
+<div class="fee"><h4>月会費（税込）</h4>
+<div class="fr"><span class="fn">幼児〜大人</span><span class="fv">¥9,350</span></div>
+<p class="note">入会初期費用¥5,500（入会時のみ）</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🏓 ファースト卓球スクール</h3><div class="sub">3階卓球コート ／ 03-5879-2442 / https://first-tt.com/</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア〜シニア</td><td>月〜金 15:00-15:50 / 土・日・祝 10:00-10:50</td></tr>
+<tr><td>小学生【初級】</td><td>月〜金 17:00-17:50</td></tr>
+<tr><td>小学生【ジュニア】</td><td>月〜金 17:00-19:30 / 土・日・祝 13:00-14:30</td></tr>
+<tr><td>小学生【選手強化】</td><td>月〜金 17:00-19:30 / 土・日・祝 13:00-15:30</td></tr>
+<tr><td>大人（平日）</td><td>10:00-12:00 / 13:00-15:00 / 19:40-21:00（月・水のみ）</td></tr>
+</table>
+<div class="fee"><h4>月会費（税込・月4回）</h4>
+<div class="fr"><span class="fn">幼児〜 / 初級〜 / ジュニア〜</span><span class="fv">¥9,680 / ¥11,380 / ¥18,480</span></div>
+<div class="fr"><span class="fn">選手強化〜 / 大人〜</span><span class="fv">¥27,720 / ¥13,200</span></div>
+<p class="note">年会費¥11,000</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🎾 Be-Win SQUASH CLUB ARIAKE（スカッシュ）</h3><div class="sub">別館スカッシュコート ／ ariake@bewin-squash.com</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア〜シニア（キンダー）</td><td>火〜金 15:00-15:50 ※定員3名 / 木〜金 16:00-16:50 ※定員3名<br>Englishクラス：月 15:00-16:50 ※定員3名</td></tr>
+<tr><td>小学生（ジュニア）</td><td>火・水 16:00-17:00 / 月〜金 17:00-18:00 / 月・木・金 18:00-19:00<br>土・日 9:00-11:00（少人数制）</td></tr>
+</table>
+<div class="fee"><h4>月会費（税込）</h4>
+<div class="fr"><span class="fn">キンダー 週1 / Englishクラス 週1</span><span class="fv">¥9,900 / ¥11,000</span></div>
+<div class="fr"><span class="fn">ジュニア 週1/2/3/4</span><span class="fv">¥9,900 / ¥17,600 / ¥24,750 / ¥33,000</span></div>
+<p class="note">成人クラスはクラブHP確認</p>
+</div></div></div>
+
+<div class="card tenant" data-ages="semi junior middle senior elementary">
+<div class="ch"><h3>🌺 Hālau Laniokekau'anaokalā（フラダンス）</h3><div class="sub">3階スタジオB ／ 担当：西澤 090-2408-8717</div></div>
+<div class="cb">
+<span class="bus bus-y">🚌 シャトルバス①お台場 ②豊洲</span>
+<table class="sc"><tr><th>学年</th><th>曜日・時間</th></tr>
+<tr><td>セミジュニア〜シニア</td><td>木 16:00-16:50（インストラクター2名）</td></tr>
+<tr><td>小学生〜中学生</td><td>木 17:00-18:00</td></tr>
+<tr><td>高校生〜大人</td><td>木 18:10-19:30</td></tr>
+</table>
+<div class="fee"><h4>月会費（税込）</h4>
+<div class="fr"><span class="fn">幼児 / 小学生〜大人</span><span class="fv">¥6,500 / ¥7,500</span></div>
+</div></div></div>
+
+</div></div>
+
+<script>
+document.querySelectorAll('.tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.section').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(t.dataset.tab).classList.add('active');
+    document.querySelectorAll('.age-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelector('.age-btn[data-age="all"]').classList.add('active');
+    document.querySelectorAll('.card').forEach(c=>c.classList.remove('hidden'));
+  });
+});
+document.querySelectorAll('.age-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.age-btn').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const age=b.dataset.age;
+    document.querySelector('.section.active').querySelectorAll('.card').forEach(c=>{
+      if(age==='all'||( c.dataset.ages||'').includes(age)){c.classList.remove('hidden')}
+      else{c.classList.add('hidden')}
+    });
+  });
+});
+</script>
+</body>
+</html>
