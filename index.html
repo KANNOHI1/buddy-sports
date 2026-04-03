@@ -2247,6 +2247,7 @@ function activateTab(tab) {
 
 sanitizeCardHeaders();
 initializeInfoBoxes();
+sections.forEach((s) => s.classList.add('active'));
 cards.forEach((card) => {
   initializeRowAgeData(card);
   buildFeeState(card);
@@ -3095,6 +3096,7 @@ function activateTab(tab) {
 
 sanitizeCardHeaders();
 initializeInfoBoxes();
+sections.forEach((s) => s.classList.add('active'));
 cards.forEach((card) => {
   initializeRowAgeData(card);
   buildFeeState(card);
