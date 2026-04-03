@@ -172,6 +172,14 @@ function testFixedFeeFallbacks() {
     2,
     'buildFeeState should skip rendering week chips for fixed-fee cards in both duplicated implementations'
   );
+
+  const filteredWeekOptionsMatches =
+    html.match(/const weekOptions = \[\.\.\.new Set\(rows\.filter\(\(r\) => !r\.extra && !r\.excluded\)\.flatMap/g) || [];
+  assert.equal(
+    filteredWeekOptionsMatches.length,
+    2,
+    'buildFeeState should exclude extra/excluded rows from weekOptions in both duplicated implementations'
+  );
 }
 
 function testModuleWiring() {
