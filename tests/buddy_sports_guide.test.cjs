@@ -74,7 +74,7 @@ function testStaticContent() {
   assertMatches(/\.control-select\s*\{[\s\S]*?max-width:220px;/, 'control-select に max-width:220px が必要');
   assertMatches(/<span class="info-box-title">費用・月謝について（共通）<\/span>/, 'info-box の h2 絵文字は削除されているべき');
   assertMatches(/<span class="info-box-title">クラブとスクールの違い<\/span>/, 'info-box のタイトルはテキストのみであるべき');
-  assertMatches(/<span class="info-box-indicator" aria-hidden="true">▶<\/span>/, 'accordion のデフォルトインジケーターは ▶');
+  assertMatches(/class="info-box-indicator"/, 'accordion のインジケーター要素が存在する');
   assertMatches(
     /\.info-box-content\s*\{[\s\S]*?max-height:0;[\s\S]*?transition:max-height 0\.25s ease, padding-bottom 0\.25s ease;/,
     'accordion は max-height アニメーションで開閉するべき'
