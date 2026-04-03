@@ -3,8 +3,6 @@
 ## 未修正バグ
 
 - [ ] Bug 3: ドッジボール（hasBus=true + 週1択）でジュニアフィルタ時に fee-chip が何も出ない（バス選択が非表示、週チップも非表示のため）
-- [ ] Bug 5: ジュニアフィルタ選択時にセミジュニアも表示される（containsAny が substring match のため 'セミジュニア'.includes('ジュニア')=true になる）
-
 ## 解決済み（確認済み）
 
 - [x] Bug 1: バスバッジがジュニア年齢フィルタ時も表示される → syncBusBadgeWithAge で age !== 'all' && age !== 'elementary' → display:none
