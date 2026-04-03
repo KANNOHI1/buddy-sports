@@ -144,6 +144,15 @@ function testBusBadgeBehavior() {
   api.syncBusBadgeWithAge('all', badge);
   assert.equal(badge.className, 'bus bus-y', 'all でも元の class を維持するべき');
   assert.equal(badge.textContent, '🚌 バスあり（1〜3年生 B・Cエリア）', 'all でも元の文言を維持するべき');
+
+  // 「高学年」バッジ: 幼児フィルタ時は非表示
+  const badgeHighGrade = createBadge('🚌 バスあり（高学年 シャトルバス①お台場 ②豊洲）');
+  api.syncBusBadgeWithAge('junior', badgeHighGrade);
+  assert.equal(badgeHighGrade.style.display, 'none', '幼児フィルタ時は高学年バッジを非表示にするべき');
+
+  // 「高学年」バッジ: 小学生フィルタ時は表示
+  api.syncBusBadgeWithAge('elementary', badgeHighGrade);
+  assert.equal(badgeHighGrade.style.display, '', '小学生フィルタ時は高学年バッジを表示するべき');
 }
 
 function main() {

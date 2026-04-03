@@ -2458,7 +2458,7 @@ function shouldShowFeeRow(age, label) {
 function shouldShowBusBadge(age, badge) {
   if (age === 'all') return true;
   const text = normalizeText(badge.innerText || '');
-  const hasElementary = /(\u5E74\u751F|\u5C0F\u5B66)/.test(text);
+  const hasElementary = /(\u5E74\u751F|\u5C0F\u5B66|\u5B66\u5E74)/.test(text);
   const hasInfant = /\u5E7C\u5150/.test(text);
   if (hasElementary && !hasInfant) return age === 'elementary';
   if (hasInfant && !hasElementary) return age !== 'elementary';
