@@ -158,11 +158,11 @@ function testFixedFeeFallbacks() {
   );
 
   const fixedWeekSelectionMatches =
-    html.match(/if \(weekOptions\.length === 1 && weekOptions\[0\] === 0\) \{\s*state\.selectedWeek = 0;\s*state\.explicitSelection = true;\s*\}/g) || [];
+    html.match(/if \(weekOptions\.length === 1 && weekOptions\[0\] === 0\) \{\s*state\.selectedWeek = 0;\s*\}/g) || [];
   assert.equal(
     fixedWeekSelectionMatches.length,
     2,
-    'buildFeeState should auto-select and activate synthetic week 0 for fixed-fee cards in both duplicated implementations'
+    'buildFeeState should auto-select synthetic week 0 for fixed-fee cards without explicit selection in both duplicated implementations'
   );
 
   const hiddenFixedWeekSelectorMatches =
