@@ -2238,8 +2238,9 @@ function activateTab(tab) {
   const next = typeof tab === 'string' ? tab : tab?.value;
   if (!next) return;
   if (categorySelect && categorySelect.value !== next) categorySelect.value = next;
+  const showAll = next === 'all';
   sections.forEach((section) => {
-    section.classList.toggle('active', section.id === next);
+    section.classList.toggle('active', showAll || section.id === next);
   });
   applyAgeFilter();
 }
@@ -3085,8 +3086,9 @@ function activateTab(tab) {
   const next = typeof tab === 'string' ? tab : tab?.value;
   if (!next) return;
   if (categorySelect && categorySelect.value !== next) categorySelect.value = next;
+  const showAll = next === 'all';
   sections.forEach((section) => {
-    section.classList.toggle('active', section.id === next);
+    section.classList.toggle('active', showAll || section.id === next);
   });
   applyAgeFilter();
 }
