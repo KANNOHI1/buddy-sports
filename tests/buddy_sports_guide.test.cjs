@@ -49,6 +49,21 @@ function loadBusBadgeApi(scriptSource) {
   return context.__busBadgeTest;
 }
 
+function loadInfoBoxApi(scriptSource) {
+  const setInfoBoxOpenSource = scriptSource.match(/function setInfoBoxOpen\(box, open\) \{[\s\S]*?\n\}/)?.[0];
+  if (!setInfoBoxOpenSource) {
+    throw new Error('Could not extract setInfoBoxOpen from module script');
+  }
+
+  const context = vm.createContext({});
+  const script = new vm.Script(`
+    ${setInfoBoxOpenSource}
+    globalThis.__infoBoxTest = { setInfoBoxOpen };
+  `);
+  script.runInContext(context);
+  return context.__infoBoxTest;
+}
+
 function createBadge(text, className = 'bus bus-y') {
   const attrs = new Map();
   return {
@@ -110,7 +125,7 @@ function testModuleWiring() {
 
   assert.match(moduleScript, /function setInfoBoxOpen\(box, open\)/, 'accordion 開閉関数が必要');
   assert.match(moduleScript, /box\.classList\.toggle\('is-open'/, 'accordion の開閉は is-open クラスで制御する');
-  assert.match(moduleScript, /content\.style\.maxHeight = open \? `\$\{content\.scrollHeight\}px` : '0px';/, 'accordion は max-height を更新するべき');
+  assert.match(moduleScript, /content\.style\.maxHeight = open \? `\$\{content\.scrollHeight \+ 32\}px` : '0px';/, 'accordion は max-height を更新するべき');
   assert.match(moduleScript, /initializeInfoBoxes\(\);/, 'module script で accordion 初期化を呼ぶべき');
   assert.match(
     moduleScript,
@@ -125,6 +140,40 @@ function testModuleWiring() {
     /card\.querySelectorAll\('\.bus'\)\.forEach\(\(badge\) => \{\s*syncBusBadgeWithAge\(age, badge\);\s*\}\);/,
     'applyAgeFilter はバスバッジの見た目を age filter と連動させるべき'
   );
+}
+
+function testInfoBoxOpenBehavior() {
+  const api = loadInfoBoxApi(getModuleScript(html));
+  const attrs = new Map();
+  const toggle = {
+    setAttribute(name, value) {
+      attrs.set(name, String(value));
+    }
+  };
+  const content = {
+    scrollHeight: 120,
+    style: {}
+  };
+  const indicator = {};
+  const box = {
+    classList: {
+      toggle() {}
+    },
+    querySelector(selector) {
+      if (selector === '.info-box-toggle') return toggle;
+      if (selector === '.info-box-content') return content;
+      if (selector === '.info-box-indicator') return indicator;
+      return null;
+    }
+  };
+
+  api.setInfoBoxOpen(box, true);
+  assert.equal(content.style.maxHeight, '152px', 'info-box open 時は下余白ぶんを max-height に含める');
+  assert.equal(attrs.get('aria-expanded'), 'true', 'info-box open 時は aria-expanded=true にする');
+
+  api.setInfoBoxOpen(box, false);
+  assert.equal(content.style.maxHeight, '0px', 'info-box close 時は max-height を 0px に戻す');
+  assert.equal(attrs.get('aria-expanded'), 'false', 'info-box close 時は aria-expanded=false にする');
 }
 
 function testBusBadgeBehavior() {
@@ -157,6 +206,7 @@ function main() {
   testStaticContent();
   testMonthlyFees();
   testModuleWiring();
+  testInfoBoxOpenBehavior();
   testBusBadgeBehavior();
   console.log('buddy_sports_guide regression tests passed');
 }

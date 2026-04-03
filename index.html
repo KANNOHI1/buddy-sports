@@ -2374,7 +2374,7 @@ function setInfoBoxOpen(box, open) {
   box.classList.toggle('is-open', open);
   toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
 
-  content.style.maxHeight = open ? `${content.scrollHeight}px` : '0px';
+  content.style.maxHeight = open ? `${content.scrollHeight + 32}px` : '0px';
 }
 
 function initializeInfoBoxes() {
