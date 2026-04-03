@@ -8,6 +8,8 @@
 - [x] Bug 1: バスバッジがジュニア年齢フィルタ時も表示される → syncBusBadgeWithAge で age !== 'all' && age !== 'elementary' → display:none
 - [x] Bug 2: バスなし（bus-n）カードにバスあり/なし選択ボタンが表示される → hasBus がfee行ラベルの A/B 有無で判定（bus-n カードは false）
 - [x] Bug 4: フィルタが全幅に広がる → .control-group { flex: 0 0 auto } 設定済み
+- [x] Bug 5: ジュニアフィルタ時にセミジュニアも表示される → inferRowAgesFromText でジュニア判定前にセミジュニア語を除去（2026-04-04）
+- [x] 初期状態: カテゴリ=すべて・年齢=ジュニア・合計欄は空 に変更（2026-04-04）
 
 ## 完了済み
 
