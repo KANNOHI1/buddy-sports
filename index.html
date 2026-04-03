@@ -2468,9 +2468,6 @@ function shouldShowBusBadge(age, badge) {
 function syncBusBadgeWithAge(age, badge) {
   const originalText = badge.getAttribute('data-bus-original-text') || normalizeText(badge.textContent || '');
   const originalClass = badge.getAttribute('data-bus-original-class') || badge.className;
-  const shouldSwap = ['semi', 'junior', 'middle', 'senior'].includes(age)
-    && /\bbus-y\b/.test(originalClass)
-    && /(B・Cエリア|1〜3年生)/.test(originalText);
 
   if (!badge.hasAttribute('data-bus-original-class')) {
     badge.setAttribute('data-bus-original-class', originalClass);
@@ -2479,15 +2476,14 @@ function syncBusBadgeWithAge(age, badge) {
     badge.setAttribute('data-bus-original-text', originalText);
   }
 
-  if (shouldSwap) {
-    badge.className = originalClass.replace(/\bbus-y\b/, 'bus-n');
-    badge.textContent = 'バスなし（小学生以上対象）';
-    badge.style.display = '';
+  badge.className = badge.getAttribute('data-bus-original-class') || originalClass;
+  badge.textContent = badge.getAttribute('data-bus-original-text') || originalText;
+
+  if (age !== 'all' && age !== 'elementary') {
+    badge.style.display = 'none';
     return;
   }
 
-  badge.className = badge.getAttribute('data-bus-original-class') || originalClass;
-  badge.textContent = badge.getAttribute('data-bus-original-text') || originalText;
   badge.style.display = shouldShowBusBadge(age, badge) ? '' : 'none';
 }
 
