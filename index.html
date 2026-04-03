@@ -2828,7 +2828,7 @@ function renderSupplementalNotes(state, items) {
 function refreshFeeSummary(state) {
   syncFeeUI(state);
 
-  if (!(state.selectedWeek !== null && state.explicitSelection)) {
+  if (state.selectedWeek === null) {
     state.currentTotal = null;
     state.empty.textContent = LABELS.pickWeek;
     state.empty.hidden = false;
