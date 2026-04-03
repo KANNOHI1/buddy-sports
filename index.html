@@ -468,13 +468,14 @@ table.sc{
   header h1{font-size:19px}
   .info-boxes,.control-bar,.section{padding-left:12px;padding-right:12px}
   .cards{grid-template-columns:1fr}
-  .control-bar{gap:8px}
+  .control-bar{gap:8px;align-items:center}
   .control-group{
-    flex:1 1 100%;
+    flex:1 1 calc(50% - 4px);
     align-items:flex-start;
     flex-direction:column;
     gap:6px;
   }
+  .control-group select{min-width:0;width:100%}
   .control-select{width:100%}
   .cb{font-size:13px}
   .sc{font-size:13px}

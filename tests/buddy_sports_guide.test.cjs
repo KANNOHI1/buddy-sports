@@ -110,6 +110,21 @@ function testStaticContent() {
   );
 }
 
+function testMobileFilterLayout() {
+  assertMatches(
+    /@media \(max-width: 767px\)\s*\{[\s\S]*?\.control-bar\{[\s\S]*?align-items:center[\s\S]*?\}/,
+    'mobile control-bar should vertically center wrapped filters'
+  );
+  assertMatches(
+    /@media \(max-width: 767px\)\s*\{[\s\S]*?\.control-group\{[\s\S]*?flex:1 1 calc\(50% - 4px\);[\s\S]*?\}/,
+    'mobile control-group should use two-column layout'
+  );
+  assertMatches(
+    /@media \(max-width: 767px\)\s*\{[\s\S]*?\.control-group select\{[\s\S]*?min-width:0;[\s\S]*?width:100%[\s\S]*?\}/,
+    'mobile control-group select should keep a constrained full-width layout'
+  );
+}
+
 function testMonthlyFees() {
   assertCardFee('⚽ バディクラブ サッカー', '小学生週2回A（1・2年のみ）/ B', '¥17,050 / ¥13,200');
   assertCardFee('⚽ バディクラブ サッカー', '小学生週3回A / B', '¥20,350 / ¥16,500');
@@ -285,6 +300,7 @@ function testBusBadgeBehavior() {
 
 function main() {
   testStaticContent();
+  testMobileFilterLayout();
   testMonthlyFees();
   testModuleWiring();
   testInfoBoxOpenBehavior();
