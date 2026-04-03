@@ -2420,11 +2420,22 @@ function inferRowAgesFromText(text) {
 
   if (!compact) return ages;
 
-  Object.entries(TOKENS).forEach(([age, tokens]) => {
-    if (containsAny(compact, tokens)) {
-      ages.add(age);
-    }
-  });
+  if (containsAny(compact, TOKENS.semi)) {
+    ages.add('semi');
+  }
+
+  const compactWithoutSemi = compact
+    .replace(/セミジュニア/g, '')
+    .replace(/年少々/g, '')
+    .replace(/3歳/g, '');
+
+  if (containsAny(compactWithoutSemi, TOKENS.junior)) {
+    ages.add('junior');
+  }
+
+  if (containsAny(compact, TOKENS.middle)) ages.add('middle');
+  if (containsAny(compact, TOKENS.senior)) ages.add('senior');
+  if (containsAny(compact, TOKENS.elementary)) ages.add('elementary');
 
   RANGE_PAIRS.forEach(([startAge, endAge]) => {
     const startHits = TOKENS[startAge];
