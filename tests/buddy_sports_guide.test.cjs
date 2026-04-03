@@ -49,16 +49,18 @@ function loadBusBadgeApi(scriptSource) {
   return context.__busBadgeTest;
 }
 
-function loadInfoBoxApi(scriptSource) {
+function loadInfoBoxApi(scriptSource, { infoBoxes = [] } = {}) {
   const setInfoBoxOpenSource = scriptSource.match(/function setInfoBoxOpen\(box, open\) \{[\s\S]*?\n\}/)?.[0];
-  if (!setInfoBoxOpenSource) {
-    throw new Error('Could not extract setInfoBoxOpen from module script');
+  const initializeInfoBoxesSource = scriptSource.match(/function initializeInfoBoxes\(\) \{[\s\S]*?\n\}/)?.[0];
+  if (!setInfoBoxOpenSource || !initializeInfoBoxesSource) {
+    throw new Error('Could not extract info box helpers from module script');
   }
 
-  const context = vm.createContext({});
+  const context = vm.createContext({ infoBoxes });
   const script = new vm.Script(`
     ${setInfoBoxOpenSource}
-    globalThis.__infoBoxTest = { setInfoBoxOpen };
+    ${initializeInfoBoxesSource}
+    globalThis.__infoBoxTest = { setInfoBoxOpen, initializeInfoBoxes };
   `);
   script.runInContext(context);
   return context.__infoBoxTest;
@@ -184,6 +186,77 @@ function testInfoBoxOpenBehavior() {
   assert.equal(attrs.get('aria-expanded'), 'false', 'info-box close 時は aria-expanded=false にする');
 }
 
+function testInfoBoxesToggleTogether() {
+  const createMockBox = (scrollHeight = 120) => {
+    const attrs = new Map();
+    const listeners = new Map();
+    const classes = new Set();
+    const toggle = {
+      setAttribute(name, value) {
+        attrs.set(name, String(value));
+      },
+      addEventListener(type, handler) {
+        listeners.set(type, handler);
+      },
+      click() {
+        const handler = listeners.get('click');
+        if (handler) handler();
+      }
+    };
+    const content = {
+      scrollHeight,
+      style: {},
+      id: ''
+    };
+    const indicator = {};
+    const box = {
+      classList: {
+        toggle(name, force) {
+          if (force) {
+            classes.add(name);
+            return true;
+          }
+          classes.delete(name);
+          return false;
+        },
+        contains(name) {
+          return classes.has(name);
+        }
+      },
+      querySelector(selector) {
+        if (selector === '.info-box-toggle') return toggle;
+        if (selector === '.info-box-content') return content;
+        if (selector === '.info-box-indicator') return indicator;
+        return null;
+      }
+    };
+
+    return { attrs, box, content, toggle };
+  };
+
+  const first = createMockBox(100);
+  const second = createMockBox(140);
+  const api = loadInfoBoxApi(getModuleScript(html), { infoBoxes: [first.box, second.box] });
+
+  api.initializeInfoBoxes();
+
+  first.toggle.click();
+  assert.equal(first.box.classList.contains('is-open'), true, '1つ目の toggle クリックで1つ目が開く');
+  assert.equal(second.box.classList.contains('is-open'), true, '1つ目の toggle クリックで2つ目も開く');
+  assert.equal(first.content.style.maxHeight, '132px', '1つ目は open 時の高さになる');
+  assert.equal(second.content.style.maxHeight, '172px', '2つ目も open 時の高さになる');
+  assert.equal(first.attrs.get('aria-expanded'), 'true', '1つ目の aria-expanded が true になる');
+  assert.equal(second.attrs.get('aria-expanded'), 'true', '2つ目の aria-expanded も true になる');
+
+  first.toggle.click();
+  assert.equal(first.box.classList.contains('is-open'), false, '再クリックで1つ目が閉じる');
+  assert.equal(second.box.classList.contains('is-open'), false, '再クリックで2つ目も閉じる');
+  assert.equal(first.content.style.maxHeight, '0px', '1つ目は close 時の高さに戻る');
+  assert.equal(second.content.style.maxHeight, '0px', '2つ目も close 時の高さに戻る');
+  assert.equal(first.attrs.get('aria-expanded'), 'false', '1つ目の aria-expanded が false に戻る');
+  assert.equal(second.attrs.get('aria-expanded'), 'false', '2つ目の aria-expanded も false に戻る');
+}
+
 function testBusBadgeBehavior() {
   const api = loadBusBadgeApi(getModuleScript(html));
   const badge = createBadge('🚌 バスあり（1〜3年生 B・Cエリア）');
@@ -215,6 +288,7 @@ function main() {
   testMonthlyFees();
   testModuleWiring();
   testInfoBoxOpenBehavior();
+  testInfoBoxesToggleTogether();
   testBusBadgeBehavior();
   console.log('buddy_sports_guide regression tests passed');
 }

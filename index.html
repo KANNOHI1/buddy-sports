@@ -2390,7 +2390,8 @@ function initializeInfoBoxes() {
     setInfoBoxOpen(box, false);
 
     toggle.addEventListener('click', () => {
-      setInfoBoxOpen(box, !box.classList.contains('is-open'));
+      const next = !box.classList.contains('is-open');
+      infoBoxes.forEach((b) => setInfoBoxOpen(b, next));
     });
   });
 }
