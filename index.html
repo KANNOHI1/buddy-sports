@@ -1908,6 +1908,12 @@ function resolveBaseRow(state) {
         } else if (state.selectedBus === 'A' && Number.isFinite(amounts.default)) {
           amount = amounts.default;
           score += 20;
+        } else if (Number.isFinite(amounts.A)) {
+          amount = amounts.A;
+          score += 10;
+        } else if (Number.isFinite(amounts.B)) {
+          amount = amounts.B;
+          score += 10;
         }
       } else {
         amount = amounts.default ?? amounts.B ?? amounts.A ?? null;
@@ -2749,6 +2755,12 @@ function resolveBaseRow(state) {
         } else if (state.selectedBus === 'A' && Number.isFinite(amounts.default)) {
           amount = amounts.default;
           score += 20;
+        } else if (Number.isFinite(amounts.A)) {
+          amount = amounts.A;
+          score += 10;
+        } else if (Number.isFinite(amounts.B)) {
+          amount = amounts.B;
+          score += 10;
         }
       } else {
         amount = amounts.default ?? amounts.B ?? amounts.A ?? null;
