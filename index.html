@@ -77,14 +77,13 @@ header p{
   flex:1;
   min-width:280px;
   background:var(--card-bg);
-  border:1px solid rgba(210,210,215,0.6);
-  border-left:4px solid var(--apple-blue);
-  border-radius:14px;
+  border:1px solid rgba(0,0,0,0.08);
+  border-radius:16px;
   padding:0;
   font-size:13px;
   line-height:1.7;
   color:var(--text-primary);
-  box-shadow:0 1px 4px rgba(0,0,0,0.06);
+  box-shadow:0 2px 12px rgba(0,0,0,0.07);
   overflow:hidden;
 }
 .info-box-toggle{
@@ -93,13 +92,15 @@ header p{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  padding:14px 16px;
+  padding:16px 18px;
   border:none;
   background:none;
   color:var(--text-primary);
   cursor:pointer;
   text-align:left;
+  transition:background 0.15s ease;
 }
+.info-box-toggle:hover{background:rgba(0,0,0,0.03)}
 .info-box h2,
 .info-box-title{
   font-size:14px;
@@ -111,20 +112,22 @@ header p{
   color:var(--text-secondary);
   font-size:12px;
   line-height:1;
+  transition:transform 0.2s ease;
 }
+.info-box.is-open .info-box-indicator{transform:rotate(180deg)}
 .info-box-content{
   max-height:0;
   overflow:hidden;
-  padding:0 16px;
+  padding:0 18px;
   transition:max-height 0.25s ease, padding-bottom 0.25s ease;
 }
 .info-box.is-open .info-box-content{
-  padding-bottom:14px;
+  padding-bottom:20px;
 }
 .info-box ol,
 .info-box ul{padding-left:18px;line-height:1.85}
 .info-box strong{color:var(--text-primary)}
-.info-box.blue{border-left-color:var(--accent-orange)}
+.info-box.blue{}
 .control-bar{
   display:flex;
   flex-wrap:wrap;
