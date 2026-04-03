@@ -2196,29 +2196,31 @@ function buildFeeState(card) {
 }
 
 function applyAgeFilter() {
-  const activeSection = getActiveSection();
   const age = getActiveAge();
-  if (!activeSection) return;
+  const showAll = categorySelect?.value === 'all';
+  const activeSections = showAll
+    ? sections.filter((s) => s.classList.contains('active'))
+    : [getActiveSection()].filter(Boolean);
 
-  sections.forEach((section) => {
-    section.classList.toggle('active', section === activeSection);
-  });
+  if (activeSections.length === 0) return;
 
-  activeSection.querySelectorAll('.card').forEach((card) => {
-    let visibleRowCount = 0;
+  activeSections.forEach((activeSection) => {
+    activeSection.querySelectorAll('.card').forEach((card) => {
+      let visibleRowCount = 0;
 
-    getCardDataRows(card).forEach((row) => {
-      const rowAges = getRowAges(row);
-      const showRow = age === 'all' || rowAges.has(age);
-      row.style.display = showRow ? '' : 'none';
-      if (showRow) visibleRowCount += 1;
+      getCardDataRows(card).forEach((row) => {
+        const rowAges = getRowAges(row);
+        const showRow = age === 'all' || rowAges.has(age);
+        row.style.display = showRow ? '' : 'none';
+        if (showRow) visibleRowCount += 1;
+      });
+
+      card.querySelectorAll('.bus').forEach((badge) => {
+        syncBusBadgeWithAge(age, badge);
+      });
+
+      setCardVisibility(card, visibleRowCount > 0);
     });
-
-    card.querySelectorAll('.bus').forEach((badge) => {
-      syncBusBadgeWithAge(age, badge);
-    });
-
-    setCardVisibility(card, visibleRowCount > 0);
   });
 
   feeStates.forEach((state) => {
@@ -3041,29 +3043,31 @@ function buildFeeState(card) {
 }
 
 function applyAgeFilter() {
-  const activeSection = getActiveSection();
   const age = getActiveAge();
-  if (!activeSection) return;
+  const showAll = categorySelect?.value === 'all';
+  const activeSections = showAll
+    ? sections.filter((s) => s.classList.contains('active'))
+    : [getActiveSection()].filter(Boolean);
 
-  sections.forEach((section) => {
-    section.classList.toggle('active', section === activeSection);
-  });
+  if (activeSections.length === 0) return;
 
-  activeSection.querySelectorAll('.card').forEach((card) => {
-    let visibleRowCount = 0;
+  activeSections.forEach((activeSection) => {
+    activeSection.querySelectorAll('.card').forEach((card) => {
+      let visibleRowCount = 0;
 
-    getCardDataRows(card).forEach((row) => {
-      const rowAges = getRowAges(row);
-      const showRow = age === 'all' || rowAges.has(age);
-      row.style.display = showRow ? '' : 'none';
-      if (showRow) visibleRowCount += 1;
+      getCardDataRows(card).forEach((row) => {
+        const rowAges = getRowAges(row);
+        const showRow = age === 'all' || rowAges.has(age);
+        row.style.display = showRow ? '' : 'none';
+        if (showRow) visibleRowCount += 1;
+      });
+
+      card.querySelectorAll('.bus').forEach((badge) => {
+        syncBusBadgeWithAge(age, badge);
+      });
+
+      setCardVisibility(card, visibleRowCount > 0);
     });
-
-    card.querySelectorAll('.bus').forEach((badge) => {
-      syncBusBadgeWithAge(age, badge);
-    });
-
-    setCardVisibility(card, visibleRowCount > 0);
   });
 
   feeStates.forEach((state) => {
