@@ -109,7 +109,7 @@ function testModuleWiring() {
   const moduleScript = getModuleScript(html);
 
   assert.match(moduleScript, /function setInfoBoxOpen\(box, open\)/, 'accordion 開閉関数が必要');
-  assert.match(moduleScript, /indicator\.textContent = open \? '▼' : '▶';/, 'accordion のインジケーター切替が必要');
+  assert.match(moduleScript, /box\.classList\.toggle\('is-open'/, 'accordion の開閉は is-open クラスで制御する');
   assert.match(moduleScript, /content\.style\.maxHeight = open \? `\$\{content\.scrollHeight\}px` : '0px';/, 'accordion は max-height を更新するべき');
   assert.match(moduleScript, /initializeInfoBoxes\(\);/, 'module script で accordion 初期化を呼ぶべき');
   assert.match(
