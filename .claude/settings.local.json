@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(python:*)"
+      "Bash(python:*)",
+      "Bash(ls ~/.claude/projects/C--Users-c6341-Documents-Projects-buddy-sports/*.jsonl)",
+      "Bash(sort -t_ -k1)"
     ]
   }
 }

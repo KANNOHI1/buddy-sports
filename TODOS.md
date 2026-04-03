@@ -2,11 +2,14 @@
 
 ## 未修正バグ
 
-- [ ] Bug 1: バスバッジがジュニア（幼児）年齢フィルタ選択時でも表示される（syncBusBadgeWithAge() が機能していない）
-- [ ] Bug 2: バスなし（bus-n）カードにバスあり/なし選択ボタンが表示される（fee-selector を非表示にすること）
-- [ ] Bug 3: ドッジボールで週の回数選択ができない（fee-chip が表示されないまたはクリックしても月額が変わらない）
-- [ ] Bug 4: フィルタが全幅に広がる（control-group の flex レイアウト問題、max-width または flex:0 を設定）
-- [ ] Bug 5: ジュニア（幼児）フィルタ選択時にセミジュニア（年中）も表示される（data-ages フィルタの判定ロジック問題）
+- [ ] Bug 3: ドッジボール（hasBus=true + 週1択）でジュニアフィルタ時に fee-chip が何も出ない（バス選択が非表示、週チップも非表示のため）
+- [ ] Bug 5: ジュニアフィルタ選択時にセミジュニアも表示される（containsAny が substring match のため 'セミジュニア'.includes('ジュニア')=true になる）
+
+## 解決済み（確認済み）
+
+- [x] Bug 1: バスバッジがジュニア年齢フィルタ時も表示される → syncBusBadgeWithAge で age !== 'all' && age !== 'elementary' → display:none
+- [x] Bug 2: バスなし（bus-n）カードにバスあり/なし選択ボタンが表示される → hasBus がfee行ラベルの A/B 有無で判定（bus-n カードは false）
+- [x] Bug 4: フィルタが全幅に広がる → .control-group { flex: 0 0 auto } 設定済み
 
 ## 完了済み
 
