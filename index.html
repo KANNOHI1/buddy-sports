@@ -35,6 +35,7 @@ body{
   font-size:14px;
   line-height:1.6;
   position:relative;
+  padding-bottom:96px;
 }
 body::before,
 body::after{
@@ -42,8 +43,7 @@ body::after{
 }
 header,
 .info-box,
-.tab-bar,
-.filter-bar,
+.control-bar,
 .card{
   position:relative;
   z-index:1;
@@ -80,28 +80,58 @@ header p{
   border:1px solid rgba(210,210,215,0.6);
   border-left:4px solid var(--apple-blue);
   border-radius:14px;
-  padding:14px 16px;
+  padding:0;
   font-size:13px;
   line-height:1.7;
   color:var(--text-primary);
   box-shadow:0 1px 4px rgba(0,0,0,0.06);
+  overflow:hidden;
 }
-.info-box h2{
+.info-box-toggle{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 16px;
+  border:none;
+  background:none;
+  color:var(--text-primary);
+  cursor:pointer;
+  text-align:left;
+}
+.info-box h2,
+.info-box-title{
   font-size:14px;
   font-weight:700;
   color:var(--text-primary);
-  margin-bottom:8px;
+}
+.info-box-indicator{
+  flex:0 0 auto;
+  color:var(--text-secondary);
+  font-size:12px;
+  line-height:1;
+}
+.info-box-content{
+  max-height:0;
+  overflow:hidden;
+  padding:0 16px;
+  transition:max-height 0.25s ease, padding-bottom 0.25s ease;
+}
+.info-box.is-open .info-box-content{
+  padding-bottom:14px;
 }
 .info-box ol,
 .info-box ul{padding-left:18px;line-height:1.85}
 .info-box strong{color:var(--text-primary)}
 .info-box.blue{border-left-color:var(--accent-orange)}
-.tab-bar{
+.control-bar{
   display:flex;
   flex-wrap:wrap;
-  gap:10px;
+  gap:12px;
   padding:12px var(--content-pad);
-  background:rgba(255,255,255,0.85);
+  align-items:flex-end;
+  background:rgba(255,255,255,0.9);
   backdrop-filter:saturate(180%) blur(20px);
   -webkit-backdrop-filter:saturate(180%) blur(20px);
   border-bottom:1px solid var(--border);
@@ -109,61 +139,35 @@ header p{
   top:0;
   z-index:10;
 }
-.tab{
-  padding:9px 16px;
-  border:1px solid var(--border);
-  border-radius:20px;
-  cursor:pointer;
-  font-size:13px;
-  font-weight:600;
-  white-space:nowrap;
-  background:var(--section-bg);
-  color:var(--text-primary);
-  transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
-}
-.tab:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
-}
-.tab.active{
-  background:var(--apple-blue);
-  color:#FFFFFF;
-  border-color:var(--apple-blue);
-  box-shadow:none;
-}
-.filter-bar{
+.control-group{
+  flex:1 1 280px;
+  min-width:0;
   display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  padding:14px var(--content-pad) 6px;
   align-items:center;
-  background:var(--card-bg);
-  border-bottom:1px solid var(--border);
+  gap:10px;
 }
-.filter-label{
+.control-label{
   font-size:12px;
   color:var(--text-secondary);
   font-weight:700;
+  white-space:nowrap;
 }
-.age-btn{
-  padding:8px 12px;
+.control-select{
+  flex:1;
+  min-width:0;
+  max-width:220px;
   border:1px solid var(--border);
-  border-radius:999px;
-  cursor:pointer;
-  font-size:12px;
-  font-weight:600;
-  background:var(--section-bg);
+  border-radius:14px;
+  background:#FFFFFF;
   color:var(--text-primary);
-  transition:all 0.25s cubic-bezier(0.25,0.46,0.45,0.94);
+  padding:11px 12px;
+  font-size:13px;
+  font-weight:600;
+  box-shadow:0 1px 3px rgba(0,0,0,0.04);
 }
-.age-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 6px 18px rgba(0,0,0,0.08);
-}
-.age-btn.active{
-  background:var(--apple-blue);
-  color:#FFFFFF;
-  border-color:var(--apple-blue);
+.tab-bar,
+.filter-bar{
+  display:none;
 }
 .section{
   display:none;
@@ -269,7 +273,7 @@ table.sc{
   background:var(--section-bg);
   border:none;
   border-radius:10px;
-  padding:10px 12px;
+  padding:12px;
   margin-top:12px;
   font-size:13px;
   color:var(--text-primary);
@@ -278,7 +282,7 @@ table.sc{
   font-size:13px;
   font-weight:700;
   color:var(--text-primary);
-  margin-bottom:7px;
+  margin-bottom:10px;
 }
 .fr{
   display:flex;
@@ -296,15 +300,184 @@ table.sc{
   margin-top:8px;
   line-height:1.6;
 }
+.fee-controls{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.fee-selector{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.fee-chip{
+  border:1px solid var(--border);
+  background:#FFFFFF;
+  color:var(--text-primary);
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.2s ease;
+}
+.fee-chip:hover{
+  transform:translateY(-1px);
+  box-shadow:0 4px 10px rgba(0,0,0,0.08);
+}
+.fee-chip.active{
+  background:var(--apple-blue);
+  border-color:var(--apple-blue);
+  color:#FFFFFF;
+  box-shadow:none;
+}
+.fee-chip.single{
+  background:transparent;
+}
+.fee-chip.single.active{
+  background:var(--apple-blue);
+}
+.fee-static{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:700;
+  color:var(--text-secondary);
+}
+.fee-breakdown{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.fee-breakdown[hidden]{
+  display:none;
+}
+.fee-line{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:baseline;
+}
+.fee-line .label{
+  color:var(--text-secondary);
+}
+.fee-line .value{
+  font-weight:700;
+}
+.fee-divider{
+  height:1px;
+  background:rgba(29,29,31,0.14);
+  margin:2px 0;
+}
+.fee-total{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:baseline;
+}
+.fee-total .label{
+  font-size:13px;
+  font-weight:800;
+}
+.fee-total .value{
+  font-size:22px;
+  font-weight:800;
+  color:var(--text-primary);
+  letter-spacing:-0.02em;
+}
+.fee-empty{
+  font-size:12px;
+  color:var(--text-secondary);
+}
+.fee-empty[hidden]{
+  display:none;
+}
+.fee-extra-notes{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  font-size:12px;
+  color:var(--text-secondary);
+}
+.fee-extra-notes[hidden]{
+  display:none;
+}
+.fee-extra-note{
+  line-height:1.5;
+}
+.global-total{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  z-index:20;
+  padding:10px var(--content-pad) calc(10px + env(safe-area-inset-bottom, 0px));
+  background:rgba(255,255,255,0.96);
+  backdrop-filter:saturate(180%) blur(24px);
+  -webkit-backdrop-filter:saturate(180%) blur(24px);
+  border-top:1px solid var(--border);
+  box-shadow:0 -10px 30px rgba(0,0,0,0.08);
+  display:none;
+}
+.global-total.visible{
+  display:block;
+}
+.global-total-items{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-bottom:8px;
+}
+.global-total-item{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--section-bg);
+  font-size:12px;
+  font-weight:700;
+}
+.global-total-main{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+.global-total-sum{
+  font-size:18px;
+  font-weight:800;
+  letter-spacing:-0.02em;
+}
+.global-total-clear{
+  border:1px solid var(--border);
+  background:#FFFFFF;
+  border-radius:999px;
+  padding:8px 14px;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
 @media (max-width: 767px){
   header{padding:18px 16px 16px}
   header h1{font-size:19px}
-  .info-boxes,.tab-bar,.filter-bar,.section{padding-left:12px;padding-right:12px}
+  .info-boxes,.control-bar,.section{padding-left:12px;padding-right:12px}
   .cards{grid-template-columns:1fr}
-  .tab-bar,.filter-bar{gap:8px}
-  .tab,.age-btn{font-size:12px}
+  .control-bar{gap:8px}
+  .control-group{
+    flex:1 1 100%;
+    align-items:flex-start;
+    flex-direction:column;
+    gap:6px;
+  }
+  .control-select{width:100%}
   .cb{font-size:13px}
   .sc{font-size:13px}
+  .global-total-main{
+    align-items:flex-start;
+    flex-direction:column;
+  }
 }
 </style>
 </head>
@@ -316,23 +489,58 @@ table.sc{
 
 <div class="info-boxes">
   <div class="info-box">
-    <h2>💴 費用・月謝について（共通）</h2>
-    <ol>
-      <li>入会金：¥11,000（税込）― 入会時に一律</li>
-      <li>年会金：¥13,200（税込）― 途中入会は1ヶ月¥1,100×残月数。毎年3月末に翌年分請求。複数クラブ入会でも1種目分のみ。</li>
-      <li>在園児・卒園児：入会金免除。在園児年会金¥2,200。</li>
-      <li>運営費・大会準備費・用具費・ユニフォーム費はクラブ・スクールにより異なる。</li>
-      <li>合宿・大会出場等の費用はその都度連絡。</li>
-      <li>月謝：Aコース（バス利用あり）／ Bコース（バス利用なし）</li>
-    </ol>
+    <button class="info-box-toggle" type="button" aria-expanded="false">
+      <span class="info-box-title">費用・月謝について（共通）</span>
+      <span class="info-box-indicator" aria-hidden="true">▶</span>
+    </button>
+    <div class="info-box-content">
+      <ol>
+        <li>入会金：¥11,000（税込）― 入会時に一律</li>
+        <li>年会金：¥13,200（税込）― 途中入会は1ヶ月¥1,100×残月数。毎年3月末に翌年分請求。複数クラブ入会でも1種目分のみ。</li>
+        <li>在園児・卒園児：入会金免除。在園児年会金¥2,200。</li>
+        <li>運営費・大会準備費・用具費・ユニフォーム費はクラブ・スクールにより異なる。</li>
+        <li>合宿・大会出場等の費用はその都度連絡。</li>
+        <li>月謝：Aコース（バス利用あり）／ Bコース（バス利用なし）</li>
+      </ol>
+    </div>
   </div>
   <div class="info-box blue">
-    <h2>📌 クラブとスクールの違い</h2>
-    <ul>
-      <li><strong>クラブ</strong>：合宿・大会参加・チーム登録あり。<span style="color:#2e7d32;font-weight:bold">送迎バス利用可</span></li>
-      <li><strong>スクール</strong>：個人スキルアップのみ。合宿・大会なし。<span style="color:#c62828;font-weight:bold">送迎バス利用不可</span></li>
-      <li><strong>年齢区分</strong>：セミジュニア(年少々3歳) → ジュニア(年少4歳) → ミドル(年中5歳) → シニア(年長6歳) → 小学生</li>
-    </ul>
+    <button class="info-box-toggle" type="button" aria-expanded="false">
+      <span class="info-box-title">クラブとスクールの違い</span>
+      <span class="info-box-indicator" aria-hidden="true">▶</span>
+    </button>
+    <div class="info-box-content">
+      <ul>
+        <li><strong>クラブ</strong>：合宿・大会参加・チーム登録あり。<span style="color:#2e7d32;font-weight:bold">送迎バス利用可</span></li>
+        <li><strong>スクール</strong>：個人スキルアップのみ。合宿・大会なし。<span style="color:#c62828;font-weight:bold">送迎バス利用不可</span></li>
+        <li><strong>年齢区分</strong>：セミジュニア(年少々3歳) → ジュニア(年少4歳) → ミドル(年中5歳) → シニア(年長6歳) → 小学生</li>
+        <li><strong>送迎バス（シャトルバス）</strong>：小学生以上対象。停留所は①お台場海浜公園駅・②豊洲駅。幼児は対象外。</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="control-bar">
+  <div class="control-group">
+    <label class="control-label" for="category-select">カテゴリ:</label>
+    <select class="control-select" id="category-select">
+      <option value="sport-club">運動部クラブ</option>
+      <option value="sport-school">運動部スクール</option>
+      <option value="culture-club">文化部クラブ</option>
+      <option value="culture-school">文化部スクール</option>
+      <option value="tenant">テナントスクール</option>
+    </select>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="age-select">年齢:</label>
+    <select class="control-select" id="age-select">
+      <option value="all">すべて</option>
+      <option value="semi">セミジュニア(年少々)</option>
+      <option value="junior">ジュニア(年少)</option>
+      <option value="middle">ミドル(年中)</option>
+      <option value="senior">シニア(年長)</option>
+      <option value="elementary">小学生</option>
+    </select>
   </div>
 </div>
 
@@ -376,8 +584,8 @@ table.sc{
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1回Aコース</span><span class="fv">¥9,900</span></div>
 <div class="fr"><span class="fn">幼児 週2回</span><span class="fv">¥13,200</span></div>
-<div class="fr"><span class="fn">小学生週2回A（1・2年のみ）/ B</span><span class="fv">¥15,950 / ¥13,200</span></div>
-<div class="fr"><span class="fn">小学生週3回A / B</span><span class="fv">¥19,250 / ¥16,500</span></div>
+<div class="fr"><span class="fn">小学生週2回A（1・2年のみ）/ B</span><span class="fv">¥17,050 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生週3回A / B</span><span class="fv">¥20,350 / ¥16,500</span></div>
 <div class="fr"><span class="fn">グランド使用料（週1/2/3）</span><span class="fv">¥1,100 / ¥1,650 / ¥2,200</span></div>
 <div class="fr"><span class="fn">試合費（小学生男子のみ）</span><span class="fv">¥2,200/月</span></div>
 <p class="note">運営費¥6,600（月額¥550）/ 大会準備費・選手登録¥1,100（入会時）/ 強化合宿¥34,800（年2回）</p>
@@ -398,8 +606,8 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1 / 週2</span><span class="fv">¥9,900 / ¥13,200</span></div>
-<div class="fr"><span class="fn">小学生一般 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
-<div class="fr"><span class="fn">小学生一般 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生一般 週1A/B</span><span class="fv">¥13,750 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生一般 週2A/B</span><span class="fv">¥17,050 / ¥13,200</span></div>
 <p class="note">以降¥3,300ずつ増加 / 体験費¥2,200 / 運営費¥6,600（月額¥550）</p>
 </div></div></div>
 
@@ -417,9 +625,9 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥9,900 / ¥13,200 / ¥16,500</span></div>
-<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
-<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
-<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥19,250 / ¥16,500</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥13,750 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥17,050 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥20,350 / ¥16,500</span></div>
 <p class="note">以降¥3,300ずつ増加 / 運営費¥6,600（月額¥550）</p>
 </div></div></div>
 
@@ -436,9 +644,9 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥9,900 / ¥13,200 / ¥16,500</span></div>
-<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
-<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
-<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥19,250 / ¥16,500</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥13,750 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥17,050 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥20,350 / ¥16,500</span></div>
 <p class="note">以降¥3,300ずつ増加 / 運営費¥6,600（月額¥550）</p>
 </div></div></div>
 
@@ -454,8 +662,8 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥9,900 / ¥13,200 / ¥16,500</span></div>
-<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
-<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥15,950 / ¥13,200</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥13,750 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥17,050 / ¥13,200</span></div>
 <p class="note">以降¥3,300ずつ増加 / 年間用具費¥3,300（月¥275）/ 大会準備費¥1,100（初回のみ）</p>
 </div></div></div>
 
@@ -490,7 +698,7 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1/2</span><span class="fv">¥11,220 / ¥14,520</span></div>
-<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥13,970 / ¥11,220</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥15,070 / ¥11,220</span></div>
 <p class="note">運営費¥6,600（月額¥550）</p>
 </div></div></div>
 
@@ -508,9 +716,9 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1/2/3</span><span class="fv">¥12,660 / ¥19,860 / ¥27,060</span></div>
-<div class="fr"><span class="fn">小学生 週1A</span><span class="fv">¥17,810</span></div>
-<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥25,010 / ¥22,260</span></div>
-<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥32,210 / ¥29,460</span></div>
+<div class="fr"><span class="fn">小学生 週1A</span><span class="fv">¥18,910</span></div>
+<div class="fr"><span class="fn">小学生 週2A/B</span><span class="fv">¥26,110 / ¥22,260</span></div>
+<div class="fr"><span class="fn">小学生 週3A/B</span><span class="fv">¥33,310 / ¥29,460</span></div>
 <p class="note">以降¥7,200ずつ増加 / 運営費¥6,600（月額¥550）</p>
 </div></div></div>
 
@@ -526,7 +734,7 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 週1</span><span class="fv">¥9,900</span></div>
-<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥12,650 / ¥9,900</span></div>
+<div class="fr"><span class="fn">小学生 週1A/B</span><span class="fv">¥13,750 / ¥9,900</span></div>
 <p class="note">運営費¥6,600（月額¥550）</p>
 </div></div></div>
 
@@ -953,7 +1161,15 @@ table.sc{
 
 </div></div>
 
-<script type="module">
+<div class="global-total" id="global-total">
+  <div class="global-total-items" id="global-total-items"></div>
+  <div class="global-total-main">
+    <div class="global-total-sum" id="global-total-sum">合計: ¥0/月</div>
+    <button class="global-total-clear" id="global-total-clear" type="button">クリア</button>
+  </div>
+</div>
+
+<script type="application/x-pretext-legacy">
 import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
 
 const FONT = '13px Hiragino Sans, Yu Gothic, sans-serif';
@@ -1286,6 +1502,1591 @@ ageButtons.forEach((button) => {
 window.addEventListener('resize', requestRelayout);
 
 applyAgeFilter();
+</script>
+<script type="application/x-replaced-module">
+import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
+
+const FONT = '13px Hiragino Sans, Yu Gothic, sans-serif';
+const LINE_HEIGHT = 20;
+const GAP = 18;
+const MOBILE_MAX = 767;
+const TABLET_MAX = 1199;
+const AGE_ORDER = ['semi', 'junior', 'middle', 'senior', 'elementary'];
+const AGE_LABELS = {
+  semi: ['semi', 'セミジュニア', '年少々', '年少少', '3歳'],
+  junior: ['junior', 'ジュニア', '年少'],
+  middle: ['middle', 'ミドル', '年中'],
+  senior: ['senior', 'シニア', '年長'],
+  elementary: ['elementary', '小学生', '小学', '1年生', '2年生', '3年生', '4年生', '5年生', '6年生']
+};
+
+const categorySelect = document.getElementById('category-select');
+const ageSelect = document.getElementById('age-select');
+const sections = [...document.querySelectorAll('.section')];
+const cards = [...document.querySelectorAll('.card')];
+const cardMeta = new WeakMap();
+const feeStates = [];
+const globalTotal = document.getElementById('global-total');
+const globalTotalItems = document.getElementById('global-total-items');
+const globalTotalSum = document.getElementById('global-total-sum');
+const globalTotalClear = document.getElementById('global-total-clear');
+
+let resizeFrame = 0;
+
+function normalizeText(text) {
+  return (text || '').replace(/\s+/g, ' ').trim();
+}
+
+function formatYen(value) {
+  return `¥${Number(value || 0).toLocaleString('ja-JP')}`;
+}
+
+function getColumnCount() {
+  const width = window.innerWidth;
+  if (width <= MOBILE_MAX) return 1;
+  if (width <= TABLET_MAX) return 2;
+  return 3;
+}
+
+function getActiveSection() {
+  return document.getElementById(categorySelect?.value || 'sport-club');
+}
+
+function getActiveAge() {
+  return ageSelect?.value || 'all';
+}
+
+function setCardVisibility(card, visible) {
+  card.classList.toggle('hidden', !visible);
+  card.style.display = visible ? '' : 'none';
+
+  if (!visible) {
+    card.style.left = '';
+    card.style.top = '';
+    card.style.width = '';
+  }
+}
+
+function getCardName(card) {
+  return normalizeText(card.querySelector('.ch h3')?.innerText || 'クラブ');
+}
+
+function sanitizeCardHeaders() {
+  cards.forEach((card) => {
+    const heading = card.querySelector('.ch h3');
+    if (!heading) return;
+    heading.textContent = normalizeText(
+      heading.textContent.replace(/^[^A-Za-z0-9ぁ-んァ-ヶー一-龠々]+/, '')
+    );
+  });
+}
+
+function inferRowAgesFromText(text) {
+  const compact = normalizeText(text).toLowerCase();
+  const ages = new Set();
+
+  if (!compact) return ages;
+
+  AGE_ORDER.forEach((age) => {
+    if (AGE_LABELS[age].some((keyword) => compact.includes(keyword.toLowerCase()))) {
+      ages.add(age);
+    }
+  });
+
+  if (/年少々.*年長|セミジュニア.*シニア/.test(compact)) {
+    ['semi', 'junior', 'middle', 'senior'].forEach((age) => ages.add(age));
+  }
+
+  if (/年少.*年長|ジュニア.*シニア/.test(compact)) {
+    ['junior', 'middle', 'senior'].forEach((age) => ages.add(age));
+  }
+
+  if (/年少々.*小学|セミジュニア.*小学生/.test(compact)) {
+    AGE_ORDER.forEach((age) => ages.add(age));
+  }
+
+  if (/年少.*小学|ジュニア.*小学生/.test(compact)) {
+    ['junior', 'middle', 'senior', 'elementary'].forEach((age) => ages.add(age));
+  }
+
+  return ages;
+}
+
+function getCardDataRows(card) {
+  return [...card.querySelectorAll('.sc tr')].filter((row) => row.querySelectorAll('td').length > 0);
+}
+
+function getRowAges(row) {
+  if (row.dataset.age) {
+    return new Set(normalizeText(row.dataset.age).split(/\s+/).filter(Boolean));
+  }
+
+  const ages = inferRowAgesFromText(row.innerText || '');
+  row.dataset.age = [...ages].join(' ');
+  return ages;
+}
+
+function initializeRowAgeData(card) {
+  getCardDataRows(card).forEach((row) => {
+    getRowAges(row);
+  });
+}
+
+function getFeeRowCategoryFromLabel(label) {
+  const text = normalizeText(label);
+  const hasInfant = /(幼児|年少|年中|年長|セミジュニア|ジュニア|ミドル|シニア)/.test(text);
+  const hasElementary = /(小学|年生|小学生)/.test(text);
+  if (hasInfant && hasElementary) return 'all';
+  if (hasInfant) return 'infant';
+  if (hasElementary) return 'elementary';
+  return 'all';
+}
+
+function shouldShowFeeRow(age, label) {
+  if (age === 'all') return true;
+  const category = getFeeRowCategoryFromLabel(label);
+  if (category === 'all') return true;
+  return age === 'elementary' ? category === 'elementary' : category === 'infant';
+}
+
+function shouldShowBusBadge(age, badge) {
+  if (age === 'all') return true;
+  const text = normalizeText(badge.innerText || '');
+  const hasElementary = /(?:年生|小学)/.test(text);
+  const hasInfant = /幼児/.test(text);
+  if (hasElementary && !hasInfant) return age === 'elementary';
+  if (hasInfant && !hasElementary) return age !== 'elementary';
+  return true;
+}
+
+function ensurePrepared(card) {
+  if (cardMeta.has(card)) return cardMeta.get(card);
+  const body = card.querySelector('.cb');
+  const staticText = [...(body?.children || [])]
+    .filter((node) => !(node instanceof HTMLElement && node.classList.contains('fee')))
+    .map((node) => node.innerText || '')
+    .join(' ');
+
+  const meta = {
+    prepared: prepare(normalizeText(staticText), FONT)
+  };
+
+  cardMeta.set(card, meta);
+  return meta;
+}
+
+function estimateCardHeight(card, cardWidth) {
+  const meta = ensurePrepared(card);
+  const bodyWidth = Math.max(220, cardWidth - 28);
+  const textHeight = layout(meta.prepared, bodyWidth, LINE_HEIGHT).height;
+  const headerHeight = card.querySelector('.ch')?.offsetHeight || 76;
+  const tableHeight = card.querySelector('.sc')?.offsetHeight || 0;
+  const feeHeight = card.querySelector('.fee')?.offsetHeight || 0;
+  const busHeight = [...card.querySelectorAll('.bus')]
+    .filter((badge) => badge.style.display !== 'none')
+    .reduce((sum, badge) => sum + badge.offsetHeight, 0);
+  return headerHeight + tableHeight + feeHeight + busHeight + textHeight * 0.45 + 54;
+}
+
+function requestRelayout() {
+  if (resizeFrame) cancelAnimationFrame(resizeFrame);
+  resizeFrame = requestAnimationFrame(() => {
+    resizeFrame = 0;
+    relayoutActiveSection();
+  });
+}
+
+function resetCardStyles(section) {
+  section.querySelectorAll('.card').forEach((card) => {
+    card.style.left = '';
+    card.style.top = '';
+    card.style.width = '';
+  });
+}
+
+function relayoutSection(section) {
+  if (!section) return;
+
+  const container = section.querySelector('.cards');
+  if (!container) return;
+
+  const visibleCards = [...container.querySelectorAll('.card')].filter(
+    (card) => !card.classList.contains('hidden') && card.style.display !== 'none'
+  );
+
+  if (visibleCards.length === 0) {
+    container.style.height = '0px';
+    return;
+  }
+
+  const columnCount = Math.min(getColumnCount(), visibleCards.length);
+  const containerWidth = container.clientWidth;
+  const columnWidth = (containerWidth - GAP * (columnCount - 1)) / columnCount;
+  const estimatedHeights = new Array(columnCount).fill(0);
+  const columns = Array.from({ length: columnCount }, () => []);
+
+  visibleCards.forEach((card) => {
+    const estimate = estimateCardHeight(card, columnWidth);
+    const targetColumn = estimatedHeights.indexOf(Math.min(...estimatedHeights));
+    columns[targetColumn].push(card);
+    estimatedHeights[targetColumn] += estimate + GAP;
+  });
+
+  const actualHeights = new Array(columnCount).fill(0);
+
+  columns.forEach((columnCards, columnIndex) => {
+    const left = columnIndex * (columnWidth + GAP);
+    columnCards.forEach((card) => {
+      card.style.width = `${columnWidth}px`;
+      card.style.left = `${left}px`;
+      card.style.top = `${actualHeights[columnIndex]}px`;
+      actualHeights[columnIndex] += card.offsetHeight + GAP;
+    });
+  });
+
+  container.style.height = `${Math.max(...actualHeights) - GAP}px`;
+}
+
+function relayoutActiveSection() {
+  const activeSection = getActiveSection();
+  sections.forEach((section) => {
+    const container = section.querySelector('.cards');
+    if (!container) return;
+
+    if (section === activeSection) {
+      relayoutSection(section);
+    } else {
+      resetCardStyles(section);
+      container.style.height = '';
+    }
+  });
+}
+
+function extractWeekOptions(label) {
+  const weeks = new Set();
+  for (const match of normalizeText(label).matchAll(/週\s*([1-9](?:\s*\/\s*[1-9])*)/g)) {
+    match[1].split('/').forEach((part) => {
+      const week = Number.parseInt(part.trim(), 10);
+      if (Number.isFinite(week)) weeks.add(week);
+    });
+  }
+  return [...weeks].sort((a, b) => a - b);
+}
+
+function extractCurrencyValues(text) {
+  return [...normalizeText(text).matchAll(/(\d{1,3}(?:,\d{3})+|\d{4,})/g)]
+    .map((match) => Number.parseInt(match[1].replace(/,/g, ''), 10))
+    .filter(Number.isFinite);
+}
+
+function isExtraFeeLabel(label) {
+  return /(使用料|運営費|教材費|レンタル|年会費|年額|登録料|入会|用具費|設備費|施設費|管理費|維持費|システム|手数料|保険|テスト|検定|認定|諸費用|冷暖房|ウェア|ユニフォーム|試合|大会|送迎|バス代)/.test(label);
+}
+
+function isExcludedBaseLabel(label) {
+  return /(大人|一般|成人|保護者|親子|ママ|パパ)/.test(label);
+}
+
+function parseMonthlyExtras(noteText) {
+  const extras = [];
+  const segments = normalizeText(noteText).split(/[\/／\n]/).map(normalizeText).filter(Boolean);
+
+  segments.forEach((segment) => {
+    if (/(入会時|初回|初年度|初月)/.test(segment)) return;
+
+    const monthlyMatch = segment.match(/(?:月額|月)\s*[¥￥]?\s*(\d{1,3}(?:,\d{3})+|\d{3,})/);
+    const slashMatch = segment.match(/[¥￥]?\s*(\d{1,3}(?:,\d{3})+|\d{3,})\s*\/\s*月/);
+    const match = monthlyMatch || slashMatch;
+    if (!match) return;
+
+    const amount = Number.parseInt(match[1].replace(/,/g, ''), 10);
+    if (!Number.isFinite(amount)) return;
+
+    let label = segment
+      .replace(/（.*?）|\(.*?\)/g, ' ')
+      .replace(/[¥￥]?\s*\d{1,3}(?:,\d{3})+|[¥￥]?\s*\d{3,}/g, ' ')
+      .replace(/月額|月|\/月/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/[・･]+$/, '');
+
+    label = label || '追加費用';
+    extras.push({ label, amount });
+  });
+
+  return extras.filter(
+    (extra, index, all) =>
+      all.findIndex((candidate) => candidate.label === extra.label && candidate.amount === extra.amount) === index
+  );
+}
+
+function parseFeeRowData(row, index) {
+  const label = normalizeText(row.querySelector('.fn')?.innerText || '');
+  const values = extractCurrencyValues(row.querySelector('.fv')?.innerText || '');
+  const weeks = extractWeekOptions(label);
+  const hasAB = /A\s*\/\s*B/i.test(label);
+  const hasAOnly = !hasAB && /(?:Aコース|週\s*[1-9]\s*A\b)/i.test(label);
+  const hasBOnly = !hasAB && /(?:Bコース|週\s*[1-9]\s*B\b)/i.test(label);
+  const amountByWeek = {};
+
+  if (weeks.length > 1 && values.length >= weeks.length) {
+    weeks.forEach((week, valueIndex) => {
+      amountByWeek[week] = { default: values[valueIndex] };
+    });
+  } else if (weeks.length === 1) {
+    const [week] = weeks;
+    if (hasAB && values.length >= 2) {
+      amountByWeek[week] = { A: values[0], B: values[1] };
+    } else if (hasAOnly && values.length >= 1) {
+      amountByWeek[week] = { A: values[0] };
+    } else if (hasBOnly && values.length >= 1) {
+      amountByWeek[week] = { B: values[0] };
+    } else if (values.length >= 1) {
+      amountByWeek[week] = { default: values[0] };
+    }
+  }
+
+  return {
+    index,
+    label,
+    weeks,
+    values,
+    amountByWeek,
+    extra: isExtraFeeLabel(label),
+    excluded: isExcludedBaseLabel(label)
+  };
+}
+
+function createFeeChip(label, onClick, extraClass = '') {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = `fee-chip${extraClass ? ` ${extraClass}` : ''}`;
+  button.textContent = label;
+  button.addEventListener('click', onClick);
+  return button;
+}
+
+function getVisibleRowsForState(state) {
+  const age = getActiveAge();
+  return state.rows.filter((row) => shouldShowFeeRow(age, row.label));
+}
+
+function resolveBaseRow(state) {
+  if (state.selectedWeek === null) return null;
+
+  const candidates = getVisibleRowsForState(state).filter(
+    (row) => !row.extra && !row.excluded && row.weeks.includes(state.selectedWeek)
+  );
+
+  const ranked = candidates
+    .map((row) => {
+      const amounts = row.amountByWeek[state.selectedWeek] || {};
+      let amount = null;
+      let score = 0;
+
+      if (state.hasBus) {
+        if (state.selectedBus === 'A' && Number.isFinite(amounts.A)) {
+          amount = amounts.A;
+          score += 50;
+        } else if (state.selectedBus === 'B' && Number.isFinite(amounts.B)) {
+          amount = amounts.B;
+          score += 50;
+        } else if (state.selectedBus === 'B' && Number.isFinite(amounts.default)) {
+          amount = amounts.default;
+          score += 30;
+        } else if (state.selectedBus === 'A' && Number.isFinite(amounts.default)) {
+          amount = amounts.default;
+          score += 20;
+        }
+      } else {
+        amount = amounts.default ?? amounts.B ?? amounts.A ?? null;
+        if (Number.isFinite(amount)) score += 20;
+      }
+
+      score -= row.index * 0.01;
+      return { row, amount, score };
+    })
+    .filter((candidate) => Number.isFinite(candidate.amount))
+    .sort((left, right) => right.score - left.score);
+
+  return ranked[0] || null;
+}
+
+function getSupplementalFees(state) {
+  if (state.selectedWeek === null) return [];
+
+  return getVisibleRowsForState(state)
+    .filter((row) => row.extra && row.weeks.includes(state.selectedWeek))
+    .map((row) => {
+      const amounts = row.amountByWeek[state.selectedWeek] || {};
+      const amount = state.hasBus
+        ? state.selectedBus === 'A'
+          ? amounts.A ?? amounts.default ?? amounts.B
+          : amounts.B ?? amounts.default ?? amounts.A
+        : amounts.default ?? amounts.B ?? amounts.A;
+
+      if (!Number.isFinite(amount)) return null;
+
+      const label = normalizeText(
+        row.label
+          .replace(/週\s*[1-9](?:\s*\/\s*[1-9])*/g, '')
+          .replace(/A\s*\/\s*B|Aコース|Bコース/gi, '')
+      ) || row.label;
+
+      return { label, amount };
+    })
+    .filter(Boolean);
+}
+
+function syncFeeUI(state) {
+  if (state.weekSelector) {
+    [...state.weekSelector.querySelectorAll('.fee-chip')].forEach((chip) => {
+      const week = Number.parseInt(chip.dataset.week || '', 10);
+      chip.classList.toggle('active', week === state.selectedWeek && state.explicitSelection);
+    });
+  }
+
+  if (state.busSelector) {
+    [...state.busSelector.querySelectorAll('.fee-chip')].forEach((chip) => {
+      chip.classList.toggle('active', chip.dataset.bus === state.selectedBus);
+    });
+  }
+}
+
+function renderSupplementalNotes(state, items) {
+  state.notes.innerHTML = '';
+  items.forEach((item) => {
+    const line = document.createElement('div');
+    line.className = 'fee-extra-note';
+    line.textContent = `※${item.label} ${formatYen(item.amount)}`;
+    state.notes.appendChild(line);
+  });
+  state.notes.hidden = items.length === 0;
+}
+
+function refreshFeeSummary(state) {
+  syncFeeUI(state);
+
+  if (!(state.selectedWeek !== null && state.explicitSelection)) {
+    state.currentTotal = null;
+    state.empty.textContent = '週回数を選択してください';
+    state.empty.hidden = false;
+    state.breakdown.hidden = true;
+    state.notes.hidden = true;
+    return;
+  }
+
+  const base = resolveBaseRow(state);
+  if (!base) {
+    state.currentTotal = null;
+    state.empty.textContent = '該当する月謝が見つかりません';
+    state.empty.hidden = false;
+    state.breakdown.hidden = true;
+    state.notes.hidden = true;
+    return;
+  }
+
+  let total = base.amount;
+  state.empty.hidden = true;
+  state.breakdown.hidden = false;
+  state.tuition.textContent = formatYen(base.amount);
+  state.extraLines.innerHTML = '';
+
+  state.monthlyExtras.forEach((extra) => {
+    total += extra.amount;
+    const line = document.createElement('div');
+    line.className = 'fee-line';
+    line.innerHTML = `<span class="label">${extra.label}</span><span class="value">${formatYen(extra.amount)}</span>`;
+    state.extraLines.appendChild(line);
+  });
+
+  state.total.textContent = formatYen(total);
+  state.currentTotal = total;
+  renderSupplementalNotes(state, getSupplementalFees(state));
+}
+
+function updateGlobalTotal() {
+  const activeStates = feeStates.filter((state) => state.currentTotal !== null && state.explicitSelection);
+
+  if (activeStates.length === 0) {
+    globalTotal?.classList.remove('visible');
+    if (globalTotalItems) globalTotalItems.innerHTML = '';
+    if (globalTotalSum) globalTotalSum.textContent = '合計: ¥0/月';
+    return;
+  }
+
+  if (globalTotalItems) {
+    globalTotalItems.innerHTML = '';
+    activeStates.forEach((state) => {
+      const item = document.createElement('div');
+      item.className = 'global-total-item';
+      item.textContent = `${state.title} ${formatYen(state.currentTotal)}`;
+      globalTotalItems.appendChild(item);
+    });
+  }
+
+  const total = activeStates.reduce((sum, state) => sum + (state.currentTotal || 0), 0);
+  if (globalTotalSum) globalTotalSum.textContent = `合計: ${formatYen(total)}/月`;
+  globalTotal?.classList.add('visible');
+}
+
+function updateCardState(state) {
+  refreshFeeSummary(state);
+  updateGlobalTotal();
+  requestRelayout();
+}
+
+function clearCardState(state) {
+  state.selectedWeek = null;
+  state.selectedBus = 'B';
+  state.explicitSelection = false;
+  updateCardState(state);
+}
+
+function clearAllSelections() {
+  feeStates.forEach((state) => {
+    clearCardState(state);
+  });
+}
+
+function buildFeeState(card) {
+  const fee = card.querySelector('.fee');
+  if (!fee) return;
+
+  const rows = [...fee.querySelectorAll('.fr')].map((row, index) => parseFeeRowData(row, index));
+  const noteText = normalizeText([...fee.querySelectorAll('.note')].map((note) => note.innerText).join(' / '));
+  const weekOptions = [...new Set(rows.flatMap((row) => row.weeks))].sort((a, b) => a - b);
+  const hasBus = rows.some((row) => /A\s*\/\s*B|Aコース|Bコース/i.test(row.label));
+
+  fee.innerHTML = '';
+
+  const title = document.createElement('h4');
+  title.textContent = '月会費';
+  fee.appendChild(title);
+
+  const controls = document.createElement('div');
+  controls.className = 'fee-controls';
+  fee.appendChild(controls);
+
+  const state = {
+    card,
+    title: getCardName(card),
+    rows,
+    weekOptions,
+    hasBus,
+    monthlyExtras: parseMonthlyExtras(noteText),
+    selectedWeek: null,
+    selectedBus: 'B',
+    explicitSelection: false,
+    currentTotal: null
+  };
+
+  if (weekOptions.length > 1 || !hasBus) {
+    const weekSelector = document.createElement('div');
+    weekSelector.className = 'fee-selector';
+    state.weekSelector = weekSelector;
+
+    if (weekOptions.length > 1) {
+      weekOptions.forEach((week) => {
+        const chip = createFeeChip(`週${week}`, () => {
+          if (state.selectedWeek === week && state.explicitSelection) {
+            state.selectedWeek = null;
+            state.explicitSelection = false;
+          } else {
+            state.selectedWeek = week;
+            state.explicitSelection = true;
+          }
+          updateCardState(state);
+        });
+        chip.dataset.week = String(week);
+        weekSelector.appendChild(chip);
+      });
+    } else if (weekOptions.length === 1) {
+      const [week] = weekOptions;
+      const chip = createFeeChip(`週${week}`, () => {
+        if (state.selectedWeek === week && state.explicitSelection) {
+          state.selectedWeek = null;
+          state.explicitSelection = false;
+        } else {
+          state.selectedWeek = week;
+          state.explicitSelection = true;
+        }
+        updateCardState(state);
+      }, 'single');
+      chip.dataset.week = String(week);
+      weekSelector.appendChild(chip);
+    }
+
+    if (weekSelector.childElementCount > 0) {
+      controls.appendChild(weekSelector);
+    }
+  }
+
+  if (hasBus) {
+    const busSelector = document.createElement('div');
+    busSelector.className = 'fee-selector';
+    state.busSelector = busSelector;
+
+    const busOn = createFeeChip('バスあり', () => {
+      state.selectedBus = 'A';
+      if (state.weekOptions.length === 1 && state.selectedWeek === null) {
+        state.selectedWeek = state.weekOptions[0];
+        state.explicitSelection = true;
+      }
+      updateCardState(state);
+    });
+    busOn.dataset.bus = 'A';
+
+    const busOff = createFeeChip('バスなし', () => {
+      state.selectedBus = 'B';
+      if (state.weekOptions.length === 1 && state.selectedWeek === null) {
+        state.selectedWeek = state.weekOptions[0];
+        state.explicitSelection = true;
+      }
+      updateCardState(state);
+    });
+    busOff.dataset.bus = 'B';
+    busOff.classList.add('active');
+
+    busSelector.append(busOn, busOff);
+    controls.appendChild(busSelector);
+  }
+
+  const empty = document.createElement('div');
+  empty.className = 'fee-empty';
+  empty.textContent = weekOptions.length > 0 ? '週回数を選択してください' : '料金選択に対応していません';
+  controls.appendChild(empty);
+
+  const breakdown = document.createElement('div');
+  breakdown.className = 'fee-breakdown';
+  breakdown.hidden = true;
+  breakdown.innerHTML = `
+    <div class="fee-line"><span class="label">月謝</span><span class="value" data-role="tuition"></span></div>
+    <div data-role="extras"></div>
+    <div class="fee-divider"></div>
+    <div class="fee-total"><span class="label">実質月額</span><span class="value" data-role="total"></span></div>
+    <div class="fee-extra-notes" data-role="notes" hidden></div>
+  `;
+  controls.appendChild(breakdown);
+
+  state.empty = empty;
+  state.breakdown = breakdown;
+  state.tuition = breakdown.querySelector('[data-role="tuition"]');
+  state.extraLines = breakdown.querySelector('[data-role="extras"]');
+  state.total = breakdown.querySelector('[data-role="total"]');
+  state.notes = breakdown.querySelector('[data-role="notes"]');
+
+  feeStates.push(state);
+  refreshFeeSummary(state);
+}
+
+function applyAgeFilter() {
+  const activeSection = getActiveSection();
+  const age = getActiveAge();
+  if (!activeSection) return;
+
+  sections.forEach((section) => {
+    section.classList.toggle('active', section === activeSection);
+  });
+
+  activeSection.querySelectorAll('.card').forEach((card) => {
+    let visibleRowCount = 0;
+
+    getCardDataRows(card).forEach((row) => {
+      const rowAges = getRowAges(row);
+      const showRow = age === 'all' || rowAges.has(age);
+      row.style.display = showRow ? '' : 'none';
+      if (showRow) visibleRowCount += 1;
+    });
+
+    card.querySelectorAll('.bus').forEach((badge) => {
+      syncBusBadgeWithAge(age, badge);
+    });
+
+    setCardVisibility(card, visibleRowCount > 0);
+  });
+
+  feeStates.forEach((state) => {
+    refreshFeeSummary(state);
+  });
+
+  updateGlobalTotal();
+  requestRelayout();
+}
+
+function activateTab(tab) {
+  const next = typeof tab === 'string' ? tab : tab?.value;
+  if (!next) return;
+  if (categorySelect && categorySelect.value !== next) categorySelect.value = next;
+  sections.forEach((section) => {
+    section.classList.toggle('active', section.id === next);
+  });
+  applyAgeFilter();
+}
+
+sanitizeCardHeaders();
+initializeInfoBoxes();
+cards.forEach((card) => {
+  initializeRowAgeData(card);
+  buildFeeState(card);
+  ensurePrepared(card);
+});
+
+document.body.classList.add('pretext-ready');
+
+categorySelect?.addEventListener('change', (event) => {
+  activateTab(event.target.value);
+});
+
+ageSelect?.addEventListener('change', (event) => {
+  ageSelect.value = event.target.value || 'all';
+  clearAllSelections();
+  applyAgeFilter();
+});
+
+globalTotalClear?.addEventListener('click', () => {
+  clearAllSelections();
+  updateGlobalTotal();
+  requestRelayout();
+});
+
+window.addEventListener('resize', requestRelayout);
+window.addEventListener('resize', () => {
+  infoBoxes
+    .filter((box) => box.classList.contains('is-open'))
+    .forEach((box) => {
+      const content = box.querySelector('.info-box-content');
+      if (content) content.style.maxHeight = `${content.scrollHeight}px`;
+    });
+});
+
+activateTab(categorySelect?.value || 'sport-club');
+</script>
+<script type="module">
+import { prepare, layout } from 'https://esm.sh/@chenglou/pretext';
+
+const FONT = '13px Hiragino Sans, Yu Gothic, sans-serif';
+const LINE_HEIGHT = 20;
+const GAP = 18;
+const MOBILE_MAX = 767;
+const TABLET_MAX = 1199;
+const YEN = '\u00A5';
+const LABELS = {
+  club: '\u30AF\u30E9\u30D6',
+  monthFee: '\u6708\u4F1A\u8CBB',
+  tuition: '\u6708\u8B1D',
+  effective: '\u5B9F\u8CEA\u6708\u984D',
+  pickWeek: '\u9031\u56DE\u6570\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044',
+  unsupported: '\u6599\u91D1\u9078\u629E\u306B\u5BFE\u5FDC\u3057\u3066\u3044\u307E\u305B\u3093',
+  notFound: '\u8A72\u5F53\u3059\u308B\u6708\u8B1D\u304C\u898B\u3064\u304B\u308A\u307E\u305B\u3093',
+  busOn: '\u30D0\u30B9\u3042\u308A',
+  busOff: '\u30D0\u30B9\u306A\u3057',
+  totalPrefix: '\u5408\u8A08: ',
+  totalSuffix: '/\u6708',
+  clear: '\u30AF\u30EA\u30A2'
+};
+const TOKENS = {
+  semi: ['semi', '\u30BB\u30DF\u30B8\u30E5\u30CB\u30A2', '\u5E74\u5C11\u3005', '3\u6B73'],
+  junior: ['junior', '\u30B8\u30E5\u30CB\u30A2', '\u5E74\u5C11'],
+  middle: ['middle', '\u30DF\u30C9\u30EB', '\u5E74\u4E2D'],
+  senior: ['senior', '\u30B7\u30CB\u30A2', '\u5E74\u9577'],
+  elementary: ['elementary', '\u5C0F\u5B66\u751F', '\u5C0F\u5B66', '1\u5E74\u751F', '2\u5E74\u751F', '3\u5E74\u751F', '4\u5E74\u751F', '5\u5E74\u751F', '6\u5E74\u751F']
+};
+const RANGE_PAIRS = [
+  ['semi', 'senior'],
+  ['junior', 'senior'],
+  ['semi', 'elementary'],
+  ['junior', 'elementary']
+];
+const AGE_SEQUENCE = ['semi', 'junior', 'middle', 'senior', 'elementary'];
+const EXTRA_FEE_RE = /(\u4F7F\u7528\u6599|\u904B\u55B6\u8CBB|\u6559\u6750\u8CBB|\u30EC\u30F3\u30BF\u30EB|\u5E74\u4F1A\u8CBB|\u5E74\u984D|\u767B\u9332\u6599|\u5165\u4F1A|\u7528\u5177\u8CBB|\u8A2D\u5099\u8CBB|\u65BD\u8A2D\u8CBB|\u7BA1\u7406\u8CBB|\u7DAD\u6301\u8CBB|\u30B7\u30B9\u30C6\u30E0|\u624B\u6570\u6599|\u4FDD\u967A|\u30C6\u30B9\u30C8|\u691C\u5B9A|\u8A8D\u5B9A|\u8AF8\u8CBB\u7528|\u51B7\u6696\u623F|\u30A6\u30A7\u30A2|\u30E6\u30CB\u30D5\u30A9\u30FC\u30E0|\u8A66\u5408|\u5927\u4F1A|\u9001\u8FCE|\u30D0\u30B9\u4EE3)/;
+const EXCLUDED_BASE_RE = /(\u5927\u4EBA|\u4E00\u822C|\u6210\u4EBA|\u4FDD\u8B77\u8005|\u89AA\u5B50|\u30DE\u30DE|\u30D1\u30D1)/;
+const INFANT_RE = /(\u5E7C\u5150|\u5E74\u5C11|\u5E74\u4E2D|\u5E74\u9577|\u30BB\u30DF\u30B8\u30E5\u30CB\u30A2|\u30B8\u30E5\u30CB\u30A2|\u30DF\u30C9\u30EB|\u30B7\u30CB\u30A2)/;
+const ELEMENTARY_RE = /(\u5C0F\u5B66|\u5E74\u751F|\u5C0F\u5B66\u751F)/;
+
+const categorySelect = document.getElementById('category-select');
+const ageSelect = document.getElementById('age-select');
+const sections = [...document.querySelectorAll('.section')];
+const cards = [...document.querySelectorAll('.card')];
+const infoBoxes = [...document.querySelectorAll('.info-box')];
+const globalTotal = document.getElementById('global-total');
+const globalTotalItems = document.getElementById('global-total-items');
+const globalTotalSum = document.getElementById('global-total-sum');
+const globalTotalClear = document.getElementById('global-total-clear');
+const feeStates = [];
+const cardMeta = new WeakMap();
+
+let resizeFrame = 0;
+
+function normalizeText(text) {
+  return (text || '').replace(/\s+/g, ' ').trim();
+}
+
+function formatYen(value) {
+  return `${YEN}${Number(value || 0).toLocaleString('ja-JP')}`;
+}
+
+function containsAny(text, values) {
+  return values.some((value) => text.includes(value.toLowerCase()));
+}
+
+function getColumnCount() {
+  const width = window.innerWidth;
+  if (width <= MOBILE_MAX) return 1;
+  if (width <= TABLET_MAX) return 2;
+  return 3;
+}
+
+function getActiveSection() {
+  return document.getElementById(categorySelect?.value || 'sport-club');
+}
+
+function getActiveAge() {
+  return ageSelect?.value || 'all';
+}
+
+function getCardName(card) {
+  return normalizeText(card.querySelector('.ch h3')?.innerText || LABELS.club);
+}
+
+function sanitizeCardHeaders() {
+  cards.forEach((card) => {
+    const heading = card.querySelector('.ch h3');
+    if (!heading) return;
+    heading.textContent = normalizeText(
+      heading.textContent.replace(/^[^A-Za-z0-9\u3041-\u3093\u30A1-\u30F6\u30FC\u4E00-\u9FA0\u3005]+/, '')
+    );
+  });
+}
+
+function setInfoBoxOpen(box, open) {
+  const toggle = box.querySelector('.info-box-toggle');
+  const content = box.querySelector('.info-box-content');
+  const indicator = box.querySelector('.info-box-indicator');
+  if (!toggle || !content || !indicator) return;
+
+  box.classList.toggle('is-open', open);
+  toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  indicator.textContent = open ? '▼' : '▶';
+  content.style.maxHeight = open ? `${content.scrollHeight}px` : '0px';
+}
+
+function initializeInfoBoxes() {
+  infoBoxes.forEach((box, index) => {
+    const toggle = box.querySelector('.info-box-toggle');
+    const content = box.querySelector('.info-box-content');
+    if (!toggle || !content) return;
+
+    const contentId = `info-box-content-${index + 1}`;
+    content.id = contentId;
+    toggle.setAttribute('aria-controls', contentId);
+    setInfoBoxOpen(box, false);
+
+    toggle.addEventListener('click', () => {
+      setInfoBoxOpen(box, !box.classList.contains('is-open'));
+    });
+  });
+}
+
+function expandAgeRange(startAge, endAge, target) {
+  const startIndex = AGE_SEQUENCE.indexOf(startAge);
+  const endIndex = AGE_SEQUENCE.indexOf(endAge);
+  if (startIndex === -1 || endIndex === -1 || startIndex > endIndex) return;
+  AGE_SEQUENCE.slice(startIndex, endIndex + 1).forEach((age) => target.add(age));
+}
+
+function inferRowAgesFromText(text) {
+  const compact = normalizeText(text).toLowerCase();
+  const ages = new Set();
+
+  if (!compact) return ages;
+
+  Object.entries(TOKENS).forEach(([age, tokens]) => {
+    if (containsAny(compact, tokens)) {
+      ages.add(age);
+    }
+  });
+
+  RANGE_PAIRS.forEach(([startAge, endAge]) => {
+    const startHits = TOKENS[startAge];
+    const endHits = TOKENS[endAge];
+    if (containsAny(compact, startHits) && containsAny(compact, endHits)) {
+      expandAgeRange(startAge, endAge, ages);
+    }
+  });
+
+  return ages;
+}
+
+function getCardDataRows(card) {
+  return [...card.querySelectorAll('.sc tr')].filter((row) => row.querySelectorAll('td').length > 0);
+}
+
+function getRowAges(row) {
+  if (row.dataset.age) {
+    return new Set(normalizeText(row.dataset.age).split(/\s+/).filter(Boolean));
+  }
+
+  const ages = inferRowAgesFromText(row.innerText || '');
+  row.dataset.age = [...ages].join(' ');
+  return ages;
+}
+
+function initializeRowAgeData(card) {
+  getCardDataRows(card).forEach((row) => {
+    getRowAges(row);
+  });
+}
+
+function getFeeRowCategory(label) {
+  const text = normalizeText(label);
+  const hasInfant = INFANT_RE.test(text);
+  const hasElementary = ELEMENTARY_RE.test(text);
+  if (hasInfant && hasElementary) return 'all';
+  if (hasInfant) return 'infant';
+  if (hasElementary) return 'elementary';
+  return 'all';
+}
+
+function shouldShowFeeRow(age, label) {
+  if (age === 'all') return true;
+  const category = getFeeRowCategory(label);
+  if (category === 'all') return true;
+  return age === 'elementary' ? category === 'elementary' : category === 'infant';
+}
+
+function shouldShowBusBadge(age, badge) {
+  if (age === 'all') return true;
+  const text = normalizeText(badge.innerText || '');
+  const hasElementary = /(\u5E74\u751F|\u5C0F\u5B66)/.test(text);
+  const hasInfant = /\u5E7C\u5150/.test(text);
+  if (hasElementary && !hasInfant) return age === 'elementary';
+  if (hasInfant && !hasElementary) return age !== 'elementary';
+  return true;
+}
+
+function syncBusBadgeWithAge(age, badge) {
+  const originalText = badge.getAttribute('data-bus-original-text') || normalizeText(badge.textContent || '');
+  const originalClass = badge.getAttribute('data-bus-original-class') || badge.className;
+  const shouldSwap = ['semi', 'junior', 'middle', 'senior'].includes(age)
+    && /\bbus-y\b/.test(originalClass)
+    && /(B・Cエリア|1〜3年生)/.test(originalText);
+
+  if (!badge.hasAttribute('data-bus-original-class')) {
+    badge.setAttribute('data-bus-original-class', originalClass);
+  }
+  if (!badge.hasAttribute('data-bus-original-text')) {
+    badge.setAttribute('data-bus-original-text', originalText);
+  }
+
+  if (shouldSwap) {
+    badge.className = originalClass.replace(/\bbus-y\b/, 'bus-n');
+    badge.textContent = 'バスなし（小学生以上対象）';
+    badge.style.display = '';
+    return;
+  }
+
+  badge.className = badge.getAttribute('data-bus-original-class') || originalClass;
+  badge.textContent = badge.getAttribute('data-bus-original-text') || originalText;
+  badge.style.display = shouldShowBusBadge(age, badge) ? '' : 'none';
+}
+
+function setCardVisibility(card, visible) {
+  card.classList.toggle('hidden', !visible);
+  card.style.display = visible ? '' : 'none';
+  if (!visible) {
+    card.style.left = '';
+    card.style.top = '';
+    card.style.width = '';
+  }
+}
+
+function ensurePrepared(card) {
+  if (cardMeta.has(card)) return cardMeta.get(card);
+  const body = card.querySelector('.cb');
+  const staticText = [...(body?.children || [])]
+    .filter((node) => !(node instanceof HTMLElement && node.classList.contains('fee')))
+    .map((node) => node.innerText || '')
+    .join(' ');
+  const meta = { prepared: prepare(normalizeText(staticText), FONT) };
+  cardMeta.set(card, meta);
+  return meta;
+}
+
+function estimateCardHeight(card, cardWidth) {
+  const meta = ensurePrepared(card);
+  const bodyWidth = Math.max(220, cardWidth - 28);
+  const textHeight = layout(meta.prepared, bodyWidth, LINE_HEIGHT).height;
+  const headerHeight = card.querySelector('.ch')?.offsetHeight || 76;
+  const tableHeight = card.querySelector('.sc')?.offsetHeight || 0;
+  const feeHeight = card.querySelector('.fee')?.offsetHeight || 0;
+  const busHeight = [...card.querySelectorAll('.bus')]
+    .filter((badge) => badge.style.display !== 'none')
+    .reduce((sum, badge) => sum + badge.offsetHeight, 0);
+  return headerHeight + tableHeight + feeHeight + busHeight + textHeight * 0.45 + 54;
+}
+
+function requestRelayout() {
+  if (resizeFrame) cancelAnimationFrame(resizeFrame);
+  resizeFrame = requestAnimationFrame(() => {
+    resizeFrame = 0;
+    relayoutActiveSection();
+  });
+}
+
+function resetCardStyles(section) {
+  section.querySelectorAll('.card').forEach((card) => {
+    card.style.left = '';
+    card.style.top = '';
+    card.style.width = '';
+  });
+}
+
+function relayoutSection(section) {
+  if (!section) return;
+  const container = section.querySelector('.cards');
+  if (!container) return;
+
+  const visibleCards = [...container.querySelectorAll('.card')].filter(
+    (card) => !card.classList.contains('hidden') && card.style.display !== 'none'
+  );
+  if (visibleCards.length === 0) {
+    container.style.height = '0px';
+    return;
+  }
+
+  const columnCount = Math.min(getColumnCount(), visibleCards.length);
+  const containerWidth = container.clientWidth;
+  const columnWidth = (containerWidth - GAP * (columnCount - 1)) / columnCount;
+  const estimatedHeights = new Array(columnCount).fill(0);
+  const columns = Array.from({ length: columnCount }, () => []);
+
+  visibleCards.forEach((card) => {
+    const estimate = estimateCardHeight(card, columnWidth);
+    const targetColumn = estimatedHeights.indexOf(Math.min(...estimatedHeights));
+    columns[targetColumn].push(card);
+    estimatedHeights[targetColumn] += estimate + GAP;
+  });
+
+  const actualHeights = new Array(columnCount).fill(0);
+  columns.forEach((columnCards, columnIndex) => {
+    const left = columnIndex * (columnWidth + GAP);
+    columnCards.forEach((card) => {
+      card.style.width = `${columnWidth}px`;
+      card.style.left = `${left}px`;
+      card.style.top = `${actualHeights[columnIndex]}px`;
+      actualHeights[columnIndex] += card.offsetHeight + GAP;
+    });
+  });
+
+  container.style.height = `${Math.max(...actualHeights) - GAP}px`;
+}
+
+function relayoutActiveSection() {
+  const activeSection = getActiveSection();
+  sections.forEach((section) => {
+    const container = section.querySelector('.cards');
+    if (!container) return;
+    if (section === activeSection) {
+      relayoutSection(section);
+    } else {
+      resetCardStyles(section);
+      container.style.height = '';
+    }
+  });
+}
+
+function extractWeekOptions(label) {
+  const weeks = new Set();
+  for (const match of normalizeText(label).matchAll(/\u9031\s*([1-9](?:\s*\/\s*[1-9])*)/g)) {
+    match[1].split('/').forEach((part) => {
+      const week = Number.parseInt(part.trim(), 10);
+      if (Number.isFinite(week)) weeks.add(week);
+    });
+  }
+  return [...weeks].sort((a, b) => a - b);
+}
+
+function extractCurrencyValues(text) {
+  return [...normalizeText(text).matchAll(/(\d{1,3}(?:,\d{3})+|\d{4,})/g)]
+    .map((match) => Number.parseInt(match[1].replace(/,/g, ''), 10))
+    .filter(Number.isFinite);
+}
+
+function parseMonthlyExtras(noteText) {
+  const extras = [];
+  const segments = normalizeText(noteText).split(/[\/\uFF0F\n]/).map(normalizeText).filter(Boolean);
+
+  segments.forEach((segment) => {
+    if (/(\u5165\u4F1A\u6642|\u521D\u56DE|\u521D\u5E74\u5EA6|\u521D\u6708)/.test(segment)) return;
+    const monthlyMatch = segment.match(/(?:\u6708\u984D|\u6708)\s*[¥￥]?\s*(\d{1,3}(?:,\d{3})+|\d{3,})/);
+    const slashMatch = segment.match(/[¥￥]?\s*(\d{1,3}(?:,\d{3})+|\d{3,})\s*\/\s*\u6708/);
+    const match = monthlyMatch || slashMatch;
+    if (!match) return;
+
+    const amount = Number.parseInt(match[1].replace(/,/g, ''), 10);
+    if (!Number.isFinite(amount)) return;
+
+    let label = segment
+      .replace(/（.*?）|\(.*?\)/g, ' ')
+      .replace(/[¥￥]?\s*\d{1,3}(?:,\d{3})+|[¥￥]?\s*\d{3,}/g, ' ')
+      .replace(/\u6708\u984D|\u6708|\/\u6708/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim()
+      .replace(/[・･]+$/, '');
+
+    label = label || '\u8FFD\u52A0\u8CBB\u7528';
+    extras.push({ label, amount });
+  });
+
+  return extras.filter(
+    (extra, index, all) =>
+      all.findIndex((candidate) => candidate.label === extra.label && candidate.amount === extra.amount) === index
+  );
+}
+
+function parseFeeRowData(row, index) {
+  const label = normalizeText(row.querySelector('.fn')?.innerText || '');
+  const values = extractCurrencyValues(row.querySelector('.fv')?.innerText || '');
+  const weeks = extractWeekOptions(label);
+  const hasAB = /A\s*\/\s*B/i.test(label);
+  const hasAOnly = !hasAB && /(?:A\u30B3\u30FC\u30B9|\u9031\s*[1-9]\s*A\b)/i.test(label);
+  const hasBOnly = !hasAB && /(?:B\u30B3\u30FC\u30B9|\u9031\s*[1-9]\s*B\b)/i.test(label);
+  const amountByWeek = {};
+
+  if (weeks.length > 1 && values.length >= weeks.length) {
+    weeks.forEach((week, valueIndex) => {
+      amountByWeek[week] = { default: values[valueIndex] };
+    });
+  } else if (weeks.length === 1) {
+    const [week] = weeks;
+    if (hasAB && values.length >= 2) {
+      amountByWeek[week] = { A: values[0], B: values[1] };
+    } else if (hasAOnly && values.length >= 1) {
+      amountByWeek[week] = { A: values[0] };
+    } else if (hasBOnly && values.length >= 1) {
+      amountByWeek[week] = { B: values[0] };
+    } else if (values.length >= 1) {
+      amountByWeek[week] = { default: values[0] };
+    }
+  }
+
+  return {
+    index,
+    label,
+    weeks,
+    values,
+    amountByWeek,
+    extra: EXTRA_FEE_RE.test(label),
+    excluded: EXCLUDED_BASE_RE.test(label)
+  };
+}
+
+function getVisibleRowsForState(state) {
+  const age = getActiveAge();
+  return state.rows.filter((row) => shouldShowFeeRow(age, row.label));
+}
+
+function resolveBaseRow(state) {
+  if (state.selectedWeek === null) return null;
+
+  const candidates = getVisibleRowsForState(state).filter(
+    (row) => !row.extra && !row.excluded && row.weeks.includes(state.selectedWeek)
+  );
+
+  const ranked = candidates
+    .map((row) => {
+      const amounts = row.amountByWeek[state.selectedWeek] || {};
+      let amount = null;
+      let score = 0;
+
+      if (state.hasBus) {
+        if (state.selectedBus === 'A' && Number.isFinite(amounts.A)) {
+          amount = amounts.A;
+          score += 50;
+        } else if (state.selectedBus === 'B' && Number.isFinite(amounts.B)) {
+          amount = amounts.B;
+          score += 50;
+        } else if (state.selectedBus === 'B' && Number.isFinite(amounts.default)) {
+          amount = amounts.default;
+          score += 30;
+        } else if (state.selectedBus === 'A' && Number.isFinite(amounts.default)) {
+          amount = amounts.default;
+          score += 20;
+        }
+      } else {
+        amount = amounts.default ?? amounts.B ?? amounts.A ?? null;
+        if (Number.isFinite(amount)) score += 20;
+      }
+
+      score -= row.index * 0.01;
+      return { row, amount, score };
+    })
+    .filter((candidate) => Number.isFinite(candidate.amount))
+    .sort((left, right) => right.score - left.score);
+
+  return ranked[0] || null;
+}
+
+function getSupplementalFees(state) {
+  if (state.selectedWeek === null) return [];
+
+  return getVisibleRowsForState(state)
+    .filter((row) => row.extra && row.weeks.includes(state.selectedWeek))
+    .map((row) => {
+      const amounts = row.amountByWeek[state.selectedWeek] || {};
+      const amount = state.hasBus
+        ? state.selectedBus === 'A'
+          ? amounts.A ?? amounts.default ?? amounts.B
+          : amounts.B ?? amounts.default ?? amounts.A
+        : amounts.default ?? amounts.B ?? amounts.A;
+
+      if (!Number.isFinite(amount)) return null;
+
+      const label = normalizeText(
+        row.label
+          .replace(/\u9031\s*[1-9](?:\s*\/\s*[1-9])*/g, '')
+          .replace(/A\s*\/\s*B|A\u30B3\u30FC\u30B9|B\u30B3\u30FC\u30B9/gi, '')
+      ) || row.label;
+
+      return { label, amount };
+    })
+    .filter(Boolean);
+}
+
+function createFeeChip(label, onClick, extraClass = '') {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.className = `fee-chip${extraClass ? ` ${extraClass}` : ''}`;
+  button.textContent = label;
+  button.addEventListener('click', onClick);
+  return button;
+}
+
+function syncFeeUI(state) {
+  if (state.weekSelector) {
+    [...state.weekSelector.querySelectorAll('.fee-chip')].forEach((chip) => {
+      const week = Number.parseInt(chip.dataset.week || '', 10);
+      chip.classList.toggle('active', week === state.selectedWeek && state.explicitSelection);
+    });
+  }
+
+  if (state.busSelector) {
+    [...state.busSelector.querySelectorAll('.fee-chip')].forEach((chip) => {
+      chip.classList.toggle('active', chip.dataset.bus === state.selectedBus);
+    });
+  }
+}
+
+function renderSupplementalNotes(state, items) {
+  state.notes.innerHTML = '';
+  items.forEach((item) => {
+    const line = document.createElement('div');
+    line.className = 'fee-extra-note';
+    line.textContent = `\u203B${item.label} ${formatYen(item.amount)}`;
+    state.notes.appendChild(line);
+  });
+  state.notes.hidden = items.length === 0;
+}
+
+function refreshFeeSummary(state) {
+  syncFeeUI(state);
+
+  if (!(state.selectedWeek !== null && state.explicitSelection)) {
+    state.currentTotal = null;
+    state.empty.textContent = LABELS.pickWeek;
+    state.empty.hidden = false;
+    state.breakdown.hidden = true;
+    state.notes.hidden = true;
+    return;
+  }
+
+  const base = resolveBaseRow(state);
+  if (!base) {
+    state.currentTotal = null;
+    state.empty.textContent = LABELS.notFound;
+    state.empty.hidden = false;
+    state.breakdown.hidden = true;
+    state.notes.hidden = true;
+    return;
+  }
+
+  let total = base.amount;
+  state.empty.hidden = true;
+  state.breakdown.hidden = false;
+  state.tuition.textContent = formatYen(base.amount);
+  state.extraLines.innerHTML = '';
+
+  state.monthlyExtras.forEach((extra) => {
+    total += extra.amount;
+    const line = document.createElement('div');
+    line.className = 'fee-line';
+    line.innerHTML = `<span class="label">${extra.label}</span><span class="value">${formatYen(extra.amount)}</span>`;
+    state.extraLines.appendChild(line);
+  });
+
+  state.total.textContent = formatYen(total);
+  state.currentTotal = total;
+  renderSupplementalNotes(state, getSupplementalFees(state));
+}
+
+function updateGlobalTotal() {
+  const activeStates = feeStates.filter((state) => state.currentTotal !== null && state.explicitSelection);
+  if (activeStates.length === 0) {
+    globalTotal?.classList.remove('visible');
+    if (globalTotalItems) globalTotalItems.innerHTML = '';
+    if (globalTotalSum) globalTotalSum.textContent = `${LABELS.totalPrefix}${formatYen(0)}${LABELS.totalSuffix}`;
+    return;
+  }
+
+  if (globalTotalItems) {
+    globalTotalItems.innerHTML = '';
+    activeStates.forEach((state) => {
+      const item = document.createElement('div');
+      item.className = 'global-total-item';
+      item.textContent = `${state.title} ${formatYen(state.currentTotal)}`;
+      globalTotalItems.appendChild(item);
+    });
+  }
+
+  const total = activeStates.reduce((sum, state) => sum + (state.currentTotal || 0), 0);
+  if (globalTotalSum) {
+    globalTotalSum.textContent = `${LABELS.totalPrefix}${formatYen(total)}${LABELS.totalSuffix}`;
+  }
+  globalTotal?.classList.add('visible');
+}
+
+function updateCardState(state) {
+  refreshFeeSummary(state);
+  updateGlobalTotal();
+  requestRelayout();
+}
+
+function clearCardState(state) {
+  state.selectedWeek = null;
+  state.selectedBus = 'B';
+  state.explicitSelection = false;
+  updateCardState(state);
+}
+
+function clearAllSelections() {
+  feeStates.forEach((state) => {
+    clearCardState(state);
+  });
+}
+
+function buildFeeState(card) {
+  const fee = card.querySelector('.fee');
+  if (!fee) return;
+
+  const rows = [...fee.querySelectorAll('.fr')].map((row, index) => parseFeeRowData(row, index));
+  const noteText = normalizeText([...fee.querySelectorAll('.note')].map((note) => note.innerText).join(' / '));
+  const weekOptions = [...new Set(rows.flatMap((row) => row.weeks))].sort((a, b) => a - b);
+  const hasBus = rows.some((row) => /A\s*\/\s*B|A\u30B3\u30FC\u30B9|B\u30B3\u30FC\u30B9/i.test(row.label));
+
+  fee.innerHTML = '';
+
+  const title = document.createElement('h4');
+  title.textContent = LABELS.monthFee;
+  fee.appendChild(title);
+
+  const controls = document.createElement('div');
+  controls.className = 'fee-controls';
+  fee.appendChild(controls);
+
+  const state = {
+    card,
+    title: getCardName(card),
+    rows,
+    weekOptions,
+    hasBus,
+    monthlyExtras: parseMonthlyExtras(noteText),
+    selectedWeek: null,
+    selectedBus: 'B',
+    explicitSelection: false,
+    currentTotal: null
+  };
+
+  if (weekOptions.length > 1 || !hasBus) {
+    const weekSelector = document.createElement('div');
+    weekSelector.className = 'fee-selector';
+    state.weekSelector = weekSelector;
+
+    if (weekOptions.length > 1) {
+      weekOptions.forEach((week) => {
+        const chip = createFeeChip(`\u9031${week}`, () => {
+          if (state.selectedWeek === week && state.explicitSelection) {
+            state.selectedWeek = null;
+            state.explicitSelection = false;
+          } else {
+            state.selectedWeek = week;
+            state.explicitSelection = true;
+          }
+          updateCardState(state);
+        });
+        chip.dataset.week = String(week);
+        weekSelector.appendChild(chip);
+      });
+    } else if (weekOptions.length === 1) {
+      const [week] = weekOptions;
+      const chip = createFeeChip(`\u9031${week}`, () => {
+        if (state.selectedWeek === week && state.explicitSelection) {
+          state.selectedWeek = null;
+          state.explicitSelection = false;
+        } else {
+          state.selectedWeek = week;
+          state.explicitSelection = true;
+        }
+        updateCardState(state);
+      }, 'single');
+      chip.dataset.week = String(week);
+      weekSelector.appendChild(chip);
+    }
+
+    if (weekSelector.childElementCount > 0) {
+      controls.appendChild(weekSelector);
+    }
+  }
+
+  if (hasBus) {
+    const busSelector = document.createElement('div');
+    busSelector.className = 'fee-selector';
+    state.busSelector = busSelector;
+
+    const busOn = createFeeChip(LABELS.busOn, () => {
+      state.selectedBus = 'A';
+      if (state.weekOptions.length === 1 && state.selectedWeek === null) {
+        state.selectedWeek = state.weekOptions[0];
+        state.explicitSelection = true;
+      }
+      updateCardState(state);
+    });
+    busOn.dataset.bus = 'A';
+
+    const busOff = createFeeChip(LABELS.busOff, () => {
+      state.selectedBus = 'B';
+      if (state.weekOptions.length === 1 && state.selectedWeek === null) {
+        state.selectedWeek = state.weekOptions[0];
+        state.explicitSelection = true;
+      }
+      updateCardState(state);
+    });
+    busOff.dataset.bus = 'B';
+    busOff.classList.add('active');
+
+    busSelector.append(busOn, busOff);
+    controls.appendChild(busSelector);
+  }
+
+  const empty = document.createElement('div');
+  empty.className = 'fee-empty';
+  empty.textContent = weekOptions.length > 0 ? LABELS.pickWeek : LABELS.unsupported;
+  controls.appendChild(empty);
+
+  const breakdown = document.createElement('div');
+  breakdown.className = 'fee-breakdown';
+  breakdown.hidden = true;
+  breakdown.innerHTML = `
+    <div class="fee-line"><span class="label">${LABELS.tuition}</span><span class="value" data-role="tuition"></span></div>
+    <div data-role="extras"></div>
+    <div class="fee-divider"></div>
+    <div class="fee-total"><span class="label">${LABELS.effective}</span><span class="value" data-role="total"></span></div>
+    <div class="fee-extra-notes" data-role="notes" hidden></div>
+  `;
+  controls.appendChild(breakdown);
+
+  state.empty = empty;
+  state.breakdown = breakdown;
+  state.tuition = breakdown.querySelector('[data-role="tuition"]');
+  state.extraLines = breakdown.querySelector('[data-role="extras"]');
+  state.total = breakdown.querySelector('[data-role="total"]');
+  state.notes = breakdown.querySelector('[data-role="notes"]');
+
+  feeStates.push(state);
+  refreshFeeSummary(state);
+}
+
+function applyAgeFilter() {
+  const activeSection = getActiveSection();
+  const age = getActiveAge();
+  if (!activeSection) return;
+
+  sections.forEach((section) => {
+    section.classList.toggle('active', section === activeSection);
+  });
+
+  activeSection.querySelectorAll('.card').forEach((card) => {
+    let visibleRowCount = 0;
+
+    getCardDataRows(card).forEach((row) => {
+      const rowAges = getRowAges(row);
+      const showRow = age === 'all' || rowAges.has(age);
+      row.style.display = showRow ? '' : 'none';
+      if (showRow) visibleRowCount += 1;
+    });
+
+    card.querySelectorAll('.bus').forEach((badge) => {
+      syncBusBadgeWithAge(age, badge);
+    });
+
+    setCardVisibility(card, visibleRowCount > 0);
+  });
+
+  feeStates.forEach((state) => {
+    refreshFeeSummary(state);
+  });
+
+  updateGlobalTotal();
+  requestRelayout();
+}
+
+function activateTab(tab) {
+  const next = typeof tab === 'string' ? tab : tab?.value;
+  if (!next) return;
+  if (categorySelect && categorySelect.value !== next) categorySelect.value = next;
+  sections.forEach((section) => {
+    section.classList.toggle('active', section.id === next);
+  });
+  applyAgeFilter();
+}
+
+sanitizeCardHeaders();
+initializeInfoBoxes();
+cards.forEach((card) => {
+  initializeRowAgeData(card);
+  buildFeeState(card);
+  ensurePrepared(card);
+});
+
+document.body.classList.add('pretext-ready');
+
+categorySelect?.addEventListener('change', (event) => {
+  activateTab(event.target.value);
+});
+
+ageSelect?.addEventListener('change', (event) => {
+  ageSelect.value = event.target.value || 'all';
+  clearAllSelections();
+  applyAgeFilter();
+});
+
+globalTotalClear?.addEventListener('click', () => {
+  clearAllSelections();
+  updateGlobalTotal();
+  requestRelayout();
+});
+
+window.addEventListener('resize', requestRelayout);
+window.addEventListener('resize', () => {
+  infoBoxes
+    .filter((box) => box.classList.contains('is-open'))
+    .forEach((box) => {
+      const content = box.querySelector('.info-box-content');
+      if (content) content.style.maxHeight = `${content.scrollHeight}px`;
+    });
+});
+
+activateTab(categorySelect?.value || 'sport-club');
 </script>
 </body>
 </html>
