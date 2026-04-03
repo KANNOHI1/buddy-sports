@@ -86,6 +86,14 @@ function createBadge(text, className = 'bus bus-y') {
 }
 
 function testStaticContent() {
+  assertMatches(
+    /\.control-bar\s*\{[\s\S]*?justify-content:flex-start;/,
+    'control-bar should justify filters from the start'
+  );
+  assertMatches(
+    /\.control-group\s*\{[\s\S]*?flex:0 0 auto;/,
+    'control-group should not stretch filter blocks'
+  );
   assertMatches(/\.control-select\s*\{[\s\S]*?max-width:220px;/, 'control-select に max-width:220px が必要');
   assertMatches(/<span class="info-box-title">費用・月謝について（共通）<\/span>/, 'info-box の h2 絵文字は削除されているべき');
   assertMatches(/<span class="info-box-title">クラブとスクールの違い<\/span>/, 'info-box のタイトルはテキストのみであるべき');
