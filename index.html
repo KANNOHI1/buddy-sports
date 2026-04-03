@@ -2066,7 +2066,7 @@ function buildFeeState(card) {
 
   const rows = [...fee.querySelectorAll('.fr')].map((row, index) => parseFeeRowData(row, index));
   const noteText = normalizeText([...fee.querySelectorAll('.note')].map((note) => note.innerText).join(' / '));
-  const weekOptions = [...new Set(rows.flatMap((row) => row.weeks))].sort((a, b) => a - b);
+  const weekOptions = [...new Set(rows.filter((r) => !r.extra && !r.excluded).flatMap((r) => r.weeks))].sort((a, b) => a - b);
   const hasBus = rows.some((row) => /A\s*\/\s*B|Aコース|Bコース/i.test(row.label));
 
   fee.innerHTML = '';
@@ -2915,7 +2915,7 @@ function buildFeeState(card) {
 
   const rows = [...fee.querySelectorAll('.fr')].map((row, index) => parseFeeRowData(row, index));
   const noteText = normalizeText([...fee.querySelectorAll('.note')].map((note) => note.innerText).join(' / '));
-  const weekOptions = [...new Set(rows.flatMap((row) => row.weeks))].sort((a, b) => a - b);
+  const weekOptions = [...new Set(rows.filter((r) => !r.extra && !r.excluded).flatMap((r) => r.weeks))].sort((a, b) => a - b);
   const hasBus = rows.some((row) => /A\s*\/\s*B|A\u30B3\u30FC\u30B9|B\u30B3\u30FC\u30B9/i.test(row.label));
 
   fee.innerHTML = '';
