@@ -2207,6 +2207,9 @@ function applyAgeFilter() {
   });
 
   feeStates.forEach((state) => {
+    if (state.busSelector) {
+      state.busSelector.style.display = (age === 'all' || age === 'elementary') ? '' : 'none';
+    }
     refreshFeeSummary(state);
   });
 
@@ -3029,6 +3032,9 @@ function applyAgeFilter() {
   });
 
   feeStates.forEach((state) => {
+    if (state.busSelector) {
+      state.busSelector.style.display = (age === 'all' || age === 'elementary') ? '' : 'none';
+    }
     refreshFeeSummary(state);
   });
 
