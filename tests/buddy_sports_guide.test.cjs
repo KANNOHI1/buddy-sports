@@ -174,7 +174,7 @@ function testFixedFeeFallbacks() {
   );
 
   const filteredWeekOptionsMatches =
-    html.match(/const weekOptions = \[\.\.\.new Set\(rows\.filter\(\(r\) => !r\.extra && !r\.excluded\)\.flatMap/g) || [];
+    html.match(/const _allWeeks = rows\.filter\(\(r\) => !r\.extra && !r\.excluded\)/g) || [];
   assert.equal(
     filteredWeekOptionsMatches.length,
     2,
