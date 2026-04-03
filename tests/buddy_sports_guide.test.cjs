@@ -132,9 +132,7 @@ function testBusBadgeBehavior() {
   const badge = createBadge('🚌 バスあり（1〜3年生 B・Cエリア）');
 
   api.syncBusBadgeWithAge('semi', badge);
-  assert.equal(badge.className, 'bus bus-n', '幼児フィルタ時は bus-n に切り替えるべき');
-  assert.equal(badge.textContent, 'バスなし（小学生以上対象）', '幼児フィルタ時は文言を差し替えるべき');
-  assert.equal(badge.style.display, '', '差し替え時はバッジを表示したままにするべき');
+  assert.equal(badge.style.display, 'none', '幼児フィルタ時はバスバッジを非表示にするべき');
 
   api.syncBusBadgeWithAge('elementary', badge);
   assert.equal(badge.className, 'bus bus-y', '小学生フィルタ時は元の class に戻るべき');
