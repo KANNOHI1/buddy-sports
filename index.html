@@ -2373,7 +2373,7 @@ function setInfoBoxOpen(box, open) {
 
   box.classList.toggle('is-open', open);
   toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-  indicator.textContent = open ? '▼' : '▶';
+
   content.style.maxHeight = open ? `${content.scrollHeight}px` : '0px';
 }
 
