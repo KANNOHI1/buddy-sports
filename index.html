@@ -1828,7 +1828,7 @@ function parseMonthlyExtras(noteText) {
 function parseFeeRowData(row, index) {
   const label = normalizeText(row.querySelector('.fn')?.innerText || '');
   const values = extractCurrencyValues(row.querySelector('.fv')?.innerText || '');
-  const weeks = extractWeekOptions(label);
+  let weeks = extractWeekOptions(label);
   const hasAB = /A\s*\/\s*B/i.test(label);
   const hasAOnly = !hasAB && /(?:Aコース|週\s*[1-9]\s*A\b)/i.test(label);
   const hasBOnly = !hasAB && /(?:Bコース|週\s*[1-9]\s*B\b)/i.test(label);
@@ -1849,6 +1849,11 @@ function parseFeeRowData(row, index) {
     } else if (values.length >= 1) {
       amountByWeek[week] = { default: values[0] };
     }
+  }
+
+  if (weeks.length === 0 && values.length >= 1) {
+    weeks = [0];
+    amountByWeek[0] = { default: values[0] };
   }
 
   return {
@@ -2086,7 +2091,12 @@ function buildFeeState(card) {
     currentTotal: null
   };
 
-  if (weekOptions.length > 1 || !hasBus) {
+  if (weekOptions.length === 1 && weekOptions[0] === 0) {
+    state.selectedWeek = 0;
+    state.explicitSelection = true;
+  }
+
+  if ((weekOptions.length > 1 || !hasBus) && !(weekOptions.length === 1 && weekOptions[0] === 0)) {
     const weekSelector = document.createElement('div');
     weekSelector.className = 'fee-selector';
     state.weekSelector = weekSelector;
@@ -2653,7 +2663,7 @@ function parseMonthlyExtras(noteText) {
 function parseFeeRowData(row, index) {
   const label = normalizeText(row.querySelector('.fn')?.innerText || '');
   const values = extractCurrencyValues(row.querySelector('.fv')?.innerText || '');
-  const weeks = extractWeekOptions(label);
+  let weeks = extractWeekOptions(label);
   const hasAB = /A\s*\/\s*B/i.test(label);
   const hasAOnly = !hasAB && /(?:A\u30B3\u30FC\u30B9|\u9031\s*[1-9]\s*A\b)/i.test(label);
   const hasBOnly = !hasAB && /(?:B\u30B3\u30FC\u30B9|\u9031\s*[1-9]\s*B\b)/i.test(label);
@@ -2674,6 +2684,11 @@ function parseFeeRowData(row, index) {
     } else if (values.length >= 1) {
       amountByWeek[week] = { default: values[0] };
     }
+  }
+
+  if (weeks.length === 0 && values.length >= 1) {
+    weeks = [0];
+    amountByWeek[0] = { default: values[0] };
   }
 
   return {
@@ -2912,7 +2927,12 @@ function buildFeeState(card) {
     currentTotal: null
   };
 
-  if (weekOptions.length > 1 || !hasBus) {
+  if (weekOptions.length === 1 && weekOptions[0] === 0) {
+    state.selectedWeek = 0;
+    state.explicitSelection = true;
+  }
+
+  if ((weekOptions.length > 1 || !hasBus) && !(weekOptions.length === 1 && weekOptions[0] === 0)) {
     const weekSelector = document.createElement('div');
     weekSelector.className = 'fee-selector';
     state.weekSelector = weekSelector;

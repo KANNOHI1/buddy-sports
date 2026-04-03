@@ -145,6 +145,35 @@ function testMonthlyFees() {
   assertCardFee('🏐 バディクラブ ドッジボール', '小学生 週1A/B', '¥13,750 / ¥9,900');
 }
 
+function testFixedFeeFallbacks() {
+  const parseWeeksMatches = html.match(/let weeks = extractWeekOptions\(label\);/g) || [];
+  assert.equal(parseWeeksMatches.length, 2, 'parseFeeRowData should treat weeks as mutable in both duplicated implementations');
+
+  const fixedFeeFallbackMatches =
+    html.match(/if \(weeks\.length === 0 && values\.length >= 1\) \{\s*weeks = \[0\];\s*amountByWeek\[0\] = \{ default: values\[0\] \};\s*\}/g) || [];
+  assert.equal(
+    fixedFeeFallbackMatches.length,
+    2,
+    'parseFeeRowData should map fixed-fee rows to synthetic week 0 in both duplicated implementations'
+  );
+
+  const fixedWeekSelectionMatches =
+    html.match(/if \(weekOptions\.length === 1 && weekOptions\[0\] === 0\) \{\s*state\.selectedWeek = 0;\s*state\.explicitSelection = true;\s*\}/g) || [];
+  assert.equal(
+    fixedWeekSelectionMatches.length,
+    2,
+    'buildFeeState should auto-select and activate synthetic week 0 for fixed-fee cards in both duplicated implementations'
+  );
+
+  const hiddenFixedWeekSelectorMatches =
+    html.match(/if \(\(weekOptions\.length > 1 \|\| !hasBus\) && !\(weekOptions\.length === 1 && weekOptions\[0\] === 0\)\) \{/g) || [];
+  assert.equal(
+    hiddenFixedWeekSelectorMatches.length,
+    2,
+    'buildFeeState should skip rendering week chips for fixed-fee cards in both duplicated implementations'
+  );
+}
+
 function testModuleWiring() {
   const moduleScript = getModuleScript(html);
 
@@ -302,6 +331,7 @@ function main() {
   testStaticContent();
   testMobileFilterLayout();
   testMonthlyFees();
+  testFixedFeeFallbacks();
   testModuleWiring();
   testInfoBoxOpenBehavior();
   testInfoBoxesToggleTogether();
