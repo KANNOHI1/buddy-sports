@@ -2609,11 +2609,10 @@ function relayoutSection(section) {
 }
 
 function relayoutActiveSection() {
-  const activeSection = getActiveSection();
   sections.forEach((section) => {
     const container = section.querySelector('.cards');
     if (!container) return;
-    if (section === activeSection) {
+    if (section.classList.contains('active')) {
       relayoutSection(section);
     } else {
       resetCardStyles(section);
