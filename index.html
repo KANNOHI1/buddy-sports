@@ -2963,7 +2963,7 @@ function updateCardState(state) {
 }
 
 function clearCardState(state) {
-  state.selectedWeek = null;
+  state.selectedWeek = state.weekOptions.length === 1 ? state.weekOptions[0] : null;
   state.selectedBus = 'B';
   state.explicitSelection = false;
   updateCardState(state);
