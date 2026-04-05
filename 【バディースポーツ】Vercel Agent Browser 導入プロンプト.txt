@@ -1,0 +1,39 @@
+## 【バディースポーツ】Vercel Agent Browser 導入プロンプト
+
+以下のタスクを実装してください。
+
+### 背景
+`buddy-sports` は単一HTMLファイル（`index.html`）で構成されるスポーツクラブ活動ガイドサイト。
+GitHub Pages で公開中（https://kannohi1.github.io/buddy-sports/）
+
+現在のテストは `tests/buddy_sports_guide.test.cjs` で実施しているが、
+ブラウザ上でのレンダリング確認・スクリーンショット撮影を自動化したい。
+
+### 目的
+- Agent Browser でサイトをブラウザ操作してE2Eテストを追加
+- デプロイ後の見た目確認・スクリーンショット取得を自動化
+
+### タスク
+
+1. **Agent Browser のインストール**
+   - npm or Cargo でインストール手順を確認・実行
+   - `package.json`（または `scripts/`）に追加
+
+2. **E2Eテストスクリプトの作成**
+   - `tests/e2e.js`（または `scripts/screenshot.js`）を新規作成
+   - Agent Browser を使って以下を実行：
+     - `index.html` をローカルで開く（`file://` or `http-server` 経由）
+     - ページ全体のスクリーンショットを `tests/screenshots/` に保存
+     - 主要セクション（ナビ・各スポーツ種目・フッター）が存在することを確認
+
+3. **npm scriptに追加**
+   - `package.json` の `scripts` に `"e2e": "node tests/e2e.js"` を追加
+   - `npm run e2e` で実行できる状態にする
+
+4. **動作確認**
+   - スクリーンショットが正常に生成されること
+   - 既存テスト `node tests/buddy_sports_guide.test.cjs` が引き続き通ること
+
+### 注意
+- `index.html` 本体は変更しない
+- スクリーンショットは `.gitignore` に追加する
