@@ -2931,7 +2931,7 @@ function refreshFeeSummary(state) {
 }
 
 function updateGlobalTotal() {
-  const activeStates = feeStates.filter((state) => state.currentTotal !== null && state.explicitSelection);
+  const activeStates = feeStates.filter((state) => state.currentTotal !== null && (state.explicitSelection || (state.weekOptions.length === 1 && state.weekOptions[0] === 0)));
   if (activeStates.length === 0) {
     globalTotal?.classList.remove('visible');
     if (globalTotalItems) globalTotalItems.innerHTML = '';
