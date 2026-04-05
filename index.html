@@ -1017,7 +1017,7 @@ table.sc{
 </table>
 <div class="fee"><h4>月会費</h4>
 <div class="fr"><span class="fn">幼児 / 小学生</span><span class="fv">¥9,900 / ¥11,000</span></div>
-<p class="note">教材費：幼児¥1,100 / 小学生¥2,200</p>
+<p class="note">教材費（幼児）¥1,100 / 教材費（小学生）¥2,200</p>
 </div></div></div>
 
 <div class="card culture-school" data-ages="junior middle senior elementary">
@@ -2035,7 +2035,7 @@ function refreshFeeSummary(state) {
 
   state.total.textContent = formatYen(total);
   state.currentTotal = total;
-  renderSupplementalNotes(state, getSupplementalFees(state));
+  renderSupplementalNotes(state, [...getSupplementalFees(state), ...state.infoNotes]);
 }
 
 function updateGlobalTotal() {
@@ -2110,6 +2110,7 @@ function buildFeeState(card) {
     weekOptions,
     hasBus,
     monthlyExtras: parseMonthlyExtras(noteText),
+    infoNotes: parseInfoNotes(noteText),
     selectedWeek: null,
     selectedBus: 'B',
     explicitSelection: false,
@@ -2668,7 +2669,7 @@ function extractCurrencyValues(text) {
 
 function parseMonthlyExtras(noteText) {
   const extras = [];
-  const segments = normalizeText(noteText).split(/[\/\uFF0F\n]/).map(normalizeText).filter(Boolean);
+  const segments = normalizeText(noteText).split(/\/(?!\u6708)|[\uFF0F\n]/).map(normalizeText).filter(Boolean);
 
   segments.forEach((segment) => {
     if (/(\u5165\u4F1A\u6642|\u521D\u56DE|\u521D\u5E74\u5EA6|\u521D\u6708)/.test(segment)) return;
@@ -2698,7 +2699,34 @@ function parseMonthlyExtras(noteText) {
   );
 }
 
-function isExcludedLabel(label) {
+
+function parseInfoNotes(noteText) {
+  const notes = [];
+  const segments = normalizeText(noteText).split(/\/(?!\u6708)|[\uFF0F\n]/).map(normalizeText).filter(Boolean);
+
+  segments.forEach((segment) => {
+    if (/(\u5165\u4F1A\u6642|\u521D\u56DE|\u521D\u5E74\u5EA6|\u521D\u6708)/.test(segment)) return;
+    if (/(\u6708\u984D|\/\u6708)/.test(segment)) return;
+    if (/\uff08.*\u6708.*\uff09/.test(segment)) return;
+    if (!EXTRA_FEE_RE.test(segment)) return;
+    const amountMatch = segment.match(/[¥\uFFE5]\s*(\d{1,3}(?:,\d{3})+|\d{3,})/);
+    if (!amountMatch) return;
+    const amount = Number.parseInt(amountMatch[1].replace(/,/g, ''), 10);
+    if (!Number.isFinite(amount)) return;
+    let label = segment
+      .replace(/[¥\uFFE5]\s*[\d,]+/g, ' ')
+      .replace(/[\uff1a:]/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+    label = label || '\u8FFD\u52A0\u8CBB\u7528';
+    notes.push({ label, amount });
+  });
+
+  return notes.filter(
+    (note, index, all) =>
+      all.findIndex((n) => n.label === note.label && n.amount === note.amount) === index
+  );
+}function isExcludedLabel(label) {
   if (/(成人|保護者|親子|ママ|パパ)/.test(label)) return true;
   if (/(大人|一般)/.test(label)) {
     return !INFANT_RE.test(label) && !ELEMENTARY_RE.test(label);
@@ -2899,7 +2927,7 @@ function refreshFeeSummary(state) {
 
   state.total.textContent = formatYen(total);
   state.currentTotal = total;
-  renderSupplementalNotes(state, getSupplementalFees(state));
+  renderSupplementalNotes(state, [...getSupplementalFees(state), ...state.infoNotes]);
 }
 
 function updateGlobalTotal() {
@@ -2976,6 +3004,7 @@ function buildFeeState(card) {
     weekOptions,
     hasBus,
     monthlyExtras: parseMonthlyExtras(noteText),
+    infoNotes: parseInfoNotes(noteText),
     selectedWeek: null,
     selectedBus: 'B',
     explicitSelection: false,
