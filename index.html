@@ -2116,8 +2116,8 @@ function buildFeeState(card) {
     currentTotal: null
   };
 
-  if (weekOptions.length === 1 && weekOptions[0] === 0) {
-    state.selectedWeek = 0;
+  if (weekOptions.length === 1) {
+    state.selectedWeek = weekOptions[0];
   }
 
   if ((weekOptions.length > 1 || !hasBus) && !(weekOptions.length === 1 && weekOptions[0] === 0)) {
@@ -2698,6 +2698,14 @@ function parseMonthlyExtras(noteText) {
   );
 }
 
+function isExcludedLabel(label) {
+  if (/(成人|保護者|親子|ママ|パパ)/.test(label)) return true;
+  if (/(大人|一般)/.test(label)) {
+    return !INFANT_RE.test(label) && !ELEMENTARY_RE.test(label);
+  }
+  return false;
+}
+
 function parseFeeRowData(row, index) {
   const label = normalizeText(row.querySelector('.fn')?.innerText || '');
   const values = extractCurrencyValues(row.querySelector('.fv')?.innerText || '');
@@ -2736,7 +2744,7 @@ function parseFeeRowData(row, index) {
     values,
     amountByWeek,
     extra: EXTRA_FEE_RE.test(label),
-    excluded: EXCLUDED_BASE_RE.test(label)
+    excluded: isExcludedLabel(label)
   };
 }
 
@@ -2858,7 +2866,7 @@ function refreshFeeSummary(state) {
 
   if (state.selectedWeek === null) {
     state.currentTotal = null;
-    state.empty.textContent = LABELS.pickWeek;
+    state.empty.textContent = state.weekOptions.length > 0 ? LABELS.pickWeek : LABELS.unsupported;
     state.empty.hidden = false;
     state.breakdown.hidden = true;
     state.notes.hidden = true;
@@ -2944,6 +2952,7 @@ function buildFeeState(card) {
   if (!fee) return;
 
   const rows = [...fee.querySelectorAll('.fr')].map((row, index) => parseFeeRowData(row, index));
+  if (rows.length === 0) return;
   const noteText = normalizeText([...fee.querySelectorAll('.note')].map((note) => note.innerText).join(' / '));
   const _allWeeks = rows.filter((r) => !r.extra && !r.excluded).flatMap((r) => r.weeks);
   const _positiveWeeks = [...new Set(_allWeeks.filter((w) => w > 0))].sort((a, b) => a - b);
@@ -2973,8 +2982,8 @@ function buildFeeState(card) {
     currentTotal: null
   };
 
-  if (weekOptions.length === 1 && weekOptions[0] === 0) {
-    state.selectedWeek = 0;
+  if (weekOptions.length === 1) {
+    state.selectedWeek = weekOptions[0];
   }
 
   if ((weekOptions.length > 1 || !hasBus) && !(weekOptions.length === 1 && weekOptions[0] === 0)) {
