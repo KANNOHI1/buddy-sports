@@ -1,0 +1,674 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - heading "バディスポーツクラブ有明 活動ガイド" [level=1] [ref=e3]
+    - paragraph [ref=e4]: 運動部・文化部・テナントスクール 総合一覧 ／ 全て税込価格
+  - generic [ref=e5]:
+    - generic [ref=e6]:
+      - button "費用・月謝について（共通）" [ref=e7] [cursor=pointer]:
+        - generic [ref=e8]: 費用・月謝について（共通）
+        - img [ref=e9]
+      - list [ref=e11]:
+        - listitem [ref=e12]: 入会金：¥11,000（税込）― 入会時に一律
+        - listitem [ref=e13]: 年会金：¥13,200（税込）― 途中入会は1ヶ月¥1,100×残月数。毎年3月末に翌年分請求。複数クラブ入会でも1種目分のみ。
+        - listitem [ref=e14]: 在園児・卒園児：入会金免除。在園児年会金¥2,200。
+        - listitem [ref=e15]: 運営費・大会準備費・用具費・ユニフォーム費はクラブ・スクールにより異なる。
+        - listitem [ref=e16]: 合宿・大会出場等の費用はその都度連絡。
+        - listitem [ref=e17]: 月謝：Aコース（バス利用あり）／ Bコース（バス利用なし）
+    - generic [ref=e18]:
+      - button "クラブとスクールの違い" [ref=e19] [cursor=pointer]:
+        - generic [ref=e20]: クラブとスクールの違い
+        - img [ref=e21]
+      - list [ref=e23]:
+        - listitem [ref=e24]:
+          - strong [ref=e25]: クラブ
+          - text: ：合宿・大会参加・チーム登録あり。送迎バス利用可
+        - listitem [ref=e26]:
+          - strong [ref=e27]: スクール
+          - text: ：個人スキルアップのみ。合宿・大会なし。送迎バス利用不可
+        - listitem [ref=e28]:
+          - strong [ref=e29]: 年齢区分
+          - text: ：セミジュニア(年少々3歳) → ジュニア(年少4歳) → ミドル(年中5歳) → シニア(年長6歳) → 小学生
+        - listitem [ref=e30]:
+          - strong [ref=e31]: 送迎バス（シャトルバス）
+          - text: ：小学生以上対象。停留所は①お台場海浜公園駅・②豊洲駅。幼児は対象外。
+  - generic [ref=e32]:
+    - generic [ref=e33]:
+      - generic [ref=e34]: "カテゴリ:"
+      - combobox "カテゴリ:" [ref=e35]:
+        - option "すべて" [selected]
+        - option "運動部クラブ"
+        - option "運動部スクール"
+        - option "文化部クラブ"
+        - option "文化部スクール"
+        - option "テナントスクール"
+    - generic [ref=e36]:
+      - generic [ref=e37]: "年齢:"
+      - combobox "年齢:" [ref=e38]:
+        - option "すべて"
+        - option "セミジュニア(年少々)"
+        - option "ジュニア(年少)" [selected]
+        - option "ミドル(年中)"
+        - option "シニア(年長)"
+        - option "小学生"
+  - generic [ref=e40]:
+    - generic [ref=e41]:
+      - generic [ref=e42]:
+        - heading "バディクラブ サッカー" [level=3] [ref=e43]
+        - generic [ref=e44]: 有明バディグランド / 江東バディグランド
+      - generic [ref=e45]:
+        - table [ref=e46]:
+          - rowgroup [ref=e47]:
+            - row "学年 曜日・時間" [ref=e48]:
+              - columnheader "学年" [ref=e49]
+              - columnheader "曜日・時間" [ref=e50]
+            - row "ジュニア 月 15:00-15:50 / 金 16:00-16:50" [ref=e51]:
+              - cell "ジュニア" [ref=e52]
+              - cell "月 15:00-15:50 / 金 16:00-16:50" [ref=e53]
+        - generic [ref=e54]:
+          - heading "月会費" [level=4] [ref=e55]
+          - generic [ref=e56]:
+            - generic [ref=e57]:
+              - button "週1" [ref=e58] [cursor=pointer]
+              - button "週2" [ref=e59] [cursor=pointer]
+              - button "週3" [ref=e60] [cursor=pointer]
+            - generic [ref=e61]: 週回数を選択してください
+    - generic [ref=e62]:
+      - generic [ref=e63]:
+        - heading "バディクラブ 器械体操" [level=3] [ref=e64]
+        - generic [ref=e65]: 1F 体操場
+      - generic [ref=e66]:
+        - table [ref=e67]:
+          - rowgroup [ref=e68]:
+            - row "学年 曜日・時間" [ref=e69]:
+              - columnheader "学年" [ref=e70]
+              - columnheader "曜日・時間" [ref=e71]
+            - row "ジュニア 火 16:00-16:50 / 水 15:00-15:50 / 日 11:00-11:50" [ref=e72]:
+              - cell "ジュニア" [ref=e73]
+              - cell "火 16:00-16:50 / 水 15:00-15:50 / 日 11:00-11:50" [ref=e74]
+        - generic [ref=e75]:
+          - heading "月会費" [level=4] [ref=e76]
+          - generic [ref=e77]:
+            - generic [ref=e78]:
+              - button "週1" [ref=e79] [cursor=pointer]
+              - button "週2" [ref=e80] [cursor=pointer]
+            - generic [ref=e81]: 週回数を選択してください
+    - generic [ref=e82]:
+      - generic [ref=e83]:
+        - heading "バディクラブ バスケットボール" [level=3] [ref=e84]
+        - generic [ref=e85]: 3F バスケットコート
+      - generic [ref=e86]:
+        - table [ref=e87]:
+          - rowgroup [ref=e88]:
+            - row "学年 曜日・時間" [ref=e89]:
+              - columnheader "学年" [ref=e90]
+              - columnheader "曜日・時間" [ref=e91]
+            - row "ジュニア 月 16:00-16:50 / 火 15:00-15:50" [ref=e92]:
+              - cell "ジュニア" [ref=e93]
+              - cell "月 16:00-16:50 / 火 15:00-15:50" [ref=e94]
+        - generic [ref=e95]:
+          - heading "月会費" [level=4] [ref=e96]
+          - generic [ref=e97]:
+            - generic [ref=e98]:
+              - button "週1" [ref=e99] [cursor=pointer]
+              - button "週2" [ref=e100] [cursor=pointer]
+              - button "週3" [ref=e101] [cursor=pointer]
+            - generic [ref=e102]: 週回数を選択してください
+    - generic [ref=e103]:
+      - generic [ref=e104]:
+        - heading "バディクラブ 陸上競技" [level=3] [ref=e105]
+        - generic [ref=e106]: 陸上走路
+      - generic [ref=e107]:
+        - table [ref=e108]:
+          - rowgroup [ref=e109]:
+            - row "学年 曜日・時間" [ref=e110]:
+              - columnheader "学年" [ref=e111]
+              - columnheader "曜日・時間" [ref=e112]
+            - row "ジュニア 月・火 16:00-16:50 / 木・金 15:00-15:50" [ref=e113]:
+              - cell "ジュニア" [ref=e114]
+              - cell "月・火 16:00-16:50 / 木・金 15:00-15:50" [ref=e115]
+        - generic [ref=e116]:
+          - heading "月会費" [level=4] [ref=e117]
+          - generic [ref=e118]:
+            - generic [ref=e119]:
+              - button "週1" [ref=e120] [cursor=pointer]
+              - button "週2" [ref=e121] [cursor=pointer]
+              - button "週3" [ref=e122] [cursor=pointer]
+            - generic [ref=e123]: 週回数を選択してください
+    - generic [ref=e124]:
+      - generic [ref=e125]:
+        - heading "バディクラブ 柔道" [level=3] [ref=e126]
+        - generic [ref=e127]: 3F 柔道場
+      - generic [ref=e128]:
+        - table [ref=e129]:
+          - rowgroup [ref=e130]:
+            - row "学年 曜日・時間" [ref=e131]:
+              - columnheader "学年" [ref=e132]
+              - columnheader "曜日・時間" [ref=e133]
+            - row "ジュニア 月 15:00-15:50 / 木 16:00-16:50" [ref=e134]:
+              - cell "ジュニア" [ref=e135]
+              - cell "月 15:00-15:50 / 木 16:00-16:50" [ref=e136]
+        - generic [ref=e137]:
+          - heading "月会費" [level=4] [ref=e138]
+          - generic [ref=e139]:
+            - generic [ref=e140]:
+              - button "週1" [ref=e141] [cursor=pointer]
+              - button "週2" [ref=e142] [cursor=pointer]
+              - button "週3" [ref=e143] [cursor=pointer]
+            - generic [ref=e144]: 週回数を選択してください
+    - generic [ref=e145]:
+      - generic [ref=e146]:
+        - heading "バディクラブ テニス" [level=3] [ref=e147]
+        - generic [ref=e148]: 3F テニスコート
+      - generic [ref=e149]:
+        - table [ref=e150]:
+          - rowgroup [ref=e151]:
+            - row "学年 曜日・時間" [ref=e152]:
+              - columnheader "学年" [ref=e153]
+              - columnheader "曜日・時間" [ref=e154]
+            - row "ジュニア 水・金 15:00-15:50" [ref=e155]:
+              - cell "ジュニア" [ref=e156]
+              - cell "水・金 15:00-15:50" [ref=e157]
+        - generic [ref=e158]:
+          - heading "月会費" [level=4] [ref=e159]
+          - generic [ref=e160]:
+            - generic [ref=e161]:
+              - button "週1" [ref=e162] [cursor=pointer]
+              - button "週2" [ref=e163] [cursor=pointer]
+            - generic [ref=e164]: 週回数を選択してください
+    - generic [ref=e165]:
+      - generic [ref=e166]:
+        - heading "バディクラブ 野球" [level=3] [ref=e167]
+        - generic [ref=e168]: グランド / 1F ハンドボール場
+      - generic [ref=e169]:
+        - table [ref=e170]:
+          - rowgroup [ref=e171]:
+            - row "学年 曜日・時間" [ref=e172]:
+              - columnheader "学年" [ref=e173]
+              - columnheader "曜日・時間" [ref=e174]
+            - row "ジュニア 月 16:00-16:50" [ref=e175]:
+              - cell "ジュニア" [ref=e176]
+              - cell "月 16:00-16:50" [ref=e177]
+        - generic [ref=e178]:
+          - heading "月会費" [level=4] [ref=e179]
+          - generic [ref=e180]:
+            - generic [ref=e181]:
+              - button "週1" [ref=e182] [cursor=pointer]
+              - button "週2" [ref=e183] [cursor=pointer]
+            - generic [ref=e184]: 週回数を選択してください
+    - generic [ref=e185]:
+      - generic [ref=e186]:
+        - heading "バディクラブ ボルダリング" [level=3] [ref=e187]
+        - generic [ref=e188]: 3F ボルダリング場
+      - generic [ref=e189]:
+        - table [ref=e190]:
+          - rowgroup [ref=e191]:
+            - row "学年 曜日・時間" [ref=e192]:
+              - columnheader "学年" [ref=e193]
+              - columnheader "曜日・時間" [ref=e194]
+            - row "ジュニア 月・木・金 15:00-15:50 / 土 10:40-11:30 or 12:30-13:20" [ref=e195]:
+              - cell "ジュニア" [ref=e196]
+              - cell "月・木・金 15:00-15:50 / 土 10:40-11:30 or 12:30-13:20" [ref=e197]
+        - generic [ref=e198]:
+          - heading "月会費" [level=4] [ref=e199]
+          - generic [ref=e200]:
+            - generic [ref=e201]:
+              - button "週1" [ref=e202] [cursor=pointer]
+              - button "週2" [ref=e203] [cursor=pointer]
+              - button "週3" [ref=e204] [cursor=pointer]
+            - generic [ref=e205]: 週回数を選択してください
+    - generic [ref=e206]:
+      - generic [ref=e207]:
+        - heading "バディクラブ ドッジボール" [level=3] [ref=e208]
+        - generic [ref=e209]: 1F ハンドボール場
+      - generic [ref=e210]:
+        - table [ref=e211]:
+          - rowgroup [ref=e212]:
+            - row "学年 曜日・時間" [ref=e213]:
+              - columnheader "学年" [ref=e214]
+              - columnheader "曜日・時間" [ref=e215]
+            - row "ジュニア 水 15:00-15:50" [ref=e216]:
+              - cell "ジュニア" [ref=e217]
+              - cell "水 15:00-15:50" [ref=e218]
+        - generic [ref=e219]:
+          - heading "月会費" [level=4] [ref=e220]
+          - generic [ref=e222]: 週回数を選択してください
+    - generic [ref=e223]:
+      - generic [ref=e224]:
+        - heading "バディ 青トレ&ランニングクラブ" [level=3] [ref=e225]
+        - generic [ref=e226]: 屋上グランド（大人は晴海ふ頭公園）
+      - generic [ref=e227]:
+        - table [ref=e228]:
+          - rowgroup [ref=e229]:
+            - row "学年 曜日・時間" [ref=e230]:
+              - columnheader "学年" [ref=e231]
+              - columnheader "曜日・時間" [ref=e232]
+            - row "ジュニア 火・水 15:00-15:50" [ref=e233]:
+              - cell "ジュニア" [ref=e234]
+              - cell "火・水 15:00-15:50" [ref=e235]
+        - generic [ref=e236]:
+          - heading "月会費" [level=4] [ref=e237]
+          - generic [ref=e238]:
+            - button "週1" [ref=e240] [cursor=pointer]
+            - generic [ref=e241]: 週回数を選択してください
+  - generic [ref=e243]:
+    - generic [ref=e244]:
+      - generic [ref=e245]:
+        - heading "バディスクール FUNAJUKU" [level=3] [ref=e246]
+        - generic [ref=e247]: 屋上グランド
+      - generic [ref=e248]:
+        - table [ref=e249]:
+          - rowgroup [ref=e250]:
+            - row "学年 曜日・時間" [ref=e251]:
+              - columnheader "学年" [ref=e252]
+              - columnheader "曜日・時間" [ref=e253]
+            - row "ジュニア 火・木 15:00-15:50" [ref=e254]:
+              - cell "ジュニア" [ref=e255]
+              - cell "火・木 15:00-15:50" [ref=e256]
+        - generic [ref=e257]:
+          - heading "月会費" [level=4] [ref=e258]
+          - generic [ref=e259]:
+            - generic [ref=e260]:
+              - button "週1" [ref=e261] [cursor=pointer]
+              - button "週2" [ref=e262] [cursor=pointer]
+            - generic [ref=e263]: 週回数を選択してください
+    - generic [ref=e264]:
+      - generic [ref=e265]:
+        - heading "バディスクール フラッグフットボール" [level=3] [ref=e266]
+        - generic [ref=e267]: 1F ハンドボール場
+      - generic [ref=e268]:
+        - table [ref=e269]:
+          - rowgroup [ref=e270]:
+            - row "学年 曜日・時間" [ref=e271]:
+              - columnheader "学年" [ref=e272]
+              - columnheader "曜日・時間" [ref=e273]
+            - row "ジュニア 金 15:00-15:50 / 金 16:00-16:50" [ref=e274]:
+              - cell "ジュニア" [ref=e275]
+              - cell "金 15:00-15:50 / 金 16:00-16:50" [ref=e276]
+        - generic [ref=e277]:
+          - heading "月会費" [level=4] [ref=e278]
+          - generic [ref=e280]:
+            - generic [ref=e281]:
+              - generic [ref=e282]: 月謝
+              - generic [ref=e283]: ¥11,550
+            - generic [ref=e285]:
+              - generic [ref=e286]: 実質月額
+              - generic [ref=e287]: ¥11,550
+    - generic [ref=e288]:
+      - generic [ref=e289]:
+        - heading "バディスクール 英語フラッグフットボール" [level=3] [ref=e290]
+        - generic [ref=e291]: 屋上グランド
+      - generic [ref=e292]:
+        - table [ref=e293]:
+          - rowgroup [ref=e294]:
+            - row "学年 曜日・時間" [ref=e295]:
+              - columnheader "学年" [ref=e296]
+              - columnheader "曜日・時間" [ref=e297]
+            - row "ジュニア 木 15:00-15:50" [ref=e298]:
+              - cell "ジュニア" [ref=e299]
+              - cell "木 15:00-15:50" [ref=e300]
+        - generic [ref=e301]:
+          - heading "月会費" [level=4] [ref=e302]
+          - generic [ref=e304]:
+            - generic [ref=e305]:
+              - generic [ref=e306]: 月謝
+              - generic [ref=e307]: ¥11,550
+            - generic [ref=e309]:
+              - generic [ref=e310]: 実質月額
+              - generic [ref=e311]: ¥11,550
+    - generic [ref=e312]:
+      - generic [ref=e313]:
+        - heading "バディスクール レスリング" [level=3] [ref=e314]
+        - generic [ref=e315]: 3F レスリング場
+      - generic [ref=e316]:
+        - table [ref=e317]:
+          - rowgroup [ref=e318]:
+            - row "学年 曜日・時間" [ref=e319]:
+              - columnheader "学年" [ref=e320]
+              - columnheader "曜日・時間" [ref=e321]
+            - row "ジュニア〜シニア 火・水・木・金 15:00-16:30 / 土 10:00-12:00" [ref=e322]:
+              - cell "ジュニア〜シニア" [ref=e323]
+              - cell "火・水・木・金 15:00-16:30 / 土 10:00-12:00" [ref=e324]
+        - generic [ref=e325]:
+          - heading "月会費" [level=4] [ref=e326]
+          - generic [ref=e327]:
+            - button "週1" [ref=e329] [cursor=pointer]
+            - generic [ref=e330]: 週回数を選択してください
+    - generic [ref=e331]:
+      - generic [ref=e332]:
+        - heading "バディスクール 体操アクロバット（Brother体操）" [level=3] [ref=e333]
+        - generic [ref=e334]: 1F 体操場
+      - generic [ref=e335]:
+        - table [ref=e336]:
+          - rowgroup [ref=e337]:
+            - row "学年 曜日・時間" [ref=e338]:
+              - columnheader "学年" [ref=e339]
+              - columnheader "曜日・時間" [ref=e340]
+            - row "ジュニア 月 16:00-16:50 / 木 15:00-15:50" [ref=e341]:
+              - cell "ジュニア" [ref=e342]
+              - cell "月 16:00-16:50 / 木 15:00-15:50" [ref=e343]
+        - generic [ref=e344]:
+          - heading "月会費" [level=4] [ref=e345]
+          - generic [ref=e346]:
+            - generic [ref=e347]:
+              - button "週1" [ref=e348] [cursor=pointer]
+              - button "週2" [ref=e349] [cursor=pointer]
+            - generic [ref=e350]: 週回数を選択してください
+    - generic [ref=e351]:
+      - generic [ref=e352]:
+        - heading "バディスクール ZERO・ONEダンス" [level=3] [ref=e353]
+        - generic [ref=e354]: 3F 教室
+      - generic [ref=e355]:
+        - table [ref=e356]:
+          - rowgroup [ref=e357]:
+            - row "学年 曜日・時間" [ref=e358]:
+              - columnheader "学年" [ref=e359]
+              - columnheader "曜日・時間" [ref=e360]
+            - row "ジュニア 金 16:00-16:50" [ref=e361]:
+              - cell "ジュニア" [ref=e362]
+              - cell "金 16:00-16:50" [ref=e363]
+        - generic [ref=e364]:
+          - heading "月会費" [level=4] [ref=e365]
+          - generic [ref=e366]:
+            - button "週1" [ref=e368] [cursor=pointer]
+            - generic [ref=e369]: 週回数を選択してください
+    - generic [ref=e370]:
+      - generic [ref=e371]:
+        - heading "バディスクール 空手道" [level=3] [ref=e372]
+        - generic [ref=e373]: 2F 教室
+      - generic [ref=e374]:
+        - table [ref=e375]:
+          - rowgroup [ref=e376]:
+            - row "学年 曜日・時間" [ref=e377]:
+              - columnheader "学年" [ref=e378]
+              - columnheader "曜日・時間" [ref=e379]
+            - row "ジュニア 木 15:00-15:50" [ref=e380]:
+              - cell "ジュニア" [ref=e381]
+              - cell "木 15:00-15:50" [ref=e382]
+        - generic [ref=e383]:
+          - heading "月会費" [level=4] [ref=e384]
+          - generic [ref=e385]:
+            - button "週1" [ref=e387] [cursor=pointer]
+            - generic [ref=e388]: 週回数を選択してください
+    - generic [ref=e389]:
+      - generic [ref=e390]:
+        - heading "バディスクール サッカースクール" [level=3] [ref=e391]
+        - generic [ref=e392]: 屋上グランド
+      - generic [ref=e393]:
+        - table [ref=e394]:
+          - rowgroup [ref=e395]:
+            - row "学年 曜日・時間" [ref=e396]:
+              - columnheader "学年" [ref=e397]
+              - columnheader "曜日・時間" [ref=e398]
+            - row "セミジュニア〜シニア 詳細別途確認" [ref=e399]:
+              - cell "セミジュニア〜シニア" [ref=e400]
+              - cell "詳細別途確認" [ref=e401]
+        - generic [ref=e402]:
+          - heading "月会費" [level=4] [ref=e403]
+          - generic [ref=e405]:
+            - generic [ref=e406]:
+              - generic [ref=e407]: 月謝
+              - generic [ref=e408]: ¥9,900
+            - generic [ref=e410]:
+              - generic [ref=e411]: 実質月額
+              - generic [ref=e412]: ¥9,900
+  - generic [ref=e414]:
+    - generic [ref=e415]:
+      - generic [ref=e416]:
+        - heading "バディクラブ ピアノ" [level=3] [ref=e417]
+        - generic [ref=e418]: 4F 教室
+      - generic [ref=e419]:
+        - table [ref=e420]:
+          - rowgroup [ref=e421]:
+            - row "学年 曜日・時間" [ref=e422]:
+              - columnheader "学年" [ref=e423]
+              - columnheader "曜日・時間" [ref=e424]
+            - row "ジュニア 月・火・水・木 各30分" [ref=e425]:
+              - cell "ジュニア" [ref=e426]
+              - cell "月・火・水・木 各30分" [ref=e427]
+        - generic [ref=e428]:
+          - heading "月会費" [level=4] [ref=e429]
+          - generic [ref=e431]:
+            - generic [ref=e432]:
+              - generic [ref=e433]: 月謝
+              - generic [ref=e434]: ¥9,900
+            - generic [ref=e436]:
+              - generic [ref=e437]: 運営費
+              - generic [ref=e438]: ¥550
+            - generic [ref=e440]:
+              - generic [ref=e441]: 実質月額
+              - generic [ref=e442]: ¥10,450
+    - generic [ref=e443]:
+      - generic [ref=e444]:
+        - heading "バディクラブ 英会話" [level=3] [ref=e445]
+        - generic [ref=e446]: 3F 教室
+      - generic [ref=e447]:
+        - table [ref=e448]:
+          - rowgroup [ref=e449]:
+            - row "学年 曜日・時間" [ref=e450]:
+              - columnheader "学年" [ref=e451]
+              - columnheader "曜日・時間" [ref=e452]
+            - row "ジュニア 月〜金 15:00-15:50" [ref=e453]:
+              - cell "ジュニア" [ref=e454]
+              - cell "月〜金 15:00-15:50" [ref=e455]
+        - generic [ref=e456]:
+          - heading "月会費" [level=4] [ref=e457]
+          - generic [ref=e458]:
+            - generic [ref=e459]:
+              - button "週1" [ref=e460] [cursor=pointer]
+              - button "週2" [ref=e461] [cursor=pointer]
+              - button "週3" [ref=e462] [cursor=pointer]
+            - generic [ref=e463]: 週回数を選択してください
+  - generic [ref=e465]:
+    - generic [ref=e466]:
+      - generic [ref=e467]:
+        - heading "バディスクール 明光キッズ 学習プログラム" [level=3] [ref=e468]
+        - generic [ref=e469]: 2F 教室
+      - generic [ref=e470]:
+        - table [ref=e471]:
+          - rowgroup [ref=e472]:
+            - row "学年 曜日・時間" [ref=e473]:
+              - columnheader "学年" [ref=e474]
+              - columnheader "曜日・時間" [ref=e475]
+            - row "ジュニア 月 15:00-15:40 / 金 15:00-15:40" [ref=e476]:
+              - cell "ジュニア" [ref=e477]
+              - cell "月 15:00-15:40 / 金 15:00-15:40" [ref=e478]
+        - generic [ref=e479]:
+          - heading "月会費" [level=4] [ref=e480]
+          - generic [ref=e482]:
+            - generic [ref=e483]:
+              - generic [ref=e484]: 月謝
+              - generic [ref=e485]: ¥11,000
+            - generic [ref=e487]:
+              - generic [ref=e488]: 実質月額
+              - generic [ref=e489]: ¥11,000
+    - generic [ref=e490]:
+      - generic [ref=e491]:
+        - heading "バディスクール ヴァイオリン" [level=3] [ref=e492]
+        - generic [ref=e493]: 3F 教室
+      - generic [ref=e494]:
+        - table [ref=e495]:
+          - rowgroup [ref=e496]:
+            - row "学年 時間帯（火・水から選択）" [ref=e497]:
+              - columnheader "学年" [ref=e498]
+              - columnheader "時間帯（火・水から選択）" [ref=e499]
+            - row "ジュニア〜小学生 ①15:00-15:40 / ②15:50-16:30 / ③16:40-17:20 / ④17:30-18:10" [ref=e500]:
+              - cell "ジュニア〜小学生" [ref=e501]
+              - cell "①15:00-15:40 / ②15:50-16:30 / ③16:40-17:20 / ④17:30-18:10" [ref=e502]
+        - generic [ref=e503]:
+          - heading "月会費" [level=4] [ref=e504]
+          - generic [ref=e506]:
+            - generic [ref=e507]:
+              - generic [ref=e508]: 月謝
+              - generic [ref=e509]: ¥11,231
+            - generic [ref=e511]:
+              - generic [ref=e512]: 実質月額
+              - generic [ref=e513]: ¥11,231
+  - generic [ref=e515]:
+    - generic [ref=e516]:
+      - generic [ref=e517]:
+        - heading "チアジムトーキョー（チアリーディング）" [level=3] [ref=e518]
+        - generic [ref=e519]: 3階スタジオA ／ info@cheermaxinstitute.com
+      - generic [ref=e520]:
+        - table [ref=e521]:
+          - rowgroup [ref=e522]:
+            - row "学年 曜日・時間" [ref=e523]:
+              - columnheader "学年" [ref=e524]
+              - columnheader "曜日・時間" [ref=e525]
+            - row "ジュニア・ミドル 火・木 15:00-15:50" [ref=e526]:
+              - cell "ジュニア・ミドル" [ref=e527]
+              - cell "火・木 15:00-15:50" [ref=e528]
+        - generic [ref=e529]:
+          - heading "月会費" [level=4] [ref=e530]
+          - generic [ref=e532]:
+            - generic [ref=e533]:
+              - generic [ref=e534]: 月謝
+              - generic [ref=e535]: ¥11,550
+            - generic [ref=e537]:
+              - generic [ref=e538]: 実質月額
+              - generic [ref=e539]: ¥11,550
+            - generic [ref=e540]:
+              - generic [ref=e541]: ※年会費 BUDDY・がんばる・youth ¥13,200
+              - generic [ref=e542]: ※年会費 育成・starcats GOLD ¥14,520
+              - generic [ref=e543]: ※年会費 starcats CHEER ¥15,840
+    - generic [ref=e544]:
+      - generic [ref=e545]:
+        - heading "チアジムトーキョー（チアダンス）" [level=3] [ref=e546]
+        - generic [ref=e547]: 3階スタジオA
+      - generic [ref=e548]:
+        - table [ref=e549]:
+          - rowgroup [ref=e550]:
+            - row "学年 曜日・時間" [ref=e551]:
+              - columnheader "学年" [ref=e552]
+              - columnheader "曜日・時間" [ref=e553]
+            - row "ジュニア・ミドル 水・金 15:00-15:50" [ref=e554]:
+              - cell "ジュニア・ミドル" [ref=e555]
+              - cell "水・金 15:00-15:50" [ref=e556]
+        - generic [ref=e557]:
+          - heading "月会費" [level=4] [ref=e558]
+          - generic [ref=e560]: 週回数を選択してください
+    - generic [ref=e561]:
+      - generic [ref=e562]:
+        - heading "バレエアーツ（バレエ）" [level=3] [ref=e563]
+        - generic [ref=e564]: 3階スタジオB ／ 03-5338-5818 / info@ballet-arts.jp
+      - generic [ref=e565]:
+        - table [ref=e566]:
+          - rowgroup [ref=e567]:
+            - row "学年 曜日・時間" [ref=e568]:
+              - columnheader "学年" [ref=e569]
+              - columnheader "曜日・時間" [ref=e570]
+            - row "3歳〜シニア（エベイユ1） 月 15:00-15:50 / 金 15:00-15:50" [ref=e571]:
+              - cell "3歳〜シニア（エベイユ1）" [ref=e572]
+              - cell "月 15:00-15:50 / 金 15:00-15:50" [ref=e573]
+        - generic [ref=e574]:
+          - heading "月会費" [level=4] [ref=e575]
+          - generic [ref=e576]:
+            - generic [ref=e577]:
+              - button "週1" [ref=e578] [cursor=pointer]
+              - button "週2" [ref=e579] [cursor=pointer]
+            - generic [ref=e580]: 週回数を選択してください
+    - generic [ref=e581]:
+      - generic [ref=e582]:
+        - heading "トウリトネス（スイミング）" [level=3] [ref=e583]
+        - generic [ref=e584]: 1階プール ／ 03-6426-0804 / info@tsa1998.com
+      - generic [ref=e585]:
+        - table [ref=e586]:
+          - rowgroup [ref=e587]:
+            - row "学年 曜日・時間" [ref=e588]:
+              - columnheader "学年" [ref=e589]
+              - columnheader "曜日・時間" [ref=e590]
+            - row "ジュニア〜シニア 月〜金 15:00 or 16:00開始 / 土 11:00 or 12:00開始" [ref=e591]:
+              - cell "ジュニア〜シニア" [ref=e592]
+              - cell "月〜金 15:00 or 16:00開始 / 土 11:00 or 12:00開始" [ref=e593]
+        - generic [ref=e594]:
+          - heading "月会費" [level=4] [ref=e595]
+          - generic [ref=e596]:
+            - generic [ref=e597]:
+              - button "週1" [ref=e598] [cursor=pointer]
+              - button "週2" [ref=e599] [cursor=pointer]
+            - generic [ref=e600]: 週回数を選択してください
+    - generic [ref=e601]:
+      - generic [ref=e602]:
+        - heading "エイペックス・ダンスマスター" [level=3] [ref=e603]
+        - generic [ref=e604]: 3階スタジオB ／ adm_buddy@av.avex.co.jp
+      - generic [ref=e605]:
+        - table [ref=e606]:
+          - rowgroup [ref=e607]:
+            - row "学年 曜日・時間" [ref=e608]:
+              - columnheader "学年" [ref=e609]
+              - columnheader "曜日・時間" [ref=e610]
+            - row "3歳〜シニア 月 15:00-15:50 / 月 16:00-16:50 / 火 15:00-15:50 / 火 16:00-16:50" [ref=e611]:
+              - cell "3歳〜シニア" [ref=e612]
+              - cell "月 15:00-15:50 / 月 16:00-16:50 / 火 15:00-15:50 / 火 16:00-16:50" [ref=e613]
+        - generic [ref=e614]:
+          - heading "月会費" [level=4] [ref=e615]
+          - generic [ref=e617]: 週回数を選択してください
+    - generic [ref=e618]:
+      - generic [ref=e619]:
+        - heading "ファースト卓球スクール" [level=3] [ref=e620]
+        - generic [ref=e621]: 3階卓球コート ／ 03-5879-2442 / https://first-tt.com/
+      - generic [ref=e622]:
+        - table [ref=e623]:
+          - rowgroup [ref=e624]:
+            - row "学年 曜日・時間" [ref=e625]:
+              - columnheader "学年" [ref=e626]
+              - columnheader "曜日・時間" [ref=e627]
+            - row "セミジュニア〜シニア 月〜金 15:00-15:50 / 土・日・祝 10:00-10:50" [ref=e628]:
+              - cell "セミジュニア〜シニア" [ref=e629]
+              - cell "月〜金 15:00-15:50 / 土・日・祝 10:00-10:50" [ref=e630]
+            - row "小学生【ジュニア】 月〜金 17:00-19:30 / 土・日・祝 13:00-14:30" [ref=e631]:
+              - cell "小学生【ジュニア】" [ref=e632]
+              - cell "月〜金 17:00-19:30 / 土・日・祝 13:00-14:30" [ref=e633]
+        - generic [ref=e634]:
+          - heading "月会費" [level=4] [ref=e635]
+          - generic [ref=e637]:
+            - generic [ref=e638]:
+              - generic [ref=e639]: 月謝
+              - generic [ref=e640]: ¥9,680
+            - generic [ref=e642]:
+              - generic [ref=e643]: 実質月額
+              - generic [ref=e644]: ¥9,680
+    - generic [ref=e645]:
+      - generic [ref=e646]:
+        - heading "Be-Win SQUASH CLUB ARIAKE（スカッシュ）" [level=3] [ref=e647]
+        - generic [ref=e648]: 別館スカッシュコート ／ ariake@bewin-squash.com
+      - generic [ref=e649]:
+        - table [ref=e650]:
+          - rowgroup [ref=e651]:
+            - row "学年 曜日・時間" [ref=e652]:
+              - columnheader "学年" [ref=e653]
+              - columnheader "曜日・時間" [ref=e654]
+            - row "セミジュニア〜シニア（キンダー） 火〜金 15:00-15:50 ※定員3名 / 木〜金 16:00-16:50 ※定員3名 Englishクラス：月 15:00-16:50 ※定員3名" [ref=e655]:
+              - cell "セミジュニア〜シニア（キンダー）" [ref=e656]
+              - cell "火〜金 15:00-15:50 ※定員3名 / 木〜金 16:00-16:50 ※定員3名 Englishクラス：月 15:00-16:50 ※定員3名" [ref=e657]:
+                - text: 火〜金 15:00-15:50 ※定員3名 / 木〜金 16:00-16:50 ※定員3名
+                - text: Englishクラス：月 15:00-16:50 ※定員3名
+            - row "小学生（ジュニア） 火・水 16:00-17:00 / 月〜金 17:00-18:00 / 月・木・金 18:00-19:00 土・日 9:00-11:00（少人数制）" [ref=e658]:
+              - cell "小学生（ジュニア）" [ref=e659]
+              - cell "火・水 16:00-17:00 / 月〜金 17:00-18:00 / 月・木・金 18:00-19:00 土・日 9:00-11:00（少人数制）" [ref=e660]:
+                - text: 火・水 16:00-17:00 / 月〜金 17:00-18:00 / 月・木・金 18:00-19:00
+                - text: 土・日 9:00-11:00（少人数制）
+        - generic [ref=e661]:
+          - heading "月会費" [level=4] [ref=e662]
+          - generic [ref=e663]:
+            - generic [ref=e664]:
+              - button "週1" [ref=e665] [cursor=pointer]
+              - button "週2" [ref=e666] [cursor=pointer]
+              - button "週3" [ref=e667] [cursor=pointer]
+              - button "週4" [ref=e668] [cursor=pointer]
+            - generic [ref=e669]: 週回数を選択してください
+    - generic [ref=e670]:
+      - generic [ref=e671]:
+        - heading "Hālau Laniokekau'anaokalā（フラダンス）" [level=3] [ref=e672]
+        - generic [ref=e673]: 3階スタジオB ／ 担当：西澤 090-2408-8717
+      - generic [ref=e674]:
+        - table [ref=e675]:
+          - rowgroup [ref=e676]:
+            - row "学年 曜日・時間" [ref=e677]:
+              - columnheader "学年" [ref=e678]
+              - columnheader "曜日・時間" [ref=e679]
+            - row "セミジュニア〜シニア 木 16:00-16:50（インストラクター2名）" [ref=e680]:
+              - cell "セミジュニア〜シニア" [ref=e681]
+              - cell "木 16:00-16:50（インストラクター2名）" [ref=e682]
+        - generic [ref=e683]:
+          - heading "月会費" [level=4] [ref=e684]
+          - generic [ref=e686]: 週回数を選択してください
