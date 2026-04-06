@@ -2121,7 +2121,7 @@ function buildFeeState(card) {
     state.selectedWeek = weekOptions[0];
   }
 
-  if ((weekOptions.length > 1 || !hasBus) && !(weekOptions.length === 1 && weekOptions[0] === 0)) {
+  if (weekOptions.length >= 1 && weekOptions[0] > 0) {
     const weekSelector = document.createElement('div');
     weekSelector.className = 'fee-selector';
     state.weekSelector = weekSelector;
@@ -3017,7 +3017,7 @@ function buildFeeState(card) {
     state.selectedWeek = weekOptions[0];
   }
 
-  if ((weekOptions.length > 1 || !hasBus) && !(weekOptions.length === 1 && weekOptions[0] === 0)) {
+  if (weekOptions.length >= 1 && weekOptions[0] > 0) {
     const weekSelector = document.createElement('div');
     weekSelector.className = 'fee-selector';
     state.weekSelector = weekSelector;

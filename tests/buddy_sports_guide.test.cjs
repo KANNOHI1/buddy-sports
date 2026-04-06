@@ -187,7 +187,7 @@ function testFixedFeeFallbacks() {
   );
 
   const hiddenFixedWeekSelectorMatches =
-    html.match(/if \(\(weekOptions\.length > 1 \|\| !hasBus\) && !\(weekOptions\.length === 1 && weekOptions\[0\] === 0\)\) \{/g) || [];
+    html.match(/if \(weekOptions\.length >= 1 && weekOptions\[0\] > 0\) \{/g) || [];
   assert.equal(
     hiddenFixedWeekSelectorMatches.length,
     2,
