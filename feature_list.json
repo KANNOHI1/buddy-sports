@@ -1,0 +1,20 @@
+{
+  "features": [
+    {
+      "id": "feat-001",
+      "name": "活動ガイドHTML",
+      "description": "バディスポーツクラブ有明の活動ガイド単一HTMLファイル",
+      "dependencies": [],
+      "status": "done",
+      "evidence": "GitHub Pages公開中 https://kannohi1.github.io/buddy-sports/"
+    },
+    {
+      "id": "feat-002",
+      "name": "Agent Browser E2Eテスト",
+      "description": "Vercel agent-browserを使ったスクリーンショット・E2E自動テスト",
+      "dependencies": ["feat-001"],
+      "status": "in-progress",
+      "evidence": "Codexに依頼済み（2026-04-05）"
+    }
+  ]
+}
