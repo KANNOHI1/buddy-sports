@@ -146,6 +146,25 @@ function testMonthlyFees() {
   assertCardFee('🧗 バディクラブ ボルダリング', '小学生 週3A/B', '¥33,310 / ¥29,460');
   assertCardFee('🏐 バディクラブ ドッジボール', '小学生 週1A/B', '¥13,750 / ¥9,900');
 }
+function testFeeSelectionChip() {
+  // LABELS.select が定義されていること
+  assertMatches(
+    /const LABELS = \{[\s\S]*?select:\s*['"][^'"]+['"]/,
+    'LABELS.select が定義されていること'
+  );
+
+  // updateGlobalTotal 関数内に weekOptions の条件がないこと
+  const moduleScript = html.match(/<script type="module">([\s\S]*?)<\/script>/)?.[1] || '';
+  const updateGlobalTotalFn = moduleScript.match(/function updateGlobalTotal\(\)\s*\{[\s\S]*?\n\}/)?.[0] || '';
+  const noAutoInclude = !/weekOptions/.test(updateGlobalTotalFn);
+  assert.ok(noAutoInclude, 'updateGlobalTotal に weekOptions の自動加算条件がないこと');
+
+  // weekOptions=[0] カードに選択チップが生成されること
+  assertMatches(
+    /weekOptions\.length === 1 && weekOptions\[0\] === 0[\s\S]*?createFeeChip\(LABELS\.select/,
+    'weekOptions=[0] カードに LABELS.select チップが生成されること'
+  );
+}
 
 function testFixedFeeFallbacks() {
   const parseWeeksMatches = html.match(/let weeks = extractWeekOptions\(label\);/g) || [];
@@ -341,6 +360,7 @@ function main() {
   testStaticContent();
   testMobileFilterLayout();
   testMonthlyFees();
+  testFeeSelectionChip();
   testFixedFeeFallbacks();
   testModuleWiring();
   testInfoBoxOpenBehavior();

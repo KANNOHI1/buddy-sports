@@ -1024,7 +1024,7 @@ table.sc{
 <div class="ch"><h3>🎻 バディスクール ヴァイオリン</h3><div class="sub">3F 教室</div></div>
 <div class="cb">
 <span class="bus bus-n">🚫 バスなし（各自集合解散）</span>
-<table class="sc"><tr><th>学年</th><th>時間帯（火・水から選択）</th></tr>
+<table class="sc"><tr><th>学年</th><th>時間帯（火・水から\u9078\u629E）</th></tr>
 <tr><td>ジュニア〜小学生</td><td>①15:00-15:40 / ②15:50-16:30 / ③16:40-17:20 / ④17:30-18:10</td></tr>
 </table>
 <div class="fee"><h4>月会費</h4>
@@ -2002,7 +2002,7 @@ function refreshFeeSummary(state) {
 
   if (!(state.selectedWeek !== null && state.explicitSelection)) {
     state.currentTotal = null;
-    state.empty.textContent = '週回数を選択してください';
+    state.empty.textContent = '週回数を\u9078\u629Eしてください';
     state.empty.hidden = false;
     state.breakdown.hidden = true;
     state.notes.hidden = true;
@@ -2194,7 +2194,7 @@ function buildFeeState(card) {
 
   const empty = document.createElement('div');
   empty.className = 'fee-empty';
-  empty.textContent = weekOptions.length > 0 ? '週回数を選択してください' : '料金選択に対応していません';
+  empty.textContent = weekOptions.length > 0 ? '週回数を\u9078\u629Eしてください' : '料金\u9078\u629Eに対応していません';
   controls.appendChild(empty);
 
   const breakdown = document.createElement('div');
@@ -2330,7 +2330,8 @@ const LABELS = {
   busOff: '\u30D0\u30B9\u306A\u3057',
   totalPrefix: '\u5408\u8A08: ',
   totalSuffix: '/\u6708',
-  clear: '\u30AF\u30EA\u30A2'
+  clear: '\u30AF\u30EA\u30A2',
+  select: '\u9078\u629E'
 };
 const TOKENS = {
   semi: ['semi', '\u30BB\u30DF\u30B8\u30E5\u30CB\u30A2', '\u5E74\u5C11\u3005', '3\u6B73'],
@@ -2931,7 +2932,7 @@ function refreshFeeSummary(state) {
 }
 
 function updateGlobalTotal() {
-  const activeStates = feeStates.filter((state) => state.currentTotal !== null && (state.explicitSelection || (state.weekOptions.length === 1 && state.weekOptions[0] === 0)));
+  const activeStates = feeStates.filter((state) => state.currentTotal !== null && state.explicitSelection);
   if (activeStates.length === 0) {
     globalTotal?.classList.remove('visible');
     if (globalTotalItems) globalTotalItems.innerHTML = '';
@@ -2966,6 +2967,7 @@ function clearCardState(state) {
   state.selectedWeek = state.weekOptions.length === 1 ? state.weekOptions[0] : null;
   state.selectedBus = 'B';
   state.explicitSelection = false;
+  if (state.selectChip) state.selectChip.classList.remove('active');
   updateCardState(state);
 }
 
@@ -3054,6 +3056,19 @@ function buildFeeState(card) {
     if (weekSelector.childElementCount > 0) {
       controls.appendChild(weekSelector);
     }
+  }
+
+  if (weekOptions.length === 1 && weekOptions[0] === 0) {
+    const selectSelector = document.createElement('div');
+    selectSelector.className = 'fee-selector';
+    const selectChip = createFeeChip(LABELS.select, () => {
+      state.explicitSelection = !state.explicitSelection;
+      selectChip.classList.toggle('active', state.explicitSelection);
+      updateCardState(state);
+    });
+    selectSelector.appendChild(selectChip);
+    controls.appendChild(selectSelector);
+    state.selectChip = selectChip;
   }
 
   if (hasBus) {
